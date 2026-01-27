@@ -1,0 +1,169 @@
+/* =========================
+   PRODUCT PAGE
+========================= */
+.product-page {
+  background: #fafafa;
+  padding: 40px 16px;
+}
+
+.product-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 16px;
+}
+
+/* =========================
+   IMAGES
+========================= */
+.main-image {
+  height: 420px;
+  background: #f6f6f6;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.thumbnail-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.thumbnail-row img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnail-row img.active {
+  border-color: var(--primary);
+}
+
+/* =========================
+   PRODUCT INFO
+========================= */
+.product-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.product-short-desc {
+  color: #666;
+  margin: 10px 0 16px;
+}
+
+.price-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.selling-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a7f37;
+}
+
+.mrp {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.discount {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.stock.in {
+  color: #1a7f37;
+  margin: 10px 0;
+}
+
+.stock.out {
+  color: #d32f2f;
+  margin: 10px 0;
+}
+
+.feature-list {
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-list li {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.add-to-cart-btn {
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* =========================
+   EXTRA DETAILS
+========================= */
+.product-extra {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  background: #fff;
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.product-extra section {
+  margin-bottom: 28px;
+}
+
+.product-extra h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.long-desc {
+  white-space: pre-line;
+  line-height: 1.7;
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutrition-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .product-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .main-image {
+    height: 320px;
+  }
+}

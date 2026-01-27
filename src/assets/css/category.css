@@ -128,6 +128,49 @@
 }
 
 /* =========================
+   BACK TO CATEGORIES LINK
+========================= */
+
+.back-link-wrapper {
+  margin-bottom: 14px;
+}
+
+/* Link style */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #1a7f37; /* Fudvira green */
+  text-decoration: none;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Icon */
+.back-link .material-icons-round {
+  font-size: 18px;
+}
+
+/* Hover effect */
+.back-link:hover {
+  background-color: #eaf6ee;
+  color: #14632b;
+}
+
+/* Active click effect */
+.back-link:active {
+  transform: translateX(-2px);
+}
+
+
+/* =========================
    RESPONSIVE BREAKPOINTS
 ========================= */
 

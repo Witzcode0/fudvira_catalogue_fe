@@ -5,74 +5,156 @@ import { API_BASE } from "../services/api";
 export default function ProductDetail() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState("");
 
   useEffect(() => {
     fetch(`${API_BASE}/api/products/`)
       .then((res) => res.json())
       .then((data) => {
-        const found = data.find(p => p.slug === slug);
+        const found = data.find((p) => p.slug === slug);
         setProduct(found);
+
+        const primary =
+          found?.variants?.[0]?.images?.find((i) => i.is_primary) ||
+          found?.variants?.[0]?.images?.[0];
+
+        if (primary) {
+          setActiveImage(`${API_BASE}${primary.image}`);
+        }
       });
   }, [slug]);
 
-  if (!product) return <p>Loading product...</p>;
+  if (!product) return <p className="loading-text">Loading product...</p>;
 
   const variant = product.variants?.[0];
   const images = variant?.images || [];
-  const price = product.additional_data?.price;
+  const data = product.additional_data || {};
+  const price = data.price || {};
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
-      <div className="grid md:grid-cols-2 gap-10">
+    <div className="product-page">
+      <div className="product-wrapper">
 
-        {/* Images */}
-        <div>
-          <img
-            src={`${API_BASE}${images[0]?.image}`}
-            alt={product.name}
-            className="w-full rounded-lg"
-          />
+        {/* ================= IMAGE SECTION ================= */}
+        <div className="product-images">
+          <div className="main-image">
+            <img src={activeImage} alt={product.name} />
+          </div>
 
-          <div className="flex gap-3 mt-4">
+          <div className="thumbnail-row">
             {images.map((img) => (
               <img
                 key={img.id}
                 src={`${API_BASE}${img.image}`}
                 alt=""
-                className="w-20 h-20 object-cover border rounded"
+                className={activeImage.includes(img.image) ? "active" : ""}
+                onClick={() =>
+                  setActiveImage(`${API_BASE}${img.image}`)
+                }
               />
             ))}
           </div>
         </div>
 
-        {/* Details */}
-        <div>
-          <h1 className="text-2xl font-bold mb-3">
-            {product.name}
-          </h1>
+        {/* ================= PRODUCT INFO ================= */}
+        <div className="product-info">
+          <h1 className="product-title">{product.name}</h1>
 
-          <p className="text-gray-600 mb-4">
+          <p className="product-short-desc">
             {product.short_description}
           </p>
 
-          <p className="text-2xl font-bold text-green-700 mb-4">
-            ₹{price?.sellingPrice}
-            <span className="text-gray-400 line-through ml-3 text-lg">
-              ₹{price?.mrp}
+          {/* PRICE */}
+          <div className="price-box">
+            <span className="selling-price">
+              ₹{price.sellingPrice}
             </span>
-            <span className="text-sm text-red-600 ml-2">
-              ({price?.discountPercent}% OFF)
+
+            <span className="mrp">
+              ₹{price.mrp}
             </span>
-          </p>
 
-          <p className="mb-6 whitespace-pre-line">
-            {product.description}
-          </p>
+            <span className="discount">
+              {price.discountPercent}% OFF
+            </span>
+          </div>
 
-          <button className="bg-green-700 text-white px-6 py-3 rounded">
+          {/* STOCK */}
+          <div className={`stock ${variant.stock_quantity > 0 ? "in" : "out"}`}>
+            {variant.stock_quantity > 0 ? "In Stock" : "Out of Stock"}
+          </div>
+
+          {/* FEATURES */}
+          <ul className="feature-list">
+            {data.features?.map((f, i) => (
+              <li key={i}>✔ {f}</li>
+            ))}
+          </ul>
+
+          <button className="add-to-cart-btn">
             Add to Cart
           </button>
         </div>
+      </div>
+
+      {/* ================= EXTRA DETAILS ================= */}
+      <div className="product-extra">
+
+        {/* DESCRIPTION */}
+        <section>
+          <h3>Description</h3>
+          <p className="long-desc">{product.description}</p>
+        </section>
+
+        {/* INGREDIENTS */}
+        <section>
+          <h3>Ingredients</h3>
+          <ul>
+            {data.ingredients?.map((ing, i) => (
+              <li key={i}>{ing}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* NUTRITION */}
+        <section>
+          <h3>Nutrition Facts</h3>
+          <table className="nutrition-table">
+            <tbody>
+              {Object.entries(data.nutritionFacts || {}).map(([k, v]) => (
+                <tr key={k}>
+                  <td>{k}</td>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        {/* USAGE */}
+        <section>
+          <h3>Usage Suggestions</h3>
+          <ul>
+            {data.usageSuggestions?.map((u, i) => (
+              <li key={i}>{u}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* STORAGE */}
+        <section>
+          <h3>Storage Instructions</h3>
+          <p>{data.storageInstructions}</p>
+        </section>
+
+        {/* PACKAGING */}
+        <section>
+          <h3>Packaging Details</h3>
+          <p>
+            {data.packagingDetails?.weight} ·{" "}
+            {data.packagingDetails?.material}
+          </p>
+        </section>
       </div>
     </div>
   );
