@@ -319,12 +319,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .account-dropdown__qrcode {
-    display: none;
-  }
-}
-
 /* =========================
    FOOTER BASE
 ========================= */
