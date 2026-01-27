@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import appRouter from "./router/appRouter";
+import { CategoryProvider } from "./store/CategoryContext";
+
+import "./assets/css/global.css";
+import "./assets/css/navbar-footer.css";
+import "./assets/css/category.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <CategoryProvider>
+    <RouterProvider router={appRouter} />
+  </CategoryProvider>
+);
