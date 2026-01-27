@@ -7,6 +7,7 @@ import { CategoryProvider } from "./store/CategoryContext";
 
 import "./assets/css/global.css";
 import "./assets/css/navbar-footer.css";
+import "./assets/css/hero.css";
 import "./assets/css/category.css";
 import "./assets/css/product-detail.css";
 
