@@ -127,3 +127,217 @@
     text-align: center;
   }
 }
+
+
+/* =========================
+   WHY FUDVIRA SECTION
+========================= */
+
+.home-section.light {
+  padding: var(--space-9) 0;
+}
+
+/* SECTION TITLE */
+.home-section.light h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--text-dark);
+}
+
+
+.section-subtitle {
+  max-width: 640px;
+  margin: 0 auto var(--space-8);
+
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* =========================
+   FEATURES GRID
+========================= */
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-7);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* =========================
+   FEATURE CARD
+========================= */
+
+.feature-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7) var(--space-5);
+
+  text-align: center;
+
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ICON */
+.feature-card .material-icons-round {
+  font-size: 48px;
+  color: #013b26;
+  margin-bottom: var(--space-4);
+
+  background: rgba(10, 173, 10, 0.1);
+  padding: 14px;
+  border-radius: 50%;
+}
+
+/* TITLE */
+.feature-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--text-dark);
+}
+
+/* DESCRIPTION */
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .home-section.light {
+    padding: var(--space-8) 0;
+  }
+
+  .home-section.light h2 {
+    font-size: 1.6rem;
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: var(--space-6);
+    padding: 0 var(--space-4);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .feature-card {
+    padding: var(--space-6);
+  }
+
+  .feature-card .material-icons-round {
+    font-size: 42px;
+  }
+}
+
+
+/* =========================
+   HOME CTA SECTION
+========================= */
+
+.home-cta {
+  background: #013b26;
+  color: #ffffff;
+
+  padding: var(--space-9) var(--space-4);
+  margin-top: var(--space-9);
+  border-radius: var(--radius-lg);
+}
+
+/* CONTENT WRAPPER */
+.home-cta-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* TITLE */
+.home-cta h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  color: #ffffff;
+}
+
+/* DESCRIPTION */
+.home-cta p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-6);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* BUTTON OVERRIDE FOR CTA */
+.home-cta .btn-primary {
+  background: #ffffff;
+  color: #013b26;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.home-cta .btn-primary:hover {
+  background: #f2fff2;
+  transform: translateY(-2px);
+}
+
+/* ICON INSIDE CTA BUTTON */
+.home-cta i {
+  font-size: 22px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .home-cta {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .home-cta h2 {
+    font-size: 1.6rem;
+  }
+
+  .home-cta p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-cta h2 {
+    font-size: 1.4rem;
+  }
+
+  .home-cta .btn {
+    width: 100%;
+  }
+}
