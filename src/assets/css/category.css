@@ -56,7 +56,7 @@
 .category-image-wrapper {
   background: #f7f9f7;
   border-radius: var(--radius-md);
-  height: 120px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

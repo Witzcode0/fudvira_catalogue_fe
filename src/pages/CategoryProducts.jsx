@@ -90,9 +90,6 @@ export default function CategoryProducts() {
                 <h3 className="category-name">
                   {product.name}
                 </h3>
-                <p className="category-desc">
-                  {product.short_description}
-                </p>
               </div>
 
               {/* BUTTON */}
