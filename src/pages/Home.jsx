@@ -1,110 +1,47 @@
 import { Link } from "react-router-dom";
-import { useCategories } from "../store/CategoryContext";
+import heroDesktop from "../assets/images/hero-desktop.jpg";
+import heroTablet from "../assets/images/hero-tablet.jpg";
+import heroMobile from "../assets/images/hero-mobile.jpg";
 
-export default function Home() {
-  const { categories, loading } = useCategories();
-
+export default function HeroSection() {
   return (
-    <main className="home-body">
+    <section className="hero">
 
-      {/* ================= HERO ================= */}
-      <section className="home-hero">
-        <div className="hero-content">
-          <h1>
-            Pure • Natural • Trusted <br />
-            <span>Food & Herbal Powders</span>
-          </h1>
+      {/* RESPONSIVE IMAGE */}
+      <picture className="hero-bg">
+        <source srcSet={heroMobile} media="(max-width: 768px)" />
+        <source srcSet={heroTablet} media="(max-width: 1024px)" />
+        <img src={heroDesktop} alt="Fudvira Natural Foods" />
+      </picture>
 
-          <p>
-            Discover premium quality fruit powders, herbal powders,
-            spices, and natural honey — sourced with care.
-          </p>
+      {/* OVERLAY */}
+      <div className="hero-overlay"></div>
 
-          <div className="hero-actions">
-            <Link to="/categories" className="btn-primary">
-              Browse Categories
-            </Link>
+      {/* CONTENT */}
+      <div className="hero-content container">
+        <h1 className="hero-title">
+          Wholesome Nutrition From Nature
+          <span>✔ 100% Pure • Ethically Sourced</span>
+        </h1>
 
-            <Link to="/products" className="btn-outline">
-              View All Products
-            </Link>
-          </div>
-        </div>
-      </section>
+        <p className="hero-subtitle">
+          Premium herbal blends, spices, vegetable powders, fruit powders, and natural honey <br /> —
+          crafted with care for everyday health and wellness.
 
-      {/* ================= CATEGORIES ================= */}
-      <section className="home-section">
-        <div className="section-header">
-          <h2>Shop by Category</h2>
-          <Link to="/categories">View all</Link>
-        </div>
-
-        <div className="category-preview-grid">
-          {loading && <p>Loading categories...</p>}
-
-          {!loading &&
-            categories.slice(0, 5).map((cat) => (
-              <Link
-                key={cat.id}
-                to={`/category/${cat.slug}`}
-                className="category-preview-card"
-              >
-                <div className="category-preview-name">
-                  {cat.name}
-                </div>
-              </Link>
-            ))}
-        </div>
-      </section>
-
-      {/* ================= WHY FUDVIRA ================= */}
-      <section className="home-section light">
-        <h2 className="center">Why Choose Fudvira?</h2>
-
-        <div className="features-grid">
-          <div className="feature-card">
-            <span className="material-icons-round">verified</span>
-            <h4>100% Pure</h4>
-            <p>No chemicals, no additives, only nature.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">spa</span>
-            <h4>Health First</h4>
-            <p>Nutrient-rich powders for daily wellness.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">eco</span>
-            <h4>Ethically Sourced</h4>
-            <p>Carefully sourced from trusted farms.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">local_shipping</span>
-            <h4>Pan India Delivery</h4>
-            <p>Fast & reliable shipping across India.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= CTA ================= */}
-      <section className="home-cta">
-        <h2>Looking for Bulk or Business Orders?</h2>
-        <p>
-          Connect with us for wholesale pricing and custom requirements.
         </p>
 
-        <a
-          href="https://wa.me/918980145007"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-primary"
-        >
-          Contact on WhatsApp
-        </a>
-      </section>
+        <div className="hero-actions">
+          <Link to="/categories" className="btn btn-primary">
+            Browse Categories
+          </Link>
 
-    </main>
+          <Link to="/products" className="btn btn-outline">
+            View All Products
+          </Link>
+        </div>
+
+      </div>
+
+    </section>
   );
 }
