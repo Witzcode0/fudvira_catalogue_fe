@@ -66,13 +66,13 @@ export default function Navbar() {
                     {!loading &&
                       categories.map((cat) => (
                         <Link
-                          key={cat.id}
-                          to={`/category/${cat.slug}`}
+                          to={`/products?category=${cat.slug}`}
                           className="dropdown-item"
                           onClick={closeAll}
                         >
                           {cat.name}
                         </Link>
+
                       ))}
                   </div>
                 )}

@@ -29,9 +29,10 @@ export default function Categories() {
         {categories.map((cat) => (
           <Link
             key={cat.id}
-            to={`/category/${cat.slug}`}
+            to={`/products?category=${cat.slug}`}
             className="category-card"
           >
+
             <div className="category-image-wrapper">
               <img
                 src={`${API_BASE}${cat.category_image}`}

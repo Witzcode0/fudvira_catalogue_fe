@@ -1,169 +1,201 @@
-/* =========================
-   PRODUCT PAGE
-========================= */
-.product-page {
-  background: #fafafa;
-  padding: 40px 16px;
+/* ================= PAGE ================= */
+.blinkit-product-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 16px 60px;
 }
 
-.product-wrapper {
-  max-width: 1200px;
-  margin: auto;
+/* ================= LAYOUT ================= */
+.blinkit-product-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  background: #fff;
-  padding: 32px;
-  border-radius: 16px;
 }
 
-/* =========================
-   IMAGES
-========================= */
-.main-image {
-  height: 420px;
-  background: #f6f6f6;
-  border-radius: 14px;
+/* ================= GALLERY ================= */
+.blinkit-gallery {
+  position: sticky;
+  top: 90px;
+}
+
+.blinkit-main-image {
+  background: #f7f9f7;
+  border-radius: 18px;
+  padding: 24px;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.main-image img {
-  max-height: 100%;
-  max-width: 100%;
+.blinkit-main-image img {
+  max-height: 420px;
+  width: 100%;
   object-fit: contain;
 }
 
-.thumbnail-row {
+/* THUMB SLIDER */
+.blinkit-thumb-row {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
 }
 
-.thumbnail-row img {
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
-  border-radius: 8px;
+.blinkit-thumb {
+  border: none;
+  background: #f6f7f8;
+  border-radius: 12px;
+  padding: 8px;
   cursor: pointer;
   border: 2px solid transparent;
+  flex: 0 0 auto;
 }
 
-.thumbnail-row img.active {
+.blinkit-thumb img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.blinkit-thumb.active {
   border-color: var(--primary);
+  background: #fff;
 }
 
-/* =========================
-   PRODUCT INFO
-========================= */
-.product-title {
-  font-size: 1.8rem;
+/* ================= DETAILS ================= */
+.blinkit-details {
+  padding-top: 10px;
+}
+
+.blinkit-title {
+  font-size: 24px;
   font-weight: 700;
+  margin-bottom: 6px;
 }
 
-.product-short-desc {
-  color: #666;
-  margin: 10px 0 16px;
+.blinkit-short-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 16px;
 }
 
-.price-box {
+/* PRICE */
+.blinkit-price {
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.selling-price {
-  font-size: 1.8rem;
+.price-selling {
+  font-size: 22px;
   font-weight: 700;
-  color: #1a7f37;
+  color: var(--primary);
 }
 
-.mrp {
+.price-mrp {
+  font-size: 14px;
   text-decoration: line-through;
   color: #999;
 }
 
-.discount {
-  color: #d32f2f;
+.price-discount {
+  font-size: 13px;
+  color: #e53935;
   font-weight: 600;
 }
 
-.stock.in {
-  color: #1a7f37;
-  margin: 10px 0;
+/* STOCK */
+.blinkit-stock {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
-.stock.out {
-  color: #d32f2f;
-  margin: 10px 0;
+.blinkit-stock.in {
+  color: #2e7d32;
 }
 
-.feature-list {
-  margin: 16px 0;
-  padding: 0;
+.blinkit-stock.out {
+  color: #c62828;
+}
+
+/* FEATURES */
+.blinkit-features {
   list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
 }
 
-.feature-list li {
-  font-size: 0.9rem;
+.blinkit-features li {
+  font-size: 13px;
   margin-bottom: 6px;
 }
 
-.add-to-cart-btn {
+/* CTA */
+.blinkit-add-btn {
   background: var(--primary);
   color: #fff;
-  padding: 14px 28px;
-  border-radius: 10px;
   border: none;
-  cursor: pointer;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
 }
 
-/* =========================
-   EXTRA DETAILS
-========================= */
-.product-extra {
-  max-width: 1200px;
-  margin: 40px auto 0;
-  background: #fff;
-  padding: 32px;
-  border-radius: 16px;
+.blinkit-add-btn:hover {
+  opacity: 0.9;
 }
 
-.product-extra section {
-  margin-bottom: 28px;
+/* ================= EXTRA ================= */
+.blinkit-extra {
+  margin-top: 50px;
+  display: grid;
+  gap: 28px;
 }
 
-.product-extra h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
+.blinkit-extra h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
-.long-desc {
+.blinkit-long-desc {
   white-space: pre-line;
-  line-height: 1.7;
+  font-size: 14px;
+  color: var(--text-light);
 }
 
-.nutrition-table {
+/* TABLE */
+.blinkit-nutrition {
   width: 100%;
   border-collapse: collapse;
 }
 
-.nutrition-table td {
-  padding: 8px 12px;
+.blinkit-nutrition td {
+  padding: 8px 6px;
   border-bottom: 1px solid #eee;
+  font-size: 13px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
-  .product-wrapper {
+  .blinkit-product-layout {
     grid-template-columns: 1fr;
   }
 
-  .main-image {
-    height: 320px;
+  .blinkit-gallery {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .blinkit-main-image img {
+    max-height: 300px;
+  }
+
+  .blinkit-title {
+    font-size: 20px;
   }
 }

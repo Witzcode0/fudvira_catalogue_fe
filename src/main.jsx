@@ -9,8 +9,10 @@ import "./assets/css/global.css";
 import "./assets/css/navbar-footer.css";
 import "./assets/css/home.css";
 import "./assets/css/category.css";
+import "./assets/css/products.css";
 import "./assets/css/product-detail.css";
 import "./assets/css/notfound.css";
+import "./assets/css/maintenance.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CategoryProvider>

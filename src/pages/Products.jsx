@@ -1,69 +1,159 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
+import { useCategories } from "../store/CategoryContext";
+
+const ITEMS_PER_PAGE = 12;
 
 export default function Products() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get("category");
+
+  const { categories } = useCategories();
+
   const [products, setProducts] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(`${API_BASE}/api/products/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Products API error:", err);
-        setLoading(false);
-      });
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  if (loading) return <p>Loading products...</p>;
+  useEffect(() => {
+    setLoading(true);
+    setCurrentPage(1);
+
+    if (activeCategory) {
+      fetch(`${API_BASE}/api/category-products/${activeCategory}/`)
+        .then(res => res.json())
+        .then(data => {
+          setProducts(data.products || []);
+          setCategoryName(data.name);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    } else {
+      fetch(`${API_BASE}/api/products/`)
+        .then(res => res.json())
+        .then(data => {
+          setProducts(data || []);
+          setCategoryName("");
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }
+  }, [activeCategory]);
+
+  /* ================= PAGINATION ================= */
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedProducts = products.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-bold mb-6">Products</h1>
+    <div className="product-list-page">
+      <div className="product-list-layout">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((product) => {
-          const variant = product.variants?.[0];
-          const primaryImage = variant?.images?.find(img => img.is_primary);
+        {/* ========== SIDEBAR ========== */}
+        <aside className="product-filter">
+          <h4 className="filter-title">Categories</h4>
 
-          return (
-            <div
-              key={product.id}
-              className="border rounded-lg p-4 hover:shadow-lg transition"
+          <button
+            className={`filter-pill ${!activeCategory ? "active" : ""}`}
+            onClick={() => setSearchParams({})}
+          >
+            All Products
+          </button>
+
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              className={`filter-pill ${
+                activeCategory === cat.slug ? "active" : ""
+              }`}
+              onClick={() => setSearchParams({ category: cat.slug })}
             >
-              <Link to={`/product/${product.slug}`}>
-                <img
-                  src={
-                    primaryImage
-                      ? `${API_BASE}${primaryImage.image}`
-                      : "/placeholder.png"
-                  }
-                  alt={product.name}
-                  className="w-full h-48 object-contain mb-4"
-                />
+              {cat.name}
+            </button>
+          ))}
+        </aside>
 
-                <h3 className="text-lg font-semibold">
-                  {product.name}
-                </h3>
+        {/* ========== PRODUCTS ========== */}
+        <section className="product-list-content">
+          <h1 className="product-list-title">
+            {categoryName || "All Products"}
+          </h1>
 
-                <p className="text-sm text-gray-600 mb-2">
-                  {product.short_description}
-                </p>
+          {loading && <p className="text-center">Loading products...</p>}
 
-                <p className="text-green-700 font-bold">
-                  ₹{product.additional_data?.price?.sellingPrice}
-                  <span className="text-gray-400 line-through ml-2 text-sm">
-                    ₹{product.additional_data?.price?.mrp}
-                  </span>
-                </p>
-              </Link>
+          {!loading && !products.length && (
+            <p className="text-center">No products found.</p>
+          )}
+
+          <div className="product-grid">
+            {paginatedProducts.map(product => {
+              const variant = product.variants?.[0];
+              const image =
+                variant?.images?.find(img => img.is_primary) ||
+                variant?.images?.[0];
+
+              return (
+                <Link
+                  key={product.id}
+                  to={`/product/${product.slug}`}
+                  className="product-card"
+                >
+                  <div className="product-image-box">
+                    <img
+                      src={`${API_BASE}${image?.image}`}
+                      alt={product.name}
+                    />
+                  </div>
+
+                  <div className="product-info">
+                    <h3>{product.name}</h3>
+                  </div>
+
+                  <div className="product-action">
+                    View Product
+                    <span className="material-icons-round">
+                      chevron_right
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* ========== PAGINATION ========== */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(p => p - 1)}
+              >
+                Prev
+              </button>
+
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  className={currentPage === i + 1 ? "active" : ""}
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </button>
+              ))}
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(p => p + 1)}
+              >
+                Next
+              </button>
             </div>
-          );
-        })}
+          )}
+        </section>
       </div>
     </div>
   );

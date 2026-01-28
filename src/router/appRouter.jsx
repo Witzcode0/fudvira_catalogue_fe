@@ -1,14 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import MainLayout from "../layouts/MainLayout";
+
 import Home from "../pages/Home";
 import Categories from "../pages/Categories";
 import Products from "../pages/Products";
-import CategoryProducts from "../pages/CategoryProducts";
 import ProductDetail from "../pages/ProductDetail";
 import TermsConditions from "../pages/TermsConditions";
 import NotFound from "../pages/NotFound";
-
+import UnderMaintenance from "../pages/UnderMaintenance";
 
 const appRouter = createBrowserRouter([
   {
@@ -17,13 +16,13 @@ const appRouter = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "categories", element: <Categories /> },
-      { path: "products", element: <Products /> }, // all products
-      { path: "category/:slug", element: <CategoryProducts /> }, // ✅ IMPORTANT
+      { path: "products", element: <Products /> }, // ✅ ONLY ONE PRODUCTS PAGE
       { path: "product/:slug", element: <ProductDetail /> },
       {
-        path: "terms-and-conditions",
-        element: <TermsConditions />,
+        path: "/coming-soon",
+        element: <UnderMaintenance />,
       },
+      { path: "terms-and-conditions", element: <TermsConditions /> },
       { path: "*", element: <NotFound /> },
     ],
   },
