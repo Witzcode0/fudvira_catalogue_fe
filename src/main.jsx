@@ -7,9 +7,10 @@ import { CategoryProvider } from "./store/CategoryContext";
 
 import "./assets/css/global.css";
 import "./assets/css/navbar-footer.css";
-import "./assets/css/hero.css";
+import "./assets/css/home.css";
 import "./assets/css/category.css";
 import "./assets/css/product-detail.css";
+import "./assets/css/notfound.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CategoryProvider>
