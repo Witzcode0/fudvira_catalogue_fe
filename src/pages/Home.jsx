@@ -143,10 +143,28 @@ export default function HeroSection() {
         </div>
       </section>
 
-      <section className="home-section light"> <h2 className="center">How Fudvira Works</h2><p className="section-subtitle">
-        From sourcing to delivery, we follow a simple and transparent process
-        to ensure quality at every step.
-      </p> <div className="steps-grid"> <div className="step-card"> <span>01</span> <h4>Choose Products</h4> <p>Browse our curated range of natural products.</p> </div> <div className="step-card"> <span>02</span> <h4>Place Order</h4> <p>Order online or contact us for bulk requirements.</p> </div> <div className="step-card"> <span>03</span> <h4>We Deliver</h4> <p>Safe, hygienic, and timely delivery across India.</p> </div> </div> </section>
+      {/* <section className="home-section light">
+        <h2 className="center">How Fudvira Works</h2>
+        <p className="section-subtitle">
+          From sourcing to delivery, we follow a simple and transparent process
+          to ensure quality at every step.
+        </p> <div className="steps-grid">
+          <div className="step-card">
+            <span>01</span>
+            <h4>Choose Products</h4>
+            <p>Browse our curated range of natural products.</p>
+          </div>
+          <div className="step-card">
+            <span>02</span>
+            <h4>Place Order</h4>
+            <p>Order online or contact us for bulk requirements.</p>
+          </div> <div className="step-card">
+            <span>03</span>
+            <h4>We Deliver</h4>
+            <p>Safe, hygienic, and timely delivery across India.</p>
+          </div>
+        </div>
+      </section> */}
 
     </>
 
