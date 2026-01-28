@@ -20,6 +20,10 @@ export default function Categories() {
   return (
     <div className="category-page">
       <h1 className="category-title">Shop by Category</h1>
+      <p className="category-subtitle">
+        Explore our range of natural food products, carefully crafted for
+        purity, nutrition, and everyday wellness.
+      </p>
 
       <div className="category-grid">
         {categories.map((cat) => (
@@ -45,14 +49,14 @@ export default function Categories() {
 
             <div className="category-btn-wrapper">
               <span className="category-btn">
-                <span className="material-icons-round">
-                  chevron_right
-                </span>
+                Explore
+                <span className="material-icons-round">chevron_right</span>
               </span>
             </div>
           </Link>
         ))}
       </div>
     </div>
+
   );
 }

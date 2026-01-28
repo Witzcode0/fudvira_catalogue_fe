@@ -6,6 +6,8 @@ import Categories from "../pages/Categories";
 import Products from "../pages/Products";
 import CategoryProducts from "../pages/CategoryProducts";
 import ProductDetail from "../pages/ProductDetail";
+import TermsConditions from "../pages/TermsConditions";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ const appRouter = createBrowserRouter([
       { path: "products", element: <Products /> }, // all products
       { path: "category/:slug", element: <CategoryProducts /> }, // ✅ IMPORTANT
       { path: "product/:slug", element: <ProductDetail /> },
+      {
+        path: "terms-and-conditions",
+        element: <TermsConditions />,
+      },
     ],
   },
 ]);

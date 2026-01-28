@@ -366,3 +366,41 @@ CENTERING UTILITIES
     width: 75%;
   }
 }
+
+
+.policy-page {
+  padding: var(--space-9) 0;
+}
+
+.policy-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.policy-updated {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: var(--space-6);
+}
+
+.policy-section {
+  margin-bottom: var(--space-6);
+}
+
+.policy-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.policy-section p,
+.policy-section li {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.policy-section ul {
+  padding-left: 18px;
+}
