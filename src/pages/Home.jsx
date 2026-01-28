@@ -54,30 +54,57 @@ export default function HeroSection() {
         </p>
 
         <div className="features-grid">
+
           <div className="feature-card">
             <span className="material-icons-round">verified</span>
             <h4>100% Pure</h4>
-            <p>No chemicals, no additives, only nature.</p>
+            <p>No chemicals, no additives, only natural goodness.</p>
           </div>
 
           <div className="feature-card">
             <span className="material-icons-round">spa</span>
             <h4>Health First</h4>
-            <p>Nutrient-rich powders for daily wellness.</p>
+            <p>Nutrient-rich powders and honey for everyday wellness.</p>
           </div>
 
           <div className="feature-card">
             <span className="material-icons-round">eco</span>
             <h4>Ethically Sourced</h4>
-            <p>Carefully sourced from trusted farms.</p>
+            <p>Carefully sourced from trusted farms and producers.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">science</span>
+            <h4>Minimal Processing</h4>
+            <p>Processed gently to retain natural nutrients and taste.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">fact_check</span>
+            <h4>Quality Checked</h4>
+            <p>Each batch undergoes strict quality and hygiene checks.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">inventory_2</span>
+            <h4>Careful Packaging</h4>
+            <p>Hygienic, secure packaging to maintain freshness.</p>
           </div>
 
           <div className="feature-card">
             <span className="material-icons-round">local_shipping</span>
             <h4>Pan India Delivery</h4>
-            <p>Fast & reliable shipping across India.</p>
+            <p>Fast and reliable delivery across India.</p>
           </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">handshake</span>
+            <h4>Trusted by Businesses</h4>
+            <p>Preferred by retailers, wholesalers, and health brands.</p>
+          </div>
+
         </div>
+
       </section>
 
       {/* ================= CTA ================= */}
@@ -92,7 +119,7 @@ export default function HeroSection() {
           </p>
 
           <a
-            href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20👋%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
+            href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
@@ -103,6 +130,23 @@ export default function HeroSection() {
 
         </div>
       </section>
+
+      <section className="home-section">
+        <h2 className="center">Who We Serve</h2>
+        <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>
+        <div className="serve-grid">
+          <div className="serve-card">Retail Customers</div>
+          <div className="serve-card">Wholesalers</div>
+          <div className="serve-card">Retail Stores</div>
+          <div className="serve-card">Health & Wellness Brands</div>
+          <div className="serve-card">Export Partners</div>
+        </div>
+      </section>
+
+      <section className="home-section light"> <h2 className="center">How Fudvira Works</h2><p className="section-subtitle">
+        From sourcing to delivery, we follow a simple and transparent process
+        to ensure quality at every step.
+      </p> <div className="steps-grid"> <div className="step-card"> <span>01</span> <h4>Choose Products</h4> <p>Browse our curated range of natural products.</p> </div> <div className="step-card"> <span>02</span> <h4>Place Order</h4> <p>Order online or contact us for bulk requirements.</p> </div> <div className="step-card"> <span>03</span> <h4>We Deliver</h4> <p>Safe, hygienic, and timely delivery across India.</p> </div> </div> </section>
 
     </>
 

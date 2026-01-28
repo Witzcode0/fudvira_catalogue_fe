@@ -105,6 +105,12 @@ export default function Navbar() {
                 <div className="account-dropdown open">
                   <ul className="account-list">
                     <li>
+                      <NavLink to="/" onClick={closeAll} className="account-link">
+                        {/* <span className="material-icons-round">category</span> */}
+                        Home
+                      </NavLink>
+                    </li>
+                    <li>
                       <NavLink to="/categories" onClick={closeAll} className="account-link">
                         {/* <span className="material-icons-round">category</span> */}
                         Categories

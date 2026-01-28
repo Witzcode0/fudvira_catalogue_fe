@@ -341,3 +341,243 @@
     width: 100%;
   }
 }
+
+
+/* =========================
+   WHO WE SERVE SECTION
+========================= */
+
+.home-section {
+  padding: var(--space-9) 0;
+}
+
+/* Title already centered via class */
+.home-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  text-align: center;
+  color: var(--text-dark);
+}
+
+/* Subtitle */
+.home-section .section-subtitle {
+  max-width: 640px;
+  margin: 0 auto var(--space-8);
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.serve-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-5);
+  
+}
+
+/* =========================
+   CARD
+========================= */
+
+.serve-card {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f9fff9
+  );
+
+  border: 1px solid #e6f3e6;
+  border-radius: var(--radius-md);
+
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+/* Hover */
+.serve-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 28px rgba(10, 173, 10, 0.18);
+}
+
+/* Decorative accent */
+.serve-card::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 3px;
+  margin: 10px auto 0;
+  background: var(--primary);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Large Tablets */
+@media (max-width: 1024px) {
+  .serve-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .home-section h2 {
+    font-size: 1.7rem;
+  }
+
+  .serve-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .serve-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .serve-card {
+    font-size: 0.9rem;
+    padding: var(--space-4);
+  }
+}
+/* =========================
+   HOW FUDVIRA WORKS
+========================= */
+
+.home-section.light {
+  padding: var(--space-9) 0;
+}
+
+/* Title */
+.home-section.light h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-7);
+  color: var(--text-dark);
+}
+
+/* =========================
+   STEPS GRID
+========================= */
+
+.steps-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* =========================
+   STEP ITEM
+========================= */
+
+.step-card {
+  text-align: center;
+  padding: var(--space-4) var(--space-3);
+}
+
+/* Step number */
+.step-card span {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+
+  position: relative;
+}
+
+/* Underline accent */
+.step-card span::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 8px auto 0;
+  background: var(--primary);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* Title */
+.step-card h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+/* Description */
+.step-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  .step-card {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .step-card span {
+    font-size: 1.6rem;
+  }
+
+  .step-card span::after {
+    margin-left: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .home-section.light h2 {
+    font-size: 1.6rem;
+  }
+
+  .step-card p {
+    font-size: 0.85rem;
+  }
+}
