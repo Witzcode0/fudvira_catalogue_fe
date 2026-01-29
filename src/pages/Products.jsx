@@ -12,35 +12,37 @@ export default function Products() {
   const { categories } = useCategories();
 
   const [products, setProducts] = useState([]);
-  const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
 
+  /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
     setLoading(true);
     setCurrentPage(1);
 
-    if (activeCategory) {
-      fetch(`${API_BASE}/api/category-products/${activeCategory}/`)
-        .then(res => res.json())
-        .then(data => {
-          setProducts(data.products || []);
-          setCategoryName(data.name);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } else {
-      fetch(`${API_BASE}/api/products/`)
-        .then(res => res.json())
-        .then(data => {
-          setProducts(data || []);
-          setCategoryName("");
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    }
+    const url = activeCategory
+      ? `${API_BASE}/api/category/${activeCategory}/products/`
+      : `${API_BASE}/api/products/`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        // category API is paginated, products API is array
+        const productList = activeCategory
+          ? data?.results || []
+          : Array.isArray(data)
+          ? data
+          : [];
+
+        setProducts(productList);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [activeCategory]);
+
+  /* ================= CATEGORY NAME ================= */
+  const categoryName =
+    categories.find(cat => cat.slug === activeCategory)?.name || "";
 
   /* ================= PAGINATION ================= */
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
@@ -54,7 +56,7 @@ export default function Products() {
     <div className="product-list-page">
       <div className="product-list-layout">
 
-        {/* ========== SIDEBAR ========== */}
+        {/* ========== SIDEBAR FILTER ========== */}
         <aside className="product-filter">
           <h4 className="filter-title">Categories</h4>
 
@@ -78,7 +80,7 @@ export default function Products() {
           ))}
         </aside>
 
-        {/* ========== PRODUCTS ========== */}
+        {/* ========== PRODUCT LIST ========== */}
         <section className="product-list-content">
           <h1 className="product-list-title">
             {categoryName || "All Products"}
@@ -91,38 +93,40 @@ export default function Products() {
           )}
 
           <div className="product-grid">
-            {paginatedProducts.map(product => {
-              const variant = product.variants?.[0];
-              const image =
-                variant?.images?.find(img => img.is_primary) ||
-                variant?.images?.[0];
+            {paginatedProducts.map(product => (
+              <Link
+                key={product.id}
+                to={`/product/${product.slug}`}
+                className="product-card"
+              >
+                <div className="product-image-box">
+                  <img
+                    src={
+                      product.primary_image
+                        ? `${API_BASE}${product.primary_image}`
+                        : "/placeholder.png"
+                    }
+                    alt={product.name}
+                  />
+                </div>
 
-              return (
-                <Link
-                  key={product.id}
-                  to={`/product/${product.slug}`}
-                  className="product-card"
-                >
-                  <div className="product-image-box">
-                    <img
-                      src={`${API_BASE}${image?.image}`}
-                      alt={product.name}
-                    />
-                  </div>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  {product.starting_price && (
+                    <p className="product-price">
+                      ₹{product.starting_price}
+                    </p>
+                  )}
+                </div>
 
-                  <div className="product-info">
-                    <h3>{product.name}</h3>
-                  </div>
-
-                  <div className="product-action">
-                    View Product
-                    <span className="material-icons-round">
-                      chevron_right
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+                <div className="product-action">
+                  View Product
+                  <span className="material-icons-round">
+                    chevron_right
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
 
           {/* ========== PAGINATION ========== */}

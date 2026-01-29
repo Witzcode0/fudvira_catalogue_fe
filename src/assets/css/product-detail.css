@@ -1,201 +1,341 @@
-/* ================= PAGE ================= */
-.blinkit-product-page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 32px 16px 60px;
+/* PAGE */
+.pd-page {
+  padding: 40px 0 80px;
 }
 
-/* ================= LAYOUT ================= */
-.blinkit-product-layout {
+/* MAIN WRAPPER */
+.pd-wrapper {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
 }
 
-/* ================= GALLERY ================= */
-.blinkit-gallery {
+/* LEFT IMAGES – STICKY */
+.pd-images {
   position: sticky;
   top: 90px;
+  align-self: flex-start;
 }
-
-.blinkit-main-image {
-  background: #f7f9f7;
+.pd-main-image {
+  background: #fff;
   border-radius: 18px;
-  padding: 24px;
-  display: flex;
-  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
 }
 
-.blinkit-main-image img {
-  max-height: 420px;
+.pd-main-image img {
   width: 100%;
+  height: auto;
   object-fit: contain;
+  border-radius: 14px;
 }
 
-/* THUMB SLIDER */
-.blinkit-thumb-row {
+/* THUMBNAILS */
+.pd-thumbnails {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
-  overflow-x: auto;
-  padding-bottom: 4px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.blinkit-thumb {
-  border: none;
-  background: #f6f7f8;
-  border-radius: 12px;
-  padding: 8px;
+.pd-thumbnails.scroll {
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.pd-thumbnails img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
   cursor: pointer;
   border: 2px solid transparent;
-  flex: 0 0 auto;
+  transition: 0.3s;
 }
 
-.blinkit-thumb img {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
+.pd-thumbnails img.active {
+  border-color: #f59e0b;
+  transform: scale(1.05);
+}
+.pd-info {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
 }
 
-.blinkit-thumb.active {
-  border-color: var(--primary);
-  background: #fff;
-}
-
-/* ================= DETAILS ================= */
-.blinkit-details {
-  padding-top: 10px;
-}
-
-.blinkit-title {
-  font-size: 24px;
+/* TITLE */
+.pd-info h1 {
+  font-size: 32px;
   font-weight: 700;
-  margin-bottom: 6px;
+  color: #111827;
+  margin-bottom: 8px;
 }
 
-.blinkit-short-desc {
+/* CATEGORY */
+.pd-category {
+  display: inline-block;
+  margin-bottom: 18px;
   font-size: 14px;
-  color: var(--text-light);
-  margin-bottom: 16px;
+  color: #92400e;
+  background: #fef3c7;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-decoration: none;
 }
 
-/* PRICE */
-.blinkit-price {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+/* DESCRIPTION */
+.pd-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+  margin-bottom: 30px;
 }
-
-.price-selling {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.price-mrp {
-  font-size: 14px;
-  text-decoration: line-through;
-  color: #999;
-}
-
-.price-discount {
-  font-size: 13px;
-  color: #e53935;
-  font-weight: 600;
-}
-
-/* STOCK */
-.blinkit-stock {
-  font-size: 13px;
-  font-weight: 600;
+.pd-variations h3 {
+  font-size: 20px;
   margin-bottom: 14px;
 }
 
-.blinkit-stock.in {
-  color: #2e7d32;
+/* SCROLL CONTAINER */
+.pd-variation-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
 }
 
-.blinkit-stock.out {
-  color: #c62828;
+/* VARIANT CARD */
+.pd-variation-card {
+  min-width: 180px;
+  background: linear-gradient(180deg, #fff, #f9fafb);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border: 1px solid #f3f4f6;
+  transition: 0.3s;
 }
 
-/* FEATURES */
-.blinkit-features {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
+.pd-variation-card:hover {
+  transform: translateY(-4px);
 }
 
-.blinkit-features li {
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-/* CTA */
-.blinkit-add-btn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-size: 14px;
+.pd-pack-size {
   font-weight: 600;
-  cursor: pointer;
-}
-
-.blinkit-add-btn:hover {
-  opacity: 0.9;
-}
-
-/* ================= EXTRA ================= */
-.blinkit-extra {
-  margin-top: 50px;
-  display: grid;
-  gap: 28px;
-}
-
-.blinkit-extra h3 {
   font-size: 16px;
-  font-weight: 600;
   margin-bottom: 6px;
 }
 
-.blinkit-long-desc {
-  white-space: pre-line;
-  font-size: 14px;
-  color: var(--text-light);
+.pd-pack-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #16a34a;
 }
 
-/* TABLE */
-.blinkit-nutrition {
+.pd-pack-stock.in {
+  color: #16a34a;
+  font-size: 13px;
+}
+
+.pd-pack-stock.out {
+  color: #dc2626;
+  font-size: 13px;
+}
+.pd-specs {
+  margin-top: 40px;
+}
+
+.pd-spec-table-wrapper {
+  overflow-x: auto;
+}
+
+.pd-spec-table {
   width: 100%;
   border-collapse: collapse;
+  background: #f9fafb;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
-.blinkit-nutrition td {
-  padding: 8px 6px;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
+.pd-spec-table th,
+.pd-spec-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 900px) {
-  .blinkit-product-layout {
+.pd-spec-table th {
+  width: 40%;
+  background: #f3f4f6;
+  text-align: left;
+  font-weight: 600;
+}
+
+.pd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin: 40px auto 0;
+  padding: 12px 22px;
+
+  background: #ffffff;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 500;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.pd-back:hover {
+  transform: translateX(-6px);
+  background: #fef3c7;
+  color: #92400e;
+}
+.pd-related {
+  margin-top: 90px;
+  padding: 70px 20px;
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
+}
+
+.pd-related h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.pd-related h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: var(--primary);
+  margin: 14px auto 0;
+  border-radius: 999px;
+}
+.pd-related-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+}
+.pd-related-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft gradient hover */
+.pd-related-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(245, 158, 11, 0.08)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.pd-related-card:hover::before {
+  opacity: 1;
+}
+
+.pd-related-card:hover {
+  transform: translateY(-10px);
+}
+.pd-related-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: #f9fafb;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.pd-related-card h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.pd-related-card p {
+  font-size: 16px;
+  font-weight: 700;
+  color: #16a34a;
+}
+.pd-related-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.pd-related-empty span {
+  font-size: 56px;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.pd-related-empty p {
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  .pd-related {
+    padding: 50px 16px;
+  }
+
+  .pd-related h2 {
+    font-size: 24px;
+  }
+
+  .pd-related-card img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .pd-wrapper {
     grid-template-columns: 1fr;
   }
 
-  .blinkit-gallery {
+  /* Disable sticky */
+  .pd-images {
     position: static;
   }
-}
 
-@media (max-width: 480px) {
-  .blinkit-main-image img {
-    max-height: 300px;
+  /* Variants stacked */
+  .pd-variation-scroll {
+    overflow-x: unset;
+    flex-direction: column;
   }
 
-  .blinkit-title {
-    font-size: 20px;
+  .pd-variation-card {
+    min-width: unset;
+  }
+
+  .pd-info {
+    padding: 24px;
   }
 }

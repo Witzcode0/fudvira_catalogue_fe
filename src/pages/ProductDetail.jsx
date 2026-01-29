@@ -1,158 +1,172 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
-import UnderMaintenance from "./UnderMaintenance";
 
 export default function ProductDetail() {
   const { slug } = useParams();
+
   const [product, setProduct] = useState(null);
   const [activeImage, setActiveImage] = useState("");
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/products/`)
+    setLoading(true);
+
+    fetch(`${API_BASE}/api/products/${slug}/`)
       .then(res => res.json())
       .then(data => {
-        const found = data.find(p => p.slug === slug);
-        setProduct(found);
+        setProduct(data);
+        setActiveImage(
+          data.images?.find(i => i.is_primary)?.image ||
+          data.images?.[0]?.image
+        );
+        setLoading(false);
 
-        const primary =
-          found?.variants?.[0]?.images?.find(i => i.is_primary) ||
-          found?.variants?.[0]?.images?.[0];
+        fetch(`${API_BASE}/api/products/${slug}/related/`)
+          .then(res => res.json())
+          .then(rel => {
+            setRelatedProducts(rel || []);
+          })
+          .catch(() => setRelatedProducts([]));
 
-        if (primary) {
-          setActiveImage(`${API_BASE}${primary.image}`);
-        }
-      });
+      })
+      .catch(() => setLoading(false));
   }, [slug]);
 
-  if (!product) {
-    return <p className="loading-text">Loading product...</p>;
-  }
+  if (loading) return <p className="pd-loading">Loading product...</p>;
+  if (!product) return <p className="pd-loading">Product not found</p>;
 
-  const variant = product.variants?.[0];
-  const images = variant?.images || [];
-  const data = product.additional_data || {};
-  const price = data.price || {};
+  return (
+    <div className="pd-page">
 
-  const MAINTENANCE = true;
 
-  if (MAINTENANCE) {
-    return <UnderMaintenance />;
-  } else {
-    return (
-      <div className="blinkit-product-page">
 
-        <div className="blinkit-product-layout">
+      {/* MAIN */}
+      <div className="pd-wrapper">
 
-          {/* ================= LEFT : IMAGES ================= */}
-          <div className="blinkit-gallery">
-            <div className="blinkit-main-image">
-              <img src={activeImage} alt={product.name} />
-            </div>
-
-            <div className="blinkit-thumb-row">
-              {images.map(img => (
-                <button
-                  key={img.id}
-                  className={`blinkit-thumb ${activeImage.includes(img.image) ? "active" : ""
-                    }`}
-                  onClick={() =>
-                    setActiveImage(`${API_BASE}${img.image}`)
-                  }
-                >
-                  <img
-                    src={`${API_BASE}${img.image}`}
-                    alt=""
-                  />
-                </button>
-              ))}
-            </div>
+        {/* LEFT IMAGES */}
+        <div className="pd-images">
+          <div className="pd-main-image">
+            <img src={activeImage} alt={product.name} />
           </div>
 
-          {/* ================= RIGHT : DETAILS ================= */}
-          <div className="blinkit-details">
-            <h1 className="blinkit-title">{product.name}</h1>
-
-            <p className="blinkit-short-desc">
-              {product.short_description}
-            </p>
-
-            {/* PRICE */}
-            <div className="blinkit-price">
-              <span className="price-selling">
-                ₹{price.sellingPrice}
-              </span>
-
-              <span className="price-mrp">
-                ₹{price.mrp}
-              </span>
-
-              <span className="price-discount">
-                {price.discountPercent}% OFF
-              </span>
-            </div>
-
-            {/* STOCK */}
-            <div className={`blinkit-stock ${variant.stock_quantity > 0 ? "in" : "out"}`}>
-              {variant.stock_quantity > 0 ? "In Stock" : "Out of Stock"}
-            </div>
-
-            {/* FEATURES */}
-            <ul className="blinkit-features">
-              {data.features?.map((f, i) => (
-                <li key={i}>✔ {f}</li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <button className="blinkit-add-btn">
-              Add to Cart
-            </button>
+          <div
+            className={`pd-thumbnails ${product.images.length > 5 ? "scroll" : ""
+              }`}
+          >
+            {product.images.map(img => (
+              <img
+                key={img.id}
+                src={img.image}
+                alt=""
+                className={activeImage === img.image ? "active" : ""}
+                onClick={() => setActiveImage(img.image)}
+              />
+            ))}
           </div>
         </div>
 
-        {/* ================= EXTRA INFO ================= */}
-        <div className="blinkit-extra">
-          <section>
-            <h3>Description</h3>
-            <p className="blinkit-long-desc">{product.description}</p>
-          </section>
+        {/* RIGHT DETAILS */}
+        <div className="pd-info">
+          <h1>{product.name}</h1>
 
-          <section>
-            <h3>Ingredients</h3>
-            <ul>
-              {data.ingredients?.map((i, idx) => (
-                <li key={idx}>{i}</li>
+          <Link
+            to={`/products?category=${product.category.slug}`}
+            className="pd-category"
+          >
+            {product.category.name}
+          </Link>
+
+          <p className="pd-description">
+            {product.description
+              .split(/\r?\n\r?\n/)
+              .map((para, i) => (
+                <span key={i}>
+                  {para}
+                  <br /><br />
+                </span>
               ))}
-            </ul>
-          </section>
+          </p>
 
-          <section>
-            <h3>Nutrition Facts</h3>
-            <table className="blinkit-nutrition">
-              <tbody>
-                {Object.entries(data.nutritionFacts || {}).map(([k, v]) => (
-                  <tr key={k}>
-                    <td>{k}</td>
-                    <td>{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
+          {/* VARIATIONS */}
+          <div className="pd-variations">
+            <h3>Available Packs</h3>
 
-          <section>
-            <h3>Usage Suggestions</h3>
-            <ul>
-              {data.usageSuggestions?.map((u, i) => (
-                <li key={i}>{u}</li>
+            <div className="pd-variation-scroll">
+              {product.variations.map(v => (
+                <div key={v.id} className="pd-variation-card">
+                  <div className="pd-pack-size">
+                    {v.quantity} {v.unit}
+                  </div>
+
+                  <div className="pd-pack-price">
+                    ₹{v.price}
+                  </div>
+
+                  <div className={`pd-pack-stock ${v.stock ? "in" : "out"}`}>
+                    {v.stock ? "In Stock" : "Out of Stock"}
+                  </div>
+                </div>
               ))}
-            </ul>
-          </section>
+            </div>
+          </div>
+
+
+          {/* ADDITIONAL INFO */}
+          {product.additional_values && (
+            <div className="pd-specs">
+              <h3>Product Information</h3>
+
+              <div className="pd-spec-table-wrapper">
+                <table className="pd-spec-table">
+                  <tbody>
+                    {Object.entries(product.additional_values).map(([k, v]) => (
+                      <tr key={k}>
+                        <th>{k}</th>
+                        <td>{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
-    );
-  }
 
+      {/* BACK */}
+      <Link to="/products" className="pd-back">
+        ← Back to Products
+      </Link>
 
+      {/* RELATED */}
+      <div className="pd-related">
+        <h2>Related Products</h2>
+
+        {relatedProducts.length > 0 ? (
+          <div className="pd-related-grid">
+            {relatedProducts.map(p => (
+              <Link
+                key={p.id}
+                to={`/product/${p.slug}`}
+                className="pd-related-card"
+              >
+                <img src={`${API_BASE}${p.primary_image}`} alt={p.name} />
+                <h4>{p.name}</h4>
+                <p>₹{p.starting_price}</p>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="pd-related-empty">
+            <span className="material-icons-round">inventory_2</span>
+            <p>No related products found</p>
+          </div>
+        )}
+      </div>
+
+    </div>
+  );
 }

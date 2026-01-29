@@ -4,6 +4,7 @@ import { API_BASE } from "../services/api";
 
 export default function Categories() {
   const { categories, loading } = useCategories();
+  
 
   const limitWords = (text, wordLimit = 10) => {
     if (!text) return "";
