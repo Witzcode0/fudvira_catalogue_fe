@@ -50,7 +50,7 @@ export default function Footer() {
 
           {/* POLICIES */}
           <div className="footer-col">
-            <h4>Shipping & Returns</h4>
+            <h4>Legal & Policies</h4>
             <ul>
               <li>
                 <Link to="/terms-and-conditions">

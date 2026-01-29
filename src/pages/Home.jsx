@@ -45,6 +45,24 @@ export default function HeroSection() {
         </div>
       </section>
 
+
+      {/* PRICE LIST SECTION */}
+      <section className="home-price">
+        <div className="home-price-container">
+          <div className="home-price-content">
+            <h2>Product Price List</h2>
+            <p>
+              Explore our latest product pricing based on pack size, quality, and
+              purchase type. Ideal for both retail and bulk buyers.
+            </p>
+
+            <Link to="/price-list" className="home-price-btn">
+              View Price List
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="home-section">
         <h2 className="center">Who We Serve</h2>
         <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>

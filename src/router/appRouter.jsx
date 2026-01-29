@@ -9,6 +9,7 @@ import TermsConditions from "../pages/TermsConditions";
 import NotFound from "../pages/NotFound";
 import UnderMaintenance from "../pages/UnderMaintenance";
 import Certificates from "../pages/Certificates";
+import ProductPriceList from "../pages/ProductPriceList";
 
 
 const appRouter = createBrowserRouter([
@@ -26,6 +27,7 @@ const appRouter = createBrowserRouter([
       },
       { path: "terms-and-conditions", element: <TermsConditions /> },
       { path: "certificates", element: <Certificates /> },
+      { path: "price-list", element: <ProductPriceList /> },
       { path: "*", element: <NotFound /> },
     ],
   },

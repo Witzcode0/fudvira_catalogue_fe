@@ -1,0 +1,142 @@
+.price-page {
+  background: #f9fafb;
+  padding: 80px 16px 120px;
+}
+
+.price-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.price-container h1 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.price-intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 12px auto 40px;
+  color: #374151;
+}
+
+/* FILTERS */
+.price-filters {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.price-filters input,
+.price-filters select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* TABLE */
+.price-table-wrapper {
+  background: #fff;
+  border-radius: 18px;
+  overflow-x: auto;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table th,
+.price-table td {
+  padding: 16px 18px;
+  font-size: 15px;
+}
+
+.price-table thead {
+  background: #f3f4f6;
+}
+
+.price-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* PRODUCT */
+.price-product {
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+/* PACK */
+.price-pack {
+  font-size: 14px;
+}
+
+.price-quality {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* PURCHASE TYPE */
+.price-purchase {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.price-purchase.retail {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.price-purchase.bulk {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* PRICE */
+.price-amount {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* STATUS */
+.price-status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.price-status.in {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.price-status.out {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* EMPTY */
+.price-empty {
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+}
+
+/* LOADING */
+.price-loading {
+  text-align: center;
+  padding: 120px;
+  color: #6b7280;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .price-container h1 {
+    font-size: 28px;
+  }
+}
