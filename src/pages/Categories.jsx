@@ -35,7 +35,7 @@ export default function Categories() {
 
             <div className="category-image-wrapper">
               <img
-                src={`${API_BASE}${cat.category_image}`}
+                src={`${cat.category_image}`}
                 alt={cat.name}
                 className="category-image"
               />
