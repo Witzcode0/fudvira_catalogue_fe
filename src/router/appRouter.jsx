@@ -8,6 +8,8 @@ import ProductDetail from "../pages/ProductDetail";
 import TermsConditions from "../pages/TermsConditions";
 import NotFound from "../pages/NotFound";
 import UnderMaintenance from "../pages/UnderMaintenance";
+import Certificates from "../pages/Certificates";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +25,7 @@ const appRouter = createBrowserRouter([
         element: <UnderMaintenance />,
       },
       { path: "terms-and-conditions", element: <TermsConditions /> },
+      { path: "certificates", element: <Certificates /> },
       { path: "*", element: <NotFound /> },
     ],
   },

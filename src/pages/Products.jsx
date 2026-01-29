@@ -112,11 +112,6 @@ export default function Products() {
 
                 <div className="product-info">
                   <h3>{product.name}</h3>
-                  {product.starting_price && (
-                    <p className="product-price">
-                      ₹{product.starting_price}
-                    </p>
-                  )}
                 </div>
 
                 <div className="product-action">

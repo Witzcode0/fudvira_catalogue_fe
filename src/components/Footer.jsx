@@ -56,6 +56,12 @@ export default function Footer() {
                 <Link to="/terms-and-conditions">
                   Terms & Conditions
                 </Link>
+
+              </li>
+              <li>
+                <Link to="/certificates">
+                  Certificates
+                </Link>
               </li>
             </ul>
           </div>
