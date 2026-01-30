@@ -53,7 +53,10 @@ export default function Footer() {
             <h4>Legal & Policies</h4>
             <ul>
               <li>
-                <Link to="/terms-and-conditions">
+                <Link to="/terms-and-conditions" onClick={() => {
+                  closeAll();
+                  window.scrollTo(0, 0);
+                }}>
                   Terms & Conditions
                 </Link>
 

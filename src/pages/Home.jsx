@@ -82,9 +82,6 @@ export default function HeroSection() {
         </div>
       </section>
 
-
-
-
       <section className="home-section light">
         <h2 className="center">Why Choose Fudvira?</h2>
 
@@ -122,7 +119,6 @@ export default function HeroSection() {
 
       </section>
 
-
       {/* PRICE LIST SECTION */}
       <section className="home-price">
         <div className="home-price-container">
@@ -143,13 +139,6 @@ export default function HeroSection() {
       {/* ================= WHY FUDVIRA ================= */}
 
       <FeaturedProducts />
-
-
-
-
-
-
-
 
       {/* <section className="home-section light">
         <h2 className="center">How Fudvira Works</h2>

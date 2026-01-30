@@ -20,10 +20,10 @@ const appRouter = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "categories", element: <Categories /> },
       {
-  path: "/products",
-  element: <Products />,
-  key: "products"
-}, // ✅ ONLY ONE PRODUCTS PAGE
+        path: "/products",
+        element: <Products />,
+        key: "products"
+      },
       { path: "product/:slug", element: <ProductDetail /> },
       {
         path: "/coming-soon",
