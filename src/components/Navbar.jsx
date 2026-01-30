@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import logo from "../assets/images/logo.png";
 import fudvira_qr from "../assets/images/fudvira-qr.png";
 import { useCategories } from "../store/CategoryContext";
 
 export default function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { categories, loading } = useCategories();
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const location = useLocation();
+  const [searchText, setSearchText] = useState("");
 
   const closeAll = () => {
     setCategoryOpen(false);
@@ -84,7 +87,20 @@ export default function Navbar() {
           <div className="nav-search">
             <div className="search-wrapper">
               <span className="material-icons-round search-icon">search</span>
-              <input type="search" placeholder="Search products..." />
+              <input
+                type="search"
+                placeholder="Search products..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && searchText.trim()) {
+                    navigate(`/products?search=${encodeURIComponent(searchText.trim())}`);
+                    setSearchText("");
+                    closeAll();
+                  }
+                }}
+              />
+
             </div>
           </div>
 
@@ -117,11 +133,20 @@ export default function Navbar() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/products" onClick={closeAll} className="account-link">
-                        {/* <span className="material-icons-round">inventory_2</span> */}
+                      <NavLink
+                        to="/products"
+                        className="account-link"
+                        onClick={() => {
+                          closeAll();
+                          window.scrollTo(0, 0);
+                        }}
+                      >
                         Products
                       </NavLink>
+
+
                     </li>
+
                   </ul>
 
                   {/* QR */}

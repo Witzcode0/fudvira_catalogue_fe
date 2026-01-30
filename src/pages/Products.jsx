@@ -5,9 +5,17 @@ import { useCategories } from "../store/CategoryContext";
 
 const ITEMS_PER_PAGE = 12;
 
+const normalizeProducts = (data) => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.results)) return data.results;
+  return [];
+};
+
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const activeCategory = searchParams.get("category");
+  const searchQuery = searchParams.get("search");
 
   const { categories } = useCategories();
 
@@ -20,29 +28,34 @@ export default function Products() {
     setLoading(true);
     setCurrentPage(1);
 
-    const url = activeCategory
-      ? `${API_BASE}/api/category/${activeCategory}/products/`
-      : `${API_BASE}/api/products/`;
+    let url = `${API_BASE}/api/products/`;
+
+    if (searchQuery) {
+      url = `${API_BASE}/api/products/search/?q=${searchQuery}`;
+    } else if (activeCategory) {
+      url = `${API_BASE}/api/category/${activeCategory}/products/`;
+    }
 
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        // category API is paginated, products API is array
-        const productList = activeCategory
-          ? data?.results || []
-          : Array.isArray(data)
-          ? data
-          : [];
-
-        setProducts(productList);
+        setProducts(normalizeProducts(data));
         setLoading(false);
       })
-      .catch(() => setLoading(false));
-  }, [activeCategory]);
+      .catch(() => {
+        setProducts([]);
+        setLoading(false);
+      });
 
-  /* ================= CATEGORY NAME ================= */
+  }, [searchParams.toString()]);
+
+  /* ================= TITLE ================= */
   const categoryName =
-    categories.find(cat => cat.slug === activeCategory)?.name || "";
+    categories.find(cat => cat.slug === activeCategory)?.name;
+
+  const pageTitle = searchQuery
+    ? `Search results for "${searchQuery}"`
+    : categoryName || "All Products";
 
   /* ================= PAGINATION ================= */
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
@@ -56,13 +69,16 @@ export default function Products() {
     <div className="product-list-page">
       <div className="product-list-layout">
 
-        {/* ========== SIDEBAR FILTER ========== */}
+        {/* SIDEBAR */}
         <aside className="product-filter">
           <h4 className="filter-title">Categories</h4>
 
+          {/* ✅ ALL PRODUCTS */}
           <button
-            className={`filter-pill ${!activeCategory ? "active" : ""}`}
-            onClick={() => setSearchParams({})}
+            className={`filter-pill ${
+              !activeCategory && !searchQuery ? "active" : ""
+            }`}
+            onClick={() => setSearchParams({}, { replace: true })}
           >
             All Products
           </button>
@@ -73,21 +89,20 @@ export default function Products() {
               className={`filter-pill ${
                 activeCategory === cat.slug ? "active" : ""
               }`}
-              onClick={() => setSearchParams({ category: cat.slug })}
+              onClick={() =>
+                setSearchParams({ category: cat.slug }, { replace: true })
+              }
             >
               {cat.name}
             </button>
           ))}
         </aside>
 
-        {/* ========== PRODUCT LIST ========== */}
+        {/* PRODUCT LIST */}
         <section className="product-list-content">
-          <h1 className="product-list-title">
-            {categoryName || "All Products"}
-          </h1>
+          <h1 className="product-list-title">{pageTitle}</h1>
 
           {loading && <p className="text-center">Loading products...</p>}
-
           {!loading && !products.length && (
             <p className="text-center">No products found.</p>
           )}
@@ -97,9 +112,10 @@ export default function Products() {
               <Link
                 key={product.id}
                 to={`/product/${product.slug}`}
-                className="product-card"
+                className="product-card-ui"
+                onClick={() => window.scrollTo(0, 0)}
               >
-                <div className="product-image-box">
+                <div className="product-image-ui">
                   <img
                     src={
                       product.primary_image
@@ -110,48 +126,15 @@ export default function Products() {
                   />
                 </div>
 
-                <div className="product-info">
+                <div className="product-content-ui">
                   <h3>{product.name}</h3>
-                </div>
-
-                <div className="product-action">
-                  View Product
-                  <span className="material-icons-round">
-                    chevron_right
+                  <span className="view-product-link">
+                    View product details →
                   </span>
                 </div>
               </Link>
             ))}
           </div>
-
-          {/* ========== PAGINATION ========== */}
-          {totalPages > 1 && (
-            <div className="pagination">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(p => p - 1)}
-              >
-                Prev
-              </button>
-
-              {Array.from({ length: totalPages }).map((_, i) => (
-                <button
-                  key={i}
-                  className={currentPage === i + 1 ? "active" : ""}
-                  onClick={() => setCurrentPage(i + 1)}
-                >
-                  {i + 1}
-                </button>
-              ))}
-
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(p => p + 1)}
-              >
-                Next
-              </button>
-            </div>
-          )}
         </section>
       </div>
     </div>

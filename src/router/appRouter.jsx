@@ -19,7 +19,11 @@ const appRouter = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "categories", element: <Categories /> },
-      { path: "products", element: <Products /> }, // ✅ ONLY ONE PRODUCTS PAGE
+      {
+  path: "/products",
+  element: <Products />,
+  key: "products"
+}, // ✅ ONLY ONE PRODUCTS PAGE
       { path: "product/:slug", element: <ProductDetail /> },
       {
         path: "/coming-soon",

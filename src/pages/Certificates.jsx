@@ -68,17 +68,14 @@ export default function Certificates() {
                         <p className="cert-desc">{cert.description}</p>
 
                         <div className="cert-pdf">
-                            <iframe
-                                src={`${cert.document_url}#toolbar=0&navpanes=0&scrollbar=0`}
-                                title={cert.title}
-                                width="100%"
-                                height="800"
-                                style={{
-                                    border: "none",
-                                    borderRadius: "14px",
-                                    background: "#fff"
-                                }}
-                            />
+                            <div className="cert-pdf">
+  <iframe
+    src={`${cert.document_url}#toolbar=0&navpanes=0&scrollbar=1&zoom=page-width`}
+    title={cert.title}
+    className="cert-pdf-frame"
+  />
+</div>
+
                         </div>
                     </div>
                 ))}
