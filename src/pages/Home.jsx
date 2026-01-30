@@ -45,6 +45,18 @@ export default function HeroSection() {
         </div>
       </section>
 
+      <section className="home-section">
+        <h2 className="center">Who We Serve</h2>
+        <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>
+        <div className="serve-grid">
+          <div className="serve-card">Retail Customers</div>
+          <div className="serve-card">Wholesalers</div>
+          <div className="serve-card">Retail Stores</div>
+          <div className="serve-card">Health Partners</div>
+          <div className="serve-card">Export Partners</div>
+        </div>
+      </section>
+
 
       {/* PRICE LIST SECTION */}
       <section className="home-price">
@@ -62,45 +74,6 @@ export default function HeroSection() {
           </div>
         </div>
       </section>
-
-      <section className="home-section">
-        <h2 className="center">Who We Serve</h2>
-        <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>
-        <div className="serve-grid">
-          <div className="serve-card">Retail Customers</div>
-          <div className="serve-card">Wholesalers</div>
-          <div className="serve-card">Retail Stores</div>
-          <div className="serve-card">Health Partners</div>
-          <div className="serve-card">Export Partners</div>
-        </div>
-      </section>
-
-
-      {/* ================= CTA ================= */}
-      <section className="home-cta">
-        <div className="home-cta-content">
-          <h2>Bulk & Business Orders with Fudvira</h2>
-
-          <p>
-            Looking for premium food powders, herbal products, or natural honey in bulk?
-            Partner with Fudvira for consistent quality, competitive pricing, and
-            reliable supply tailored to your business needs.
-          </p>
-
-          <a
-            href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            <i className="fab fa-whatsapp"></i>
-            Talk to Our Sales Team
-          </a>
-
-        </div>
-      </section>
-
-
 
       {/* ================= WHY FUDVIRA ================= */}
       <section className="home-section light">
@@ -163,6 +136,35 @@ export default function HeroSection() {
         </div>
 
       </section>
+
+
+      {/* ================= CTA ================= */}
+      <section className="home-cta">
+        <div className="home-cta-content">
+          <h2>Bulk & Business Orders with Fudvira</h2>
+
+          <p>
+            Looking for premium food powders, herbal products, or natural honey in bulk?
+            Partner with Fudvira for consistent quality, competitive pricing, and
+            reliable supply tailored to your business needs.
+          </p>
+
+          <a
+            href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
+            <i className="fab fa-whatsapp"></i>
+            Talk to Our Sales Team
+          </a>
+
+        </div>
+      </section>
+
+
+
+      
 
       {/* <section className="home-section light">
         <h2 className="center">How Fudvira Works</h2>
