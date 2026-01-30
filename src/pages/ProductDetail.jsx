@@ -97,7 +97,7 @@ export default function ProductDetail() {
               {product.variations.map(v => (
                 <div key={v.id} className="pd-variation-card">
                   <div className="pd-pack-size">
-                    {v.quantity} {v.unit}
+                    {Number(v.quantity)}{v.unit}
                   </div>
 
                   <div className="pd-pack-price">
