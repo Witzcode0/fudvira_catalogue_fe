@@ -134,7 +134,6 @@
 .home-price {
   background: linear-gradient(135deg, #fff7ed, #ecfeff);
   padding: 80px 16px;
-  margin-top: 80px;
 }
 
 .home-price-container {
@@ -628,5 +627,124 @@
 
   .step-card p {
     font-size: 0.85rem;
+  }
+}
+
+/* ===============================
+   FEATURED PRODUCTS – PREMIUM STYLE
+================================ */
+
+.featured-products-section {
+  margin-top: 90px;
+  padding: 0 4px;
+}
+
+/* Header */
+.featured-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.4px;
+}
+
+/* View all link */
+.view-all-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  position: relative;
+  padding-right: 18px;
+}
+
+.view-all-link::after {
+  content: "→";
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: transform 0.25s ease;
+}
+
+.view-all-link:hover::after {
+  transform: translateX(4px);
+}
+
+/* ===============================
+   PRODUCT GRID (4 PER ROW)
+================================ */
+
+.featured-products-section .product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 👈 4 per row */
+  gap: 28px;
+}
+
+/* ===============================
+   EMPTY STATE (UNIQUE LOOK)
+================================ */
+
+.featured-empty {
+  margin-top: 30px;
+  padding: 60px 40px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fafafa, #ffffff);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.featured-empty-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* Browse all button */
+.featured-empty-link {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-empty-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+/* ===============================
+   RESPONSIVE BREAKPOINTS
+================================ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  }
+}
+
+/* Mobiles */
+@media (max-width: 520px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: 1fr; /* 1 per row */
+  }
+
+  .featured-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }

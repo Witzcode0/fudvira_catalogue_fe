@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import heroDesktop from "../assets/images/hero-desktop.jpg";
 import heroTablet from "../assets/images/hero-tablet.jpg";
 import heroMobile from "../assets/images/hero-mobile.jpg";
+import FeaturedProducts from "./FeaturedProducts";
 
 export default function HeroSection() {
   return (
@@ -57,87 +58,6 @@ export default function HeroSection() {
         </div>
       </section>
 
-
-      {/* PRICE LIST SECTION */}
-      <section className="home-price">
-        <div className="home-price-container">
-          <div className="home-price-content">
-            <h2>Product Price List</h2>
-            <p>
-              Explore our latest product pricing based on pack size, quality, and
-              purchase type. Ideal for both retail and bulk buyers.
-            </p>
-
-            <Link to="/price-list" className="home-price-btn">
-              View Price List
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= WHY FUDVIRA ================= */}
-      <section className="home-section light">
-        <h2 className="center">Why Choose Fudvira?</h2>
-
-        <p className="section-subtitle">
-          Naturally sourced, carefully processed, and crafted for everyday wellness
-        </p>
-
-        <div className="features-grid">
-
-          <div className="feature-card">
-            <span className="material-icons-round">verified</span>
-            <h4>100% Pure</h4>
-            <p>No chemicals, no additives, only natural goodness.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">spa</span>
-            <h4>Health First</h4>
-            <p>Nutrient-rich powders and honey for everyday wellness.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">eco</span>
-            <h4>Ethically Sourced</h4>
-            <p>Carefully sourced from trusted farms and producers.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">science</span>
-            <h4>Minimal Processing</h4>
-            <p>Processed gently to retain natural nutrients and taste.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">fact_check</span>
-            <h4>Quality Checked</h4>
-            <p>Each batch undergoes strict quality and hygiene checks.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">inventory_2</span>
-            <h4>Careful Packaging</h4>
-            <p>Hygienic, secure packaging to maintain freshness.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">local_shipping</span>
-            <h4>Pan India Delivery</h4>
-            <p>Fast and reliable delivery across India.</p>
-          </div>
-
-          <div className="feature-card">
-            <span className="material-icons-round">handshake</span>
-            <h4>Trusted by Businesses</h4>
-            <p>Preferred by retailers, wholesalers, and health brands.</p>
-          </div>
-
-        </div>
-
-      </section>
-
-
       {/* ================= CTA ================= */}
       <section className="home-cta">
         <div className="home-cta-content">
@@ -164,7 +84,72 @@ export default function HeroSection() {
 
 
 
-      
+
+      <section className="home-section light">
+        <h2 className="center">Why Choose Fudvira?</h2>
+
+        <p className="section-subtitle">
+          Naturally sourced, carefully processed, and crafted for everyday wellness
+        </p>
+
+        <div className="features-grid">
+
+          <div className="feature-card">
+            <span className="material-icons-round">verified</span>
+            <h4>100% Pure</h4>
+            <p>No chemicals, no additives, only natural goodness.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">fact_check</span>
+            <h4>Quality Checked</h4>
+            <p>Each batch undergoes strict quality and hygiene checks.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">local_shipping</span>
+            <h4>Pan India Delivery</h4>
+            <p>Fast and reliable delivery across India.</p>
+          </div>
+
+          <div className="feature-card">
+            <span className="material-icons-round">handshake</span>
+            <h4>Trusted by Businesses</h4>
+            <p>Preferred by retailers, wholesalers, and health brands.</p>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* PRICE LIST SECTION */}
+      <section className="home-price">
+        <div className="home-price-container">
+          <div className="home-price-content">
+            <h2>Product Price List</h2>
+            <p>
+              Explore our latest product pricing based on pack size, quality, and
+              purchase type. Ideal for both retail and bulk buyers.
+            </p>
+
+            <Link to="/price-list" className="home-price-btn">
+              View Price List
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= WHY FUDVIRA ================= */}
+
+      <FeaturedProducts />
+
+
+
+
+
+
+
 
       {/* <section className="home-section light">
         <h2 className="center">How Fudvira Works</h2>
