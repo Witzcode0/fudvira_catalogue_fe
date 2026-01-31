@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
+import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -14,40 +15,34 @@ export default function ProductDetail() {
     let isMounted = true;
     setLoading(true);
 
-    // 1️⃣ FETCH PRODUCT DETAIL
     fetch(`${API_BASE}/api/products/${slug}/`)
       .then(res => res.json())
       .then(data => {
         if (!isMounted) return;
 
         setProduct(data);
-
         setActiveImage(
           data.images?.find(i => i.is_primary)?.image ||
           data.images?.[0]?.image ||
           ""
         );
 
-        // 2️⃣ FETCH SAME CATEGORY PRODUCTS (STRICT)
         return fetch(
           `${API_BASE}/api/products/?category=${data.category.slug}`
-        ).then(res => res.json()).then(rel => {
-          if (!isMounted) return;
+        )
+          .then(res => res.json())
+          .then(rel => {
+            if (!isMounted) return;
 
-          const results = Array.isArray(rel?.results)
-            ? rel.results
-            : [];
+            const results = Array.isArray(rel?.results) ? rel.results : [];
+            const filtered = results.filter(
+              p =>
+                p.category?.slug === data.category.slug &&
+                p.slug !== data.slug
+            );
 
-          // ✅ STRICT FILTERING
-          const filtered = results.filter(
-            p =>
-              p.category?.slug === data.category.slug &&
-              p.slug !== data.slug
-          );
-
-          // OPTIONAL: limit related products
-          setRelatedProducts(filtered.slice(0, 4));
-        });
+            setRelatedProducts(filtered.slice(0, 4));
+          });
       })
       .catch(() => {
         if (isMounted) {
@@ -70,7 +65,7 @@ export default function ProductDetail() {
   return (
     <div className="pd-page">
 
-      {/* MAIN */}
+      {/* ================= MAIN ================= */}
       <div className="pd-wrapper">
 
         {/* LEFT IMAGES */}
@@ -79,10 +74,7 @@ export default function ProductDetail() {
             <img src={activeImage} alt={product.name} />
           </div>
 
-          <div
-            className={`pd-thumbnails ${product.images?.length > 5 ? "scroll" : ""
-              }`}
-          >
+          <div className={`pd-thumbnails ${product.images?.length > 5 ? "scroll" : ""}`}>
             {product.images?.map(img => (
               <img
                 key={img.id}
@@ -106,16 +98,20 @@ export default function ProductDetail() {
             {product.category.name}
           </Link>
 
+          {/* WhatsApp CTA */}
+          <div className="pd-actions">
+            <WhatsAppEnquiry product={product} />
+          </div>
+
+          {/* DESCRIPTION */}
           {product.description && (
             <p className="pd-description">
-              {product.description
-                .split(/\r?\n\r?\n/)
-                .map((para, i) => (
-                  <span key={i}>
-                    {para}
-                    <br /><br />
-                  </span>
-                ))}
+              {product.description.split(/\r?\n\r?\n/).map((para, i) => (
+                <span key={i}>
+                  {para}
+                  <br /><br />
+                </span>
+              ))}
             </p>
           )}
 
@@ -150,7 +146,7 @@ export default function ProductDetail() {
             </div>
           )}
 
-          {/* ADDITIONAL INFO */}
+          {/* SPECIFICATIONS */}
           {product.additional_values && (
             <div className="pd-specs">
               <h3>Product Information</h3>
@@ -187,45 +183,51 @@ export default function ProductDetail() {
         ← Back to Products
       </Link>
 
-      {/* RELATED */}
+      {/* ================= RELATED PRODUCTS ================= */}
       <div className="pd-related">
         <h2>Related Products</h2>
 
         {relatedProducts.length > 0 ? (
-          <div className="pd-related-grid">
-            {relatedProducts.map(p => (
-
-              <Link
-                key={p.id}
-                to={`/product/${p.slug}`}
-                className="product-card-ui"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <div className="product-image-ui">
-                  <img
-                    src={`${API_BASE}${p.primary_image}`}
-                    alt={p.name}
-                  />
-                </div>
-
-                <div className="product-content-ui">
-                  <h3>{p.name}</h3>
-                  <span className="view-product-link">
-                    View details →
-                  </span>
-                </div>
-              </Link>
-            ))}
+  <div className="pd-related-grid">
+    {relatedProducts.map(p => (
+      <div key={p.id} className="product-card-ui">
+        <Link to={`/product/${p.slug}`} onClick={() => window.scrollTo(0, 0)}>
+          <div className="product-image-ui">
+            <img
+              src={`${API_BASE}${p.primary_image}`}
+              alt={p.name}
+            />
           </div>
+        </Link>
 
-        ) : (
-          <div className="pd-related-empty">
-            <span className="material-icons-round">inventory_2</span>
-            <p>No related products found</p>
+        <div className="product-content-ui">
+          <h3>{p.name}</h3>
+
+          <div className="product-card-actions">
+            <Link
+              to={`/product/${p.slug}`}
+              className="view-product-link"
+            >
+              View details →
+            </Link>
+
+            <WhatsAppEnquiry product={p} />
           </div>
-        )}
+        </div>
       </div>
+    ))}
+  </div>
+) : (
+  <div className="pd-related-empty">
+    <span className="material-icons-round">inventory_2</span>
+    <p>No related products available right now.</p>
+    <span className="pd-related-subtext">
+      Please check back later or explore other products.
+    </span>
+  </div>
+)}
 
+      </div>
     </div>
   );
 }

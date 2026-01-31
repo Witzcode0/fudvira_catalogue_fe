@@ -1,15 +1,15 @@
-/* ===============================
-   PAGE WRAPPER
-================================ */
+/* =========================================================
+   PRODUCT LIST PAGE WRAPPER
+========================================================= */
 .product-list-page {
   max-width: 1280px;
   margin: 0 auto;
   padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px);
 }
 
-/* ===============================
-   MAIN LAYOUT
-================================ */
+/* =========================================================
+   MAIN LAYOUT (SIDEBAR + CONTENT)
+========================================================= */
 .product-list-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -17,13 +17,13 @@
   align-items: flex-start;
 }
 
-/* ===============================
-   SIDEBAR (FILTER)
-================================ */
+/* =========================================================
+   SIDEBAR FILTER
+========================================================= */
 .product-filter {
   position: sticky;
   top: 90px;
-  background: #fff;
+  background: #ffffff;
   padding: 18px;
   border-radius: 16px;
   box-shadow: var(--shadow-sm);
@@ -33,7 +33,7 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 14px;
-  color: var(--text-dark);
+  color: #111827;
 }
 
 .filter-pill {
@@ -58,86 +58,78 @@
 
 .filter-pill.active {
   background: var(--primary);
-  color: #fff;
+  color: #ffffff;
   border-color: var(--primary);
 }
 
-/* ===============================
-   CONTENT AREA
-================================ */
-.product-list-title {
-  font-size: clamp(20px, 2.4vw, 26px);
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--text-dark);
+/* =========================================================
+   EMPTY STATE (NO PRODUCTS)
+========================================================= */
+.product-empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  background: #fafafa;
+  border-radius: 18px;
+  margin-top: 40px;
 }
 
-/* ===============================
+.product-empty-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.product-empty-subtext {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* =========================================================
    PRODUCT GRID
-================================ */
+========================================================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2.5vw, 28px);
 }
 
-/* ===============================
+/* =========================================================
    PRODUCT CARD
-================================ */
+========================================================= */
 .product-card-ui {
-  position: relative;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: #ffffff;
   border-radius: 18px;
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-
-  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .product-card-ui:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.18);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);
 }
 
-/* Wishlist */
-.wishlist-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.9);
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* ===============================
-   IMAGE (SQUARE / FULL WIDTH)
-================================ */
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
 .product-image-ui {
-  width: 100%;
-  aspect-ratio: 1 / 1;   /* 👈 PERFECT SQUARE */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
 .product-image-ui img {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* full image */
+  object-fit: cover;
   display: block;
 }
 
-/* ===============================
-   CONTENT
-================================ */
+/* =========================================================
+   PRODUCT CONTENT
+========================================================= */
 .product-content-ui {
   padding: 14px 16px 18px;
   display: flex;
@@ -149,16 +141,26 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--text-dark);
+  color: #111827;
 }
 
-/* View product link */
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+.product-card-actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* View details */
 .view-product-link {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--primary);
-  display: inline-flex;
-  align-items: center;
+  text-decoration: none;
   transition: transform 0.2s ease;
 }
 
@@ -166,53 +168,128 @@
   transform: translateX(4px);
 }
 
-/* ===============================
-   PAGINATION
-================================ */
-.pagination {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 36px;
-}
-
-.pagination button {
-  min-width: 36px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #fff;
-  font-size: 13px;
+/* =========================================================
+   WHATSAPP ENQUIRY BUTTON
+========================================================= */
+.whatsapp-enquiry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
 }
 
-.pagination button:hover {
-  border-color: var(--primary);
-  color: var(--primary);
+.whatsapp-enquiry-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
 }
 
-.pagination button.active {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+/* =========================================================
+   WHATSAPP MODAL OVERLAY
+========================================================= */
+.enquiry-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.pagination button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+/* =========================================================
+   MODAL BOX
+========================================================= */
+.enquiry-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  animation: modalPop 0.25s ease;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-@media (max-width: 1024px) {
-  .product-list-layout {
-    grid-template-columns: 220px 1fr;
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
+.enquiry-modal h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   MODAL FORM ELEMENTS
+========================================================= */
+.enquiry-modal textarea,
+.enquiry-modal input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.enquiry-modal textarea {
+  min-height: 90px;
+}
+
+.enquiry-modal textarea:focus,
+.enquiry-modal input:focus {
+  outline: none;
+  border-color: #25d366;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+/* =========================================================
+   MODAL ACTIONS
+========================================================= */
+.enquiry-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+@media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -223,38 +300,24 @@
     grid-template-columns: 1fr;
   }
 
-  /* FILTER BAR ON TOP */
   .product-filter {
     position: static;
-    padding: 12px 0;
     display: flex;
-    flex-wrap: nowrap;           /* ❌ NO WRAP */
     gap: 10px;
-    overflow-x: auto;            /* ✅ HORIZONTAL SCROLL */
-    overflow-y: hidden;
-    white-space: nowrap;
-    border-radius: 0;
+    overflow-x: auto;
     box-shadow: none;
-    scrollbar-width: none;       /* Firefox */
-  }
-
-  .product-filter::-webkit-scrollbar {
-    display: none;               /* Chrome / Safari */
+    padding: 12px 0;
   }
 
   .filter-title {
-    display: none;               /* Optional: hide title on mobile */
+    display: none;
   }
 
   .filter-pill {
-    flex: 0 0 auto;              /* 👈 IMPORTANT */
     width: auto;
     white-space: nowrap;
-    padding: 8px 14px;
-    font-size: 13px;
   }
 }
-
 
 @media (max-width: 480px) {
   .product-grid {

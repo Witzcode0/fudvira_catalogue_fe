@@ -82,42 +82,42 @@ export default function HeroSection() {
         </div>
       </section>
 
-      <section className="home-section light">
-        <h2 className="center">Why Choose Fudvira?</h2>
+      <section className="why-fudvira-section">
+  <h2 className="why-fudvira-title">Why Choose Fudvira?</h2>
 
-        <p className="section-subtitle">
-          Naturally sourced, carefully processed, and crafted for everyday wellness
-        </p>
+  <p className="why-fudvira-subtitle">
+    Naturally sourced, carefully processed, and crafted for everyday wellness
+  </p>
 
-        <div className="features-grid">
+  <div className="why-fudvira-grid">
 
-          <div className="feature-card">
-            <span className="material-icons-round">verified</span>
-            <h4>100% Pure</h4>
-            <p>No chemicals, no additives, only natural goodness.</p>
-          </div>
+    <div className="why-fudvira-card">
+      <span className="material-icons-round">verified</span>
+      <h4>100% Pure</h4>
+      <p>No chemicals, no additives, only natural goodness.</p>
+    </div>
 
-          <div className="feature-card">
-            <span className="material-icons-round">fact_check</span>
-            <h4>Quality Checked</h4>
-            <p>Each batch undergoes strict quality and hygiene checks.</p>
-          </div>
+    <div className="why-fudvira-card">
+      <span className="material-icons-round">fact_check</span>
+      <h4>Quality Checked</h4>
+      <p>Each batch undergoes strict quality and hygiene checks.</p>
+    </div>
 
-          <div className="feature-card">
-            <span className="material-icons-round">local_shipping</span>
-            <h4>Pan India Delivery</h4>
-            <p>Fast and reliable delivery across India.</p>
-          </div>
+    <div className="why-fudvira-card">
+      <span className="material-icons-round">local_shipping</span>
+      <h4>Pan India Delivery</h4>
+      <p>Fast and reliable delivery across India.</p>
+    </div>
 
-          <div className="feature-card">
-            <span className="material-icons-round">handshake</span>
-            <h4>Trusted by Businesses</h4>
-            <p>Preferred by retailers, wholesalers, and health brands.</p>
-          </div>
+    <div className="why-fudvira-card">
+      <span className="material-icons-round">handshake</span>
+      <h4>Trusted by Businesses</h4>
+      <p>Preferred by retailers, wholesalers, and health brands.</p>
+    </div>
 
-        </div>
+  </div>
+</section>
 
-      </section>
 
       {/* PRICE LIST SECTION */}
       <section className="home-price">

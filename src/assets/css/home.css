@@ -175,92 +175,356 @@
 }
 
 
-
-/* =========================
+/* ===============================
    WHY FUDVIRA SECTION
-========================= */
+================================ */
 
-.home-section.light {
-  padding: var(--space-9) 0;
+.why-fudvira-section {
+  padding: 80px 16px;
+  background: #ffffff;
 }
 
-/* SECTION TITLE */
-.home-section.light h2 {
+/* Title */
+.why-fudvira-title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: var(--space-3);
-  color: var(--text-dark);
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
 }
 
-
-.section-subtitle {
-  max-width: 640px;
-  margin: 0 auto var(--space-8);
-
+/* Subtitle */
+.why-fudvira-subtitle {
+  max-width: 680px;
+  margin: 0 auto 48px;
   text-align: center;
-  font-size: 1rem;
-  color: var(--text-light);
+  font-size: 16px;
+  color: #6b7280;
   line-height: 1.6;
 }
 
-/* =========================
-   FEATURES GRID
-========================= */
+/* ===============================
+   GRID
+================================ */
 
-.features-grid {
+.why-fudvira-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-7);
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 var(--space-4);
+  gap: 28px;
 }
 
-/* =========================
-   FEATURE CARD
-========================= */
+/* ===============================
+   CARD
+================================ */
 
-.feature-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: var(--space-7) var(--space-5);
-
+.why-fudvira-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 22px;
   text-align: center;
 
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.feature-card:hover {
+.why-fudvira-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.14);
 }
 
-/* ICON */
-.feature-card .material-icons-round {
-  font-size: 48px;
+/* Icon */
+.why-fudvira-card .material-icons-round {
+  font-size: 44px;
   color: #013b26;
-  margin-bottom: var(--space-4);
 
-  background: rgba(10, 173, 10, 0.1);
-  padding: 14px;
+  background: rgba(1, 59, 38, 0.08);
+  padding: 16px;
   border-radius: 50%;
+  margin-bottom: 18px;
 }
 
-/* TITLE */
-.feature-card h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: var(--space-2);
-  color: var(--text-dark);
+/* Heading */
+.why-fudvira-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111827;
 }
 
-/* DESCRIPTION */
-.feature-card p {
-  font-size: 0.9rem;
-  color: var(--text-light);
+/* Text */
+.why-fudvira-card p {
+  font-size: 14px;
+  color: #4b5563;
   line-height: 1.6;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .why-fudvira-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .why-fudvira-section {
+    padding: 64px 16px;
+  }
+
+  .why-fudvira-title {
+    font-size: 22px;
+  }
+
+  .why-fudvira-subtitle {
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .why-fudvira-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .why-fudvira-card {
+    padding: 26px 20px;
+  }
+}
+
+/* ===============================
+   FEATURED PRODUCTS SECTION
+================================ */
+
+.featured-products-section {
+  margin-top: 90px;
+  padding: 0 8px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.featured-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.featured-products-section .section-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.4px;
+}
+
+/* View All */
+.view-all-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.25s ease;
+}
+
+.view-all-link::after {
+  content: "→";
+  transition: transform 0.25s ease;
+}
+
+.view-all-link:hover::after {
+  transform: translateX(4px);
+}
+
+/* ===============================
+   PRODUCT GRID (4 PER ROW)
+================================ */
+
+.featured-products-section .product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* ===============================
+   PRODUCT CARD
+================================ */
+
+.featured-products-section .product-card-ui {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-products-section .product-card-ui:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);
+}
+
+/* ===============================
+   IMAGE
+================================ */
+
+.featured-products-section .product-image-ui {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.featured-products-section .product-image-ui img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+
+.featured-products-section .product-content-ui {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.featured-products-section .product-content-ui h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* ===============================
+   ACTIONS ROW
+================================ */
+
+.featured-products-section .product-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* View Details */
+.featured-products-section .view-product-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.featured-products-section .product-card-ui:hover .view-product-link {
+  transform: translateX(4px);
+}
+
+/* ===============================
+   WHATSAPP BUTTON
+================================ */
+
+.featured-products-section .whatsapp-enquiry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+
+  background: #25d366;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+}
+
+.featured-products-section .whatsapp-enquiry-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+
+.featured-empty {
+  margin-top: 30px;
+  padding: 60px 40px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fafafa, #ffffff);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.featured-empty-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 18px;
+}
+
+.featured-empty-link {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-empty-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobiles */
+@media (max-width: 520px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 
 /* =========================

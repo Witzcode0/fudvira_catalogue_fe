@@ -1,13 +1,13 @@
-/* ===============================
-   PAGE
-================================ */
+/* =========================================================
+   PRODUCT DETAIL PAGE
+========================================================= */
 .pd-page {
   padding: 40px 0 80px;
 }
 
-/* ===============================
+/* =========================================================
    MAIN WRAPPER
-================================ */
+========================================================= */
 .pd-wrapper {
   max-width: 1200px;
   margin: auto;
@@ -16,9 +16,9 @@
   gap: 48px;
 }
 
-/* ===============================
-   LEFT IMAGES – STICKY
-================================ */
+/* =========================================================
+   LEFT IMAGES (STICKY)
+========================================================= */
 .pd-images {
   position: sticky;
   top: 90px;
@@ -26,10 +26,10 @@
 }
 
 .pd-main-image {
-  background: #fff;
+  background: #ffffff;
   border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
 }
 
 .pd-main-image img {
@@ -39,9 +39,9 @@
   border-radius: 14px;
 }
 
-/* ===============================
+/* =========================================================
    THUMBNAILS
-================================ */
+========================================================= */
 .pd-thumbnails {
   display: flex;
   gap: 12px;
@@ -60,7 +60,7 @@
   border-radius: 10px;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: 0.3s;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .pd-thumbnails img.active {
@@ -68,14 +68,14 @@
   transform: scale(1.05);
 }
 
-/* ===============================
+/* =========================================================
    PRODUCT INFO
-================================ */
+========================================================= */
 .pd-info {
   background: #ffffff;
   border-radius: 20px;
   padding: 36px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
 }
 
 .pd-info h1 {
@@ -85,9 +85,9 @@
   margin-bottom: 8px;
 }
 
-/* ===============================
+/* =========================================================
    CATEGORY BADGE
-================================ */
+========================================================= */
 .pd-category {
   display: inline-block;
   margin-bottom: 18px;
@@ -99,9 +99,9 @@
   text-decoration: none;
 }
 
-/* ===============================
+/* =========================================================
    DESCRIPTION
-================================ */
+========================================================= */
 .pd-description {
   font-size: 16px;
   line-height: 1.8;
@@ -109,9 +109,9 @@
   margin-bottom: 30px;
 }
 
-/* ===============================
+/* =========================================================
    VARIATIONS
-================================ */
+========================================================= */
 .pd-variations h3 {
   font-size: 20px;
   margin-bottom: 14px;
@@ -126,12 +126,12 @@
 
 .pd-variation-card {
   min-width: 180px;
-  background: linear-gradient(180deg, #fff, #f9fafb);
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
   border-radius: 16px;
   padding: 18px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   border: 1px solid #f3f4f6;
-  transition: 0.3s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
 }
 
 .pd-variation-card:hover {
@@ -148,7 +148,6 @@
   font-size: 0.85rem;
   color: #666;
   text-transform: capitalize;
-  margin: 4px 0;
 }
 
 .pd-pack-price {
@@ -157,19 +156,21 @@
   color: #16a34a;
 }
 
+.pd-pack-stock {
+  font-size: 13px;
+}
+
 .pd-pack-stock.in {
   color: #16a34a;
-  font-size: 13px;
 }
 
 .pd-pack-stock.out {
   color: #dc2626;
-  font-size: 13px;
 }
 
-/* ===============================
+/* =========================================================
    SPECIFICATIONS
-================================ */
+========================================================= */
 .pd-specs {
   margin-top: 40px;
 }
@@ -209,9 +210,9 @@
   margin-bottom: 4px;
 }
 
-/* ===============================
+/* =========================================================
    BACK BUTTON
-================================ */
+========================================================= */
 .pd-back {
   display: inline-flex;
   align-items: center;
@@ -224,7 +225,7 @@
   font-weight: 500;
   border-radius: 999px;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
 }
 
@@ -234,9 +235,9 @@
   color: #92400e;
 }
 
-/* ===============================
-   RELATED PRODUCTS (5-CARD STYLE)
-================================ */
+/* =========================================================
+   RELATED PRODUCTS
+========================================================= */
 .pd-related {
   margin-top: 90px;
   padding: 70px 20px;
@@ -251,7 +252,6 @@
   margin-bottom: 40px;
 }
 
-/* 🔥 5 CARD GRID */
 .pd-related-grid {
   max-width: 1200px;
   margin: auto;
@@ -260,59 +260,67 @@
   gap: clamp(16px, 2.5vw, 28px);
 }
 
-/* SAME AS product-card-ui */
-.pd-related-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* =========================================================
+   RELATED EMPTY STATE
+========================================================= */
+.pd-related-empty {
+  margin-top: 30px;
+  padding: 60px 24px;
+  border-radius: 20px;
+  background: #fafafa;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-.pd-related-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.18);
+.pd-related-empty .material-icons-round {
+  font-size: 48px;
+  color: #9ca3af;
+  margin-bottom: 12px;
 }
 
-/* IMAGE */
-.pd-related-card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  background: #f9fafb;
-}
-
-/* CONTENT */
-.pd-related-card h4 {
-  padding: 14px 16px 4px;
-  font-size: 15px;
+.pd-related-empty p {
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.4;
   color: #111827;
 }
 
-.pd-related-card p {
-  padding: 0 16px 18px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #16a34a;
+.pd-related-subtext {
+  font-size: 14px;
+  color: #6b7280;
 }
 
-/* ===============================
+/* =========================================================
    RESPONSIVE
-================================ */
+========================================================= */
 @media (max-width: 768px) {
-  .pd-wrapper { grid-template-columns: 1fr; }
-  .pd-images { position: static; }
-  .pd-variation-scroll { flex-direction: column; overflow-x: unset; }
-  .pd-info { padding: 24px; }
+  .pd-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-images {
+    position: static;
+  }
+
+  .pd-info {
+    padding: 24px;
+  }
+
+  .pd-variation-scroll {
+    flex-direction: column;
+    overflow-x: unset;
+  }
+
+  .pd-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pd-related-empty {
+    padding: 40px 20px;
+  }
 }
 
 @media (max-width: 575px) {
-  .pd-related-grid { grid-template-columns: 1fr; }
+  .pd-related-grid {
+    grid-template-columns: 1fr;
+  }
 }

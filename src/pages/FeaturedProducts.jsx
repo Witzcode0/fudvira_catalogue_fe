@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE } from "../services/api";
+import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
 /* Normalize API response safely */
 const normalizeProducts = (data) => {
@@ -65,7 +66,7 @@ export default function FeaturedProducts() {
           View all
         </Link>
       </div>
-      
+
 
       <div className="product-grid">
         {products.map(product => (
@@ -88,9 +89,16 @@ export default function FeaturedProducts() {
 
             <div className="product-content-ui">
               <h3>{product.name}</h3>
-              <span className="view-product-link">
-                View details →
-              </span>
+
+              <div className="product-card-actions">
+                <Link
+                  to={`/product/${product.slug}`}
+                  className="view-product-link"
+                >
+                  View details →
+                </Link>
+                <WhatsAppEnquiry product={product} />
+              </div>
             </div>
           </Link>
         ))}

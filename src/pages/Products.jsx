@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
 import { useCategories } from "../store/CategoryContext";
-
-const ITEMS_PER_PAGE = 12;
+import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
 const normalizeProducts = (data) => {
   if (Array.isArray(data)) return data;
@@ -13,20 +12,17 @@ const normalizeProducts = (data) => {
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { categories } = useCategories();
 
   const activeCategory = searchParams.get("category");
   const searchQuery = searchParams.get("search");
 
-  const { categories } = useCategories();
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
 
   /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
     setLoading(true);
-    setCurrentPage(1);
 
     let url = `${API_BASE}/api/products/`;
 
@@ -46,24 +42,14 @@ export default function Products() {
         setProducts([]);
         setLoading(false);
       });
-
   }, [searchParams.toString()]);
 
-  /* ================= TITLE ================= */
   const categoryName =
     categories.find(cat => cat.slug === activeCategory)?.name;
 
   const pageTitle = searchQuery
     ? `Search results for "${searchQuery}"`
     : categoryName || "All Products";
-
-  /* ================= PAGINATION ================= */
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedProducts = products.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
 
   return (
     <div className="product-list-page">
@@ -73,11 +59,8 @@ export default function Products() {
         <aside className="product-filter">
           <h4 className="filter-title">Categories</h4>
 
-          {/* ✅ ALL PRODUCTS */}
           <button
-            className={`filter-pill ${
-              !activeCategory && !searchQuery ? "active" : ""
-            }`}
+            className={`filter-pill ${!activeCategory ? "active" : ""}`}
             onClick={() => setSearchParams({}, { replace: true })}
           >
             All Products
@@ -86,9 +69,7 @@ export default function Products() {
           {categories.map(cat => (
             <button
               key={cat.id}
-              className={`filter-pill ${
-                activeCategory === cat.slug ? "active" : ""
-              }`}
+              className={`filter-pill ${activeCategory === cat.slug ? "active" : ""}`}
               onClick={() =>
                 setSearchParams({ category: cat.slug }, { replace: true })
               }
@@ -102,37 +83,55 @@ export default function Products() {
         <section className="product-list-content">
           <h1 className="product-list-title">{pageTitle}</h1>
 
-          {loading && <p className="text-center">Loading products...</p>}
-          {!loading && !products.length && (
-            <p className="text-center">No products found.</p>
+          {loading && <p>Loading products...</p>}
+
+          {!loading && products.length === 0 && (
+            <div className="product-empty-state">
+              <p className="product-empty-text">
+                No products available at the moment.
+              </p>
+
+              <p className="product-empty-subtext">
+                Please try another category or check back later.
+              </p>
+            </div>
           )}
 
+
           <div className="product-grid">
-            {paginatedProducts.map(product => (
-              <Link
-                key={product.id}
-                to={`/product/${product.slug}`}
-                className="product-card-ui"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <div className="product-image-ui">
-                  <img
-                    src={
-                      product.primary_image
-                        ? `${API_BASE}${product.primary_image}`
-                        : "/placeholder.png"
-                    }
-                    alt={product.name}
-                  />
-                </div>
+            {products.map(product => (
+              <div key={product.id} className="product-card-ui">
+
+                <Link to={`/product/${product.slug}`}>
+                  <div className="product-image-ui">
+                    <img
+                      src={
+                        product.primary_image
+                          ? `${API_BASE}${product.primary_image}`
+                          : "/placeholder.png"
+                      }
+                      alt={product.name}
+                    />
+                  </div>
+                </Link>
 
                 <div className="product-content-ui">
                   <h3>{product.name}</h3>
-                  <span className="view-product-link">
-                    View details →
-                  </span>
+
+                  <div className="product-card-actions">
+                    <Link
+                      to={`/product/${product.slug}`}
+                      className="view-product-link"
+                    >
+                      View details →
+                    </Link>
+
+                    {/* ✅ THIS HANDLES EVERYTHING */}
+                    <WhatsAppEnquiry product={product} />
+                  </div>
                 </div>
-              </Link>
+
+              </div>
             ))}
           </div>
         </section>
