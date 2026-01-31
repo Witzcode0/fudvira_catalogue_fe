@@ -1,9 +1,13 @@
-/* PAGE */
+/* ===============================
+   PAGE
+================================ */
 .pd-page {
   padding: 40px 0 80px;
 }
 
-/* MAIN WRAPPER */
+/* ===============================
+   MAIN WRAPPER
+================================ */
 .pd-wrapper {
   max-width: 1200px;
   margin: auto;
@@ -12,12 +16,15 @@
   gap: 48px;
 }
 
-/* LEFT IMAGES – STICKY */
+/* ===============================
+   LEFT IMAGES – STICKY
+================================ */
 .pd-images {
   position: sticky;
   top: 90px;
   align-self: flex-start;
 }
+
 .pd-main-image {
   background: #fff;
   border-radius: 18px;
@@ -32,7 +39,9 @@
   border-radius: 14px;
 }
 
-/* THUMBNAILS */
+/* ===============================
+   THUMBNAILS
+================================ */
 .pd-thumbnails {
   display: flex;
   gap: 12px;
@@ -58,6 +67,10 @@
   border-color: #f59e0b;
   transform: scale(1.05);
 }
+
+/* ===============================
+   PRODUCT INFO
+================================ */
 .pd-info {
   background: #ffffff;
   border-radius: 20px;
@@ -65,7 +78,6 @@
   box-shadow: 0 20px 50px rgba(0,0,0,0.06);
 }
 
-/* TITLE */
 .pd-info h1 {
   font-size: 32px;
   font-weight: 700;
@@ -73,7 +85,9 @@
   margin-bottom: 8px;
 }
 
-/* CATEGORY */
+/* ===============================
+   CATEGORY BADGE
+================================ */
 .pd-category {
   display: inline-block;
   margin-bottom: 18px;
@@ -85,19 +99,24 @@
   text-decoration: none;
 }
 
-/* DESCRIPTION */
+/* ===============================
+   DESCRIPTION
+================================ */
 .pd-description {
   font-size: 16px;
   line-height: 1.8;
   color: #374151;
   margin-bottom: 30px;
 }
+
+/* ===============================
+   VARIATIONS
+================================ */
 .pd-variations h3 {
   font-size: 20px;
   margin-bottom: 14px;
 }
 
-/* SCROLL CONTAINER */
 .pd-variation-scroll {
   display: flex;
   gap: 16px;
@@ -105,7 +124,6 @@
   padding-bottom: 12px;
 }
 
-/* VARIANT CARD */
 .pd-variation-card {
   min-width: 180px;
   background: linear-gradient(180deg, #fff, #f9fafb);
@@ -120,18 +138,17 @@
   transform: translateY(-4px);
 }
 
+.pd-pack-size {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
 .pd-pack-type {
   font-size: 0.85rem;
   color: #666;
   text-transform: capitalize;
   margin: 4px 0;
-}
-
-
-.pd-pack-size {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 6px;
 }
 
 .pd-pack-price {
@@ -149,6 +166,10 @@
   color: #dc2626;
   font-size: 13px;
 }
+
+/* ===============================
+   SPECIFICATIONS
+================================ */
 .pd-specs {
   margin-top: 40px;
 }
@@ -175,7 +196,6 @@
 .pd-spec-table th {
   width: 40%;
   background: #f3f4f6;
-  text-align: left;
   font-weight: 600;
 }
 
@@ -189,23 +209,21 @@
   margin-bottom: 4px;
 }
 
-
+/* ===============================
+   BACK BUTTON
+================================ */
 .pd-back {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-
   margin: 40px auto 0;
   padding: 12px 22px;
-
   background: #ffffff;
   color: #111827;
   font-size: 15px;
   font-weight: 500;
-
   border-radius: 999px;
   text-decoration: none;
-
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
 }
@@ -215,6 +233,10 @@
   background: #fef3c7;
   color: #92400e;
 }
+
+/* ===============================
+   RELATED PRODUCTS (5-CARD STYLE)
+================================ */
 .pd-related {
   margin-top: 90px;
   padding: 70px 20px;
@@ -227,134 +249,70 @@
   font-weight: 700;
   color: #111827;
   margin-bottom: 40px;
-  position: relative;
 }
 
-.pd-related h2::after {
-  content: "";
-  display: block;
-  width: 70px;
-  height: 4px;
-  background: var(--primary);
-  margin: 14px auto 0;
-  border-radius: 999px;
-}
+/* 🔥 5 CARD GRID */
 .pd-related-grid {
   max-width: 1200px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.5vw, 28px);
 }
+
+/* SAME AS product-card-ui */
 .pd-related-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
-
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Soft gradient hover */
-.pd-related-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(245, 158, 11, 0.08)
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.pd-related-card:hover::before {
-  opacity: 1;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .pd-related-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.18);
 }
+
+/* IMAGE */
 .pd-related-card img {
   width: 100%;
-  height: 200px;
-  object-fit: contain;
-  border-radius: 14px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   background: #f9fafb;
-  padding: 14px;
-  margin-bottom: 16px;
 }
+
+/* CONTENT */
 .pd-related-card h4 {
-  font-size: 17px;
+  padding: 14px 16px 4px;
+  font-size: 15px;
   font-weight: 600;
-  color: #111827;
-  margin-bottom: 6px;
   line-height: 1.4;
+  color: #111827;
 }
 
 .pd-related-card p {
-  font-size: 16px;
+  padding: 0 16px 18px;
+  font-size: 15px;
   font-weight: 700;
   color: #16a34a;
 }
-.pd-related-empty {
-  text-align: center;
-  padding: 60px 20px;
-  color: #6b7280;
-}
 
-.pd-related-empty span {
-  font-size: 56px;
-  color: var(--primary);
-  display: block;
-  margin-bottom: 14px;
-}
-
-.pd-related-empty p {
-  font-size: 16px;
-}
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 768px) {
-  .pd-related {
-    padding: 50px 16px;
-  }
-
-  .pd-related h2 {
-    font-size: 24px;
-  }
-
-  .pd-related-card img {
-    height: 160px;
-  }
+  .pd-wrapper { grid-template-columns: 1fr; }
+  .pd-images { position: static; }
+  .pd-variation-scroll { flex-direction: column; overflow-x: unset; }
+  .pd-info { padding: 24px; }
 }
 
-@media (max-width: 768px) {
-
-  .pd-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  /* Disable sticky */
-  .pd-images {
-    position: static;
-  }
-
-  /* Variants stacked */
-  .pd-variation-scroll {
-    overflow-x: unset;
-    flex-direction: column;
-  }
-
-  .pd-variation-card {
-    min-width: unset;
-  }
-
-  .pd-info {
-    padding: 24px;
-  }
+@media (max-width: 575px) {
+  .pd-related-grid { grid-template-columns: 1fr; }
 }

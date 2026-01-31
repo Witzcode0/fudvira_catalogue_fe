@@ -114,6 +114,12 @@ export default function ProductPriceList() {
                     </select>
                 </div>
 
+                <p className="price-disclaimer">
+                    ⚠️ <strong>Pricing Notice:</strong> Prices may fluctuate due to seasonal demand,
+                    raw material availability, and order volume.
+                </p>
+
+
                 {/* =========================
             TABLE
         ========================== */}
@@ -185,14 +191,19 @@ export default function ProductPriceList() {
                                             </td>
 
                                             {/* STATUS */}
-                                            <td>
-                                                <span
-                                                    className={`price-status ${item.in_stock ? "in" : "out"
-                                                        }`}
-                                                >
-                                                    {item.in_stock ? "In Stock" : "Out of Stock"}
-                                                </span>
-                                            </td>
+                                           <td>
+  <span
+    className="price-status-emoji"
+    role="img"
+    aria-label={item.in_stock ? "In stock" : "Out of stock"}
+    title={item.in_stock ? "In Stock" : "Out of Stock"}
+  >
+    {item.in_stock ? "🟢" : "🔴"}
+  </span>
+</td>
+
+
+
                                         </tr>
                                     ))
                             )}
