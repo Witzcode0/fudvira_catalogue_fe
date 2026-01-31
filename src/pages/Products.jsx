@@ -129,7 +129,7 @@ export default function Products() {
                 <div className="product-content-ui">
                   <h3>{product.name}</h3>
                   <span className="view-product-link">
-                    View product details →
+                    View details →
                   </span>
                 </div>
               </Link>

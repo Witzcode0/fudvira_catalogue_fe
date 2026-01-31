@@ -96,21 +96,32 @@ export default function ProductDetail() {
             <div className="pd-variation-scroll">
               {product.variations.map(v => (
                 <div key={v.id} className="pd-variation-card">
+
+                  {/* Pack Size */}
                   <div className="pd-pack-size">
-                    {Number(v.quantity)}{v.unit}
+                    {Number(v.quantity)} {v.unit}
                   </div>
 
+                  {/* Purchase Type */}
+                  <div className="pd-pack-type">
+                    {v.purchase_type === "retail" ? "Retail Pack" : v.purchase_type}
+                  </div>
+
+                  {/* Price */}
                   <div className="pd-pack-price">
                     ₹{v.price}
                   </div>
 
+                  {/* Stock */}
                   <div className={`pd-pack-stock ${v.stock ? "in" : "out"}`}>
                     {v.stock ? "In Stock" : "Out of Stock"}
                   </div>
+
                 </div>
               ))}
             </div>
           </div>
+
 
 
           {/* ADDITIONAL INFO */}
@@ -124,7 +135,18 @@ export default function ProductDetail() {
                     {Object.entries(product.additional_values).map(([k, v]) => (
                       <tr key={k}>
                         <th>{k}</th>
-                        <td>{v}</td>
+                        <td>
+                          {Array.isArray(v) ? (
+                            <ul className="pd-list">
+                              {v.map((item, i) => (
+                                <li key={i}>{item}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            v
+                          )}
+                        </td>
+
                       </tr>
                     ))}
                   </tbody>
@@ -132,6 +154,7 @@ export default function ProductDetail() {
               </div>
             </div>
           )}
+
 
         </div>
       </div>

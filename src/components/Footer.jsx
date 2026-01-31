@@ -86,12 +86,29 @@ export default function Footer() {
           {/* MARKETPLACES */}
           <div className="footer-col">
             <h4>Available On</h4>
-            <ul>
-              <li contrast>IndiaMART</li>
-              <li>Flipkart</li>
-              <li>Amazon</li>
-              <li>Meesho</li>
+            <ul class="external-links">
+              <li>
+                <a href="https://www.indiamart.com/bharatoxen-surat/" target="_blank" rel="noopener noreferrer">
+                  IndiaMART
+                </a>
+              </li>
+              <li>
+                <a href="https://www.flipkart.com/search?q=fudvira" target="_blank" rel="noopener noreferrer">
+                  Flipkart
+                </a>
+              </li>
+              <li>
+                <a href="https://www.amazon.in/s?k=fudvira" target="_blank" rel="noopener noreferrer">
+                  Amazon
+                </a>
+              </li>
+              <li>
+                <a href="https://www.meesho.com/search?q=fudvira" target="_blank" rel="noopener noreferrer">
+                  Meesho
+                </a>
+              </li>
             </ul>
+
           </div>
 
         </div>

@@ -122,16 +122,15 @@ export default function Navbar() {
                   <ul className="account-list">
                     <li>
                       <NavLink to="/" onClick={closeAll} className="account-link">
-                        {/* <span className="material-icons-round">category</span> */}
                         Home
                       </NavLink>
                     </li>
                     <li>
                       <NavLink to="/categories" onClick={closeAll} className="account-link">
-                        {/* <span className="material-icons-round">category</span> */}
                         Categories
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
                         to="/products"
@@ -145,6 +144,11 @@ export default function Navbar() {
                       </NavLink>
 
 
+                    </li>
+                    <li>
+                      <NavLink to="/certificates" onClick={closeAll} className="account-link">
+                        Certificates
+                      </NavLink>
                     </li>
 
                   </ul>
