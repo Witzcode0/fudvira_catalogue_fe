@@ -87,10 +87,10 @@ export default function ProductDetailExcel() {
                                     <span
                                         className="price-status-emoji"
                                         role="img"
-                                        aria-label={v.in_stock ? "In stock" : "Out of stock"}
-                                        title={v.in_stock ? "In Stock" : "Out of Stock"}
+                                        aria-label={v.stock ? "In stock" : "Out of stock"}
+                                        title={v.stock ? "In Stock" : "Out of Stock"}
                                     >
-                                        &nbsp;  {v.in_stock ? "✔️" : "❌"}
+                                        &nbsp;  {v.stock ? "✔️" : "❌"}
                                     </span>
                                 </tr>
                             ))}
