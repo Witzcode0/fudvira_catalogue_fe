@@ -132,7 +132,7 @@ export default function ProductPriceList() {
                                 <th>Pack Details</th>
                                 <th>Purchase Type</th>
                                 <th>Price (₹)</th>
-                                <th>Status</th>
+                                <th>Stock Status</th>
                             </tr>
                         </thead>
 
@@ -198,7 +198,7 @@ export default function ProductPriceList() {
     aria-label={item.in_stock ? "In stock" : "Out of stock"}
     title={item.in_stock ? "In Stock" : "Out of Stock"}
   >
-    {item.in_stock ? "🟢" : "🔴"}
+    {item.in_stock ? "✔️" : "❌"}
   </span>
 </td>
 

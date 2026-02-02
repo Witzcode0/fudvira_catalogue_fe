@@ -43,18 +43,18 @@ export default function ProductExcelTable() {
       header: "#",
       cell: ({ row }) => row.index + 1,
     },
-    {
-      accessorKey: "primary_image",
-      header: "Image",
-      cell: info =>
-        info.getValue() ? (
-          <img
-            src={`${MEDIA_BASE}${info.getValue()}`}
-            className="excel-product-image"
-            alt=""
-          />
-        ) : "-",
-    },
+    // {
+    //   accessorKey: "primary_image",
+    //   header: "Image",
+    //   cell: info =>
+    //     info.getValue() ? (
+    //       <img
+    //         src={`${MEDIA_BASE}${info.getValue()}`}
+    //         className="excel-product-image"
+    //         alt=""
+    //       />
+    //     ) : "-",
+    // },
     {
       accessorKey: "name",
       header: "Product Name",

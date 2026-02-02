@@ -74,7 +74,7 @@ export default function ProductDetailExcel() {
                                 <th>Quality</th>
                                 <th>Type</th>
                                 <th>Price ₹</th>
-                                <th>Status</th>
+                                <th>Stock Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,9 +84,14 @@ export default function ProductDetailExcel() {
                                     <td>{v.quality_type}</td>
                                     <td>{v.purchase_type}</td>
                                     <td>{v.price}</td>
-                                    <td className={v.is_active ? "status-active" : "status-inactive"}>
-                                        {v.is_active ? "Active" : "Inactive"}
-                                    </td>
+                                    <span
+                                        className="price-status-emoji"
+                                        role="img"
+                                        aria-label={v.in_stock ? "In stock" : "Out of stock"}
+                                        title={v.in_stock ? "In Stock" : "Out of Stock"}
+                                    >
+                                        &nbsp;  {v.in_stock ? "✔️" : "❌"}
+                                    </span>
                                 </tr>
                             ))}
                         </tbody>

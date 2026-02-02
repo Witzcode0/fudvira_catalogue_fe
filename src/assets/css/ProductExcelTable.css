@@ -88,15 +88,6 @@
   position: relative;
 }
 
-/* Accent strip */
-.excel-section::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 6px;
-  border-radius: 22px 22px 0 0;
-  background: linear-gradient(90deg, #22c55e, #f59e0b);
-}
 
 .excel-section h3 {
   font-size: 18px;
@@ -128,7 +119,7 @@
 
 .excel-table th,
 .excel-table td {
-  padding: 14px 16px;
+  padding: 6px 16px;
   border-bottom: 1px solid #e5e7eb;
   border-right: 1px solid #f1f5f9;
   vertical-align: top;
@@ -195,7 +186,7 @@
    ACTION LINK
 ===================================================== */
 .excel-view-link {
-  padding: 7px 18px;
+  padding: 2px 18px;
   background: linear-gradient(135deg, #16a34a, #15803d);
   color: #ffffff;
   border-radius: 999px;
