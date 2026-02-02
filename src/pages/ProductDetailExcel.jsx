@@ -84,6 +84,7 @@ export default function ProductDetailExcel() {
                                     <td>{v.quality_type}</td>
                                     <td>{v.purchase_type}</td>
                                     <td>{v.price}</td>
+                                    <td>
                                     <span
                                         className="price-status-emoji"
                                         role="img"
@@ -92,6 +93,7 @@ export default function ProductDetailExcel() {
                                     >
                                         &nbsp;  {v.stock ? "✔️" : "❌"}
                                     </span>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
