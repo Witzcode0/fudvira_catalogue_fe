@@ -146,6 +146,15 @@ export default function Navbar() {
 
                     </li>
                     <li>
+                      <NavLink to="/products-excel" className="account-link"  onClick={() => {
+                          closeAll();
+                          window.scrollTo(0, 0);
+                        }}>
+                        Products (Excel View)
+                      </NavLink>
+                    </li>
+                    
+                    <li>
                       <NavLink to="/certificates" onClick={closeAll} className="account-link">
                         Certificates
                       </NavLink>

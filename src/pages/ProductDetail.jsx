@@ -188,44 +188,44 @@ export default function ProductDetail() {
         <h2>Related Products</h2>
 
         {relatedProducts.length > 0 ? (
-  <div className="pd-related-grid">
-    {relatedProducts.map(p => (
-      <div key={p.id} className="product-card-ui">
-        <Link to={`/product/${p.slug}`} onClick={() => window.scrollTo(0, 0)}>
-          <div className="product-image-ui">
-            <img
-              src={`${API_BASE}${p.primary_image}`}
-              alt={p.name}
-            />
+          <div className="pd-related-grid">
+            {relatedProducts.map(p => (
+              <div key={p.id} className="product-card-ui">
+                <Link to={`/product/${p.slug}`} onClick={() => window.scrollTo(0, 0)}>
+                  <div className="product-image-ui">
+                    <img
+                      src={`${API_BASE}${p.primary_image}`}
+                      alt={p.name}
+                    />
+                  </div>
+                </Link>
+
+                <div className="product-content-ui">
+                  <h3>{p.name}</h3>
+
+                  <div className="product-card-actions">
+                    <Link
+                      to={`/product/${p.slug}`}
+                      className="view-product-link"
+                    >
+                      View details →
+                    </Link>
+
+                    <WhatsAppEnquiry product={p} />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </Link>
-
-        <div className="product-content-ui">
-          <h3>{p.name}</h3>
-
-          <div className="product-card-actions">
-            <Link
-              to={`/product/${p.slug}`}
-              className="view-product-link"
-            >
-              View details →
-            </Link>
-
-            <WhatsAppEnquiry product={p} />
+        ) : (
+          <div className="pd-related-empty">
+            <span className="material-icons-round">inventory_2</span>
+            <p>No related products available right now.</p>
+            <span className="pd-related-subtext">
+              Please check back later or explore other products.
+            </span>
           </div>
-        </div>
-      </div>
-    ))}
-  </div>
-) : (
-  <div className="pd-related-empty">
-    <span className="material-icons-round">inventory_2</span>
-    <p>No related products available right now.</p>
-    <span className="pd-related-subtext">
-      Please check back later or explore other products.
-    </span>
-  </div>
-)}
+        )}
 
       </div>
     </div>

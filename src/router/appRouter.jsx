@@ -10,6 +10,8 @@ import NotFound from "../pages/NotFound";
 import UnderMaintenance from "../pages/UnderMaintenance";
 import Certificates from "../pages/Certificates";
 import ProductPriceList from "../pages/ProductPriceList";
+import ProductExcelTable from "../pages/ProductExcelTable";
+import ProductDetailExcel from "../pages/ProductDetailExcel";
 
 
 const appRouter = createBrowserRouter([
@@ -23,6 +25,14 @@ const appRouter = createBrowserRouter([
         path: "/products",
         element: <Products />,
         key: "products"
+      },
+      {
+        path:"/products-excel",
+        element: <ProductExcelTable />
+      },
+      {
+        path:"/products-excel/:slug",
+        element: <ProductDetailExcel /> 
       },
       { path: "product/:slug", element: <ProductDetail /> },
       {
