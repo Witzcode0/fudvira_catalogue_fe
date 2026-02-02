@@ -34,14 +34,25 @@ export default function ProductDetailExcel() {
                 <th>Value</th>
               </tr>
             </thead>
-            <tbody>
-              {Object.entries(product.additional_values || {}).map(([k, v]) => (
-                <tr key={k}>
-                  <td>{k}</td>
-                  <td>{v}</td>
-                </tr>
-              ))}
-            </tbody>
+           <tbody>
+  {Object.entries(product.additional_values || {}).map(([key, value]) => (
+    <tr key={key}>
+      <td>{key}</td>
+      <td>
+        {Array.isArray(value) ? (
+          <ul className="excel-ul">
+            {value.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          value
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </div>
       </div>
