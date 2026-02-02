@@ -70,39 +70,47 @@ export default function FeaturedProducts() {
 
       <div className="product-grid">
         {products.map(product => (
-          <Link
-            key={product.id}
-            to={`/product/${product.slug}`}
-            className="product-card-ui"
-            onClick={() => window.scrollTo(0, 0)}
-          >
-            <div className="product-image-ui">
-              <img
-                src={
-                  product.primary_image
-                    ? `${API_BASE}${product.primary_image}`
-                    : "/placeholder.png"
-                }
-                alt={product.name}
-              />
-            </div>
+          <div key={product.id} className="product-card-ui">
 
-            <div className="product-content-ui">
-              <h3>{product.name}</h3>
-
-              <div className="product-card-actions">
-                <Link
-                  to={`/product/${product.slug}`}
-                  className="view-product-link"
-                >
-                  View details →
-                </Link>
-                <WhatsAppEnquiry product={product} />
+            {/* CLICKABLE AREA */}
+            <Link
+              to={`/product/${product.slug}`}
+              className="product-link-area"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              <div className="product-image-ui">
+                <img
+                  src={
+                    product.primary_image
+                      ? `${API_BASE}${product.primary_image}`
+                      : "/placeholder.png"
+                  }
+                  alt={product.name}
+                />
               </div>
+
+              <div className="product-content-ui">
+                <h3>{product.name}</h3>
+              </div>
+            </Link>
+
+            {/* ACTIONS (OUTSIDE LINK ✅) */}
+            <div className="product-card-actions">
+              <Link
+                to={`/product/${product.slug}`}
+                className="view-product-link"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                View details →
+              </Link>
+
+              <WhatsAppEnquiry product={product} />
             </div>
-          </Link>
+
+          </div>
         ))}
       </div>
+
     </section>
   );
 }

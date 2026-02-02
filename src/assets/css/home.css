@@ -1,7 +1,3 @@
-/* =========================
-   HERO SECTION WITH BLUR
-========================= */
-
 .hero {
   position: relative;
   width: 100%;
@@ -10,170 +6,217 @@
   border-radius: 0 0 16px 16px;
 }
 
-/* Background Image */
 .hero-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
 }
 
 .hero-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  /* 🔥 BLUR EFFECT */
   filter: blur(3px);
-  transform: scale(1.05); /* prevents white edges */
+  transform: scale(1.05);
 }
 
-/* Dark overlay for contrast */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1;
+  background: rgba(0,0,0,0.45);
 }
 
-/* Content */
 .hero-content {
   position: relative;
-  z-index: 2;
-
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   text-align: center;
   padding: 0 20px;
 }
 
-/* Title */
 .hero-title {
   font-size: 42px;
   font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
+  color: #fff;
 }
 
 .hero-title span {
   display: block;
   font-size: 36px;
-  font-weight: 600;
   color: var(--secondary);
-  margin-top: 6px;
 }
 
-/* Subtitle */
 .hero-subtitle {
   max-width: 720px;
   margin-top: 16px;
   font-size: 16px;
   color: #f1f1f1;
-  line-height: 1.6;
 }
 
-/* Buttons */
-.hero-actions {
-  margin-top: 28px;
+.featured-products-section {
+  margin-top: 90px;
+  padding: 0 8px;
+}
+
+/* Header */
+.featured-header {
   display: flex;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1024px) {
-  .hero {
-    height: 420px;
-  }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
-  .hero-title span {
-    font-size: 30px;
-  }
+.featured-products-section .section-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  color: #111827;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    height: 460px;
-  }
-
-  .hero-bg img {
-    filter: blur(3px);
-  }
-
-  .hero-title {
-    font-size: 28px;
-  }
-
-  .hero-title span {
-    font-size: 22px;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-actions a {
-    width: 100%;
-    text-align: center;
-  }
+/* View all */
+.view-all-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
-/* ===============================
-   HOME PRICE LIST CTA
-================================ */
-.home-price {
-  background: linear-gradient(135deg, #fff7ed, #ecfeff);
-  padding: 80px 16px;
+.view-all-link::after {
+  content: "→";
+  margin-left: 4px;
+  transition: transform 0.25s ease;
 }
 
-.home-price-container {
-  max-width: 1100px;
-  margin: auto;
+.view-all-link:hover::after {
+  transform: translateX(4px);
+}
+
+/* Grid */
+.featured-products-section .product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* Card */
+.product-card-ui {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card-ui:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.18);
+}
+
+/* Image */
+.product-image-ui {
+  aspect-ratio: 1 / 1;
+}
+
+.product-image-ui img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content */
+.product-content-ui {
+  padding: 14px 16px;
+}
+
+.product-content-ui h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Actions */
+.product-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px 16px;
+}
+
+.view-product-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.product-card-ui:hover .view-product-link {
+  transform: translateX(4px);
+}
+
+/* WhatsApp */
+.whatsapp-enquiry-btn {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37,211,102,0.35);
+}
+
+.whatsapp-enquiry-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
+.featured-empty {
+  margin-top: 30px;
+  padding: 60px 40px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fafafa, #ffffff);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
   text-align: center;
 }
 
-.home-price-content h2 {
-  font-size: 34px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 14px;
-}
-
-.home-price-content p {
+.featured-empty-text {
   font-size: 16px;
-  max-width: 720px;
-  margin: 0 auto 28px;
-  color: #374151;
-  line-height: 1.7;
+  color: #444;
+  margin-bottom: 18px;
 }
 
-.home-price-btn {
-  display: inline-block;
-  padding: 14px 32px;
+.featured-empty-link {
+  padding: 12px 28px;
   border-radius: 999px;
-  background: #013b26;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
   text-decoration: none;
-  transition: all 0.3s ease;
 }
 
-.home-price-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+
+@media (max-width: 1024px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+@media (max-width: 520px) {
+  .featured-products-section .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
 
 /* ===============================
    WHY FUDVIRA SECTION
@@ -298,276 +341,51 @@
   }
 }
 
-/* ===============================
-   FEATURED PRODUCTS SECTION
-================================ */
-
-.featured-products-section {
-  margin-top: 90px;
-  padding: 0 8px;
-}
 
 /* ===============================
-   HEADER
+   HOME PRICE LIST CTA
 ================================ */
-
-.featured-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 28px;
+.home-price {
+  background: linear-gradient(135deg, #fff7ed, #ecfeff);
+  padding: 80px 16px;
 }
 
-.featured-products-section .section-title {
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 800;
-  color: #111827;
-  letter-spacing: -0.4px;
-}
-
-/* View All */
-.view-all-link {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: transform 0.25s ease;
-}
-
-.view-all-link::after {
-  content: "→";
-  transition: transform 0.25s ease;
-}
-
-.view-all-link:hover::after {
-  transform: translateX(4px);
-}
-
-/* ===============================
-   PRODUCT GRID (4 PER ROW)
-================================ */
-
-.featured-products-section .product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-}
-
-/* ===============================
-   PRODUCT CARD
-================================ */
-
-.featured-products-section .product-card-ui {
-  background: #ffffff;
-  border-radius: 18px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-
-  display: flex;
-  flex-direction: column;
-
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.featured-products-section .product-card-ui:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);
-}
-
-/* ===============================
-   IMAGE
-================================ */
-
-.featured-products-section .product-image-ui {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-
-.featured-products-section .product-image-ui img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ===============================
-   CONTENT
-================================ */
-
-.featured-products-section .product-content-ui {
-  padding: 14px 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.featured-products-section .product-content-ui h3 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-  line-height: 1.4;
-}
-
-/* ===============================
-   ACTIONS ROW
-================================ */
-
-.featured-products-section .product-card-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-/* View Details */
-.featured-products-section .view-product-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.featured-products-section .product-card-ui:hover .view-product-link {
-  transform: translateX(4px);
-}
-
-/* ===============================
-   WHATSAPP BUTTON
-================================ */
-
-.featured-products-section .whatsapp-enquiry-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: none;
-
-  background: #25d366;
-  color: #ffffff;
-
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
-  transition: all 0.25s ease;
-}
-
-.featured-products-section .whatsapp-enquiry-btn:hover {
-  background: #1ebe5d;
-  transform: translateY(-2px);
-}
-
-/* ===============================
-   EMPTY STATE
-================================ */
-
-.featured-empty {
-  margin-top: 30px;
-  padding: 60px 40px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, #fafafa, #ffffff);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+.home-price-container {
+  max-width: 1100px;
+  margin: auto;
   text-align: center;
 }
 
-.featured-empty-text {
-  font-size: 16px;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 18px;
+.home-price-content h2 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 14px;
 }
 
-.featured-empty-link {
+.home-price-content p {
+  font-size: 16px;
+  max-width: 720px;
+  margin: 0 auto 28px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+.home-price-btn {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 14px 32px;
   border-radius: 999px;
-  background: var(--primary);
+  background: #013b26;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.3s ease;
 }
 
-.featured-empty-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-}
-
-/* ===============================
-   RESPONSIVE
-================================ */
-
-/* Tablets */
-@media (max-width: 1024px) {
-  .featured-products-section .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobiles */
-@media (max-width: 520px) {
-  .featured-products-section .product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .featured-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-}
-
-/* =========================
-   RESPONSIVE BREAKPOINTS
-========================= */
-
-/* Tablets */
-@media (max-width: 1024px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
-  }
-}
-
-/* Mobile */
-@media (max-width: 640px) {
-  .home-section.light {
-    padding: var(--space-8) 0;
-  }
-
-  .home-section.light h2 {
-    font-size: 1.6rem;
-    margin-bottom: var(--space-6);
-  }
-
-  .section-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: var(--space-6);
-    padding: 0 var(--space-4);
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-  }
-
-  .feature-card {
-    padding: var(--space-6);
-  }
-
-  .feature-card .material-icons-round {
-    font-size: 42px;
-  }
+.home-price-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.18);
 }
 
 
@@ -773,242 +591,5 @@
   .serve-card {
     font-size: 0.9rem;
     padding: var(--space-4);
-  }
-}
-/* =========================
-   HOW FUDVIRA WORKS
-========================= */
-
-.home-section.light {
-  padding: var(--space-9) 0;
-}
-
-/* Title */
-.home-section.light h2 {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: var(--space-3);
-
-  color: var(--text-dark);
-}
-
-/* =========================
-   STEPS GRID
-========================= */
-
-.steps-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-
-/* =========================
-   STEP ITEM
-========================= */
-
-.step-card {
-  text-align: center;
-  padding: var(--space-4) var(--space-3);
-}
-
-/* Step number */
-.step-card span {
-  display: inline-block;
-  margin-bottom: var(--space-3);
-
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--primary);
-
-  position: relative;
-}
-
-/* Underline accent */
-.step-card span::after {
-  content: "";
-  display: block;
-  width: 40px;
-  height: 3px;
-  margin: 8px auto 0;
-  background: var(--primary);
-  border-radius: 2px;
-  opacity: 0.8;
-}
-
-/* Title */
-.step-card h4 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--text-dark);
-}
-
-/* Description */
-.step-card p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  line-height: 1.6;
-  max-width: 280px;
-  margin: 0 auto;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-/* Tablet */
-@media (max-width: 900px) {
-  .steps-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-7);
-  }
-
-  .step-card {
-    text-align: left;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .step-card span {
-    font-size: 1.6rem;
-  }
-
-  .step-card span::after {
-    margin-left: 0;
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .home-section.light h2 {
-    font-size: 1.6rem;
-  }
-
-  .step-card p {
-    font-size: 0.85rem;
-  }
-}
-
-/* ===============================
-   FEATURED PRODUCTS – PREMIUM STYLE
-================================ */
-
-.featured-products-section {
-  margin-top: 90px;
-  padding: 0 4px;
-}
-
-/* Header */
-.featured-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-
-.section-title {
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 800;
-  color: #111;
-  letter-spacing: -0.4px;
-}
-
-/* View all link */
-.view-all-link {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
-  text-decoration: none;
-  position: relative;
-  padding-right: 18px;
-}
-
-.view-all-link::after {
-  content: "→";
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: transform 0.25s ease;
-}
-
-.view-all-link:hover::after {
-  transform: translateX(4px);
-}
-
-/* ===============================
-   PRODUCT GRID (4 PER ROW)
-================================ */
-
-.featured-products-section .product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 👈 4 per row */
-  gap: 28px;
-}
-
-/* ===============================
-   EMPTY STATE (UNIQUE LOOK)
-================================ */
-
-.featured-empty {
-  margin-top: 30px;
-  padding: 60px 40px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, #fafafa, #ffffff);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
-  text-align: center;
-}
-
-.featured-empty-text {
-  font-size: 16px;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 18px;
-  line-height: 1.6;
-}
-
-/* Browse all button */
-.featured-empty-link {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 999px;
-  background: var(--primary);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.featured-empty-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-}
-
-/* ===============================
-   RESPONSIVE BREAKPOINTS
-================================ */
-
-/* Tablets */
-@media (max-width: 1024px) {
-  .featured-products-section .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row */
-  }
-}
-
-/* Mobiles */
-@media (max-width: 520px) {
-  .featured-products-section .product-grid {
-    grid-template-columns: 1fr; /* 1 per row */
-  }
-
-  .featured-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 }

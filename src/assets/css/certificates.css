@@ -205,36 +205,19 @@
 /* ===============================
    MOBILE OPTIMIZATION
 ================================ */
+/* Mobile & Tablet */
 @media (max-width: 768px) {
-
-  .cert-container h1 {
-    font-size: 28px;
+  .cert-pdf-frame {
+    display: none;
   }
 
-  .cert-intro {
-    font-size: 15px;
-    margin-bottom: 40px;
-  }
-
-  .cert-block {
-    padding: 24px;
-    margin-bottom: 50px;
-  }
-
-  .cert-pdf {
-    padding: 6px;
-  }
-
-  .react-pdf__Page canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .pdf-controls {
-    flex-wrap: wrap;
-    gap: 12px;
+  .cert-download {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
   }
 }
+
 
 /* Mobile & Tablet */
 @media (max-width: 1024px) {
