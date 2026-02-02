@@ -17,6 +17,7 @@
   align-items: flex-start;
 }
 
+
 /* =========================================================
    SIDEBAR FILTER
 ========================================================= */
@@ -143,7 +144,9 @@
   line-height: 1.4;
   color: #111827;
 }
-
+a:-webkit-any-link {
+  text-decoration: none;
+}
 /* =========================================================
    CARD ACTIONS
 ========================================================= */
@@ -291,7 +294,7 @@
 ========================================================= */
 @media (max-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -301,13 +304,40 @@
   }
 
   .product-filter {
-    position: static;
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    box-shadow: none;
-    padding: 12px 0;
-  }
+  position: static;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  box-shadow: none;
+  padding: 12px 0;
+
+  /* Hide scrollbar - Firefox */
+  scrollbar-width: none;
+
+  /* Smooth scrolling (optional) */
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar - Chrome, Safari, Edge */
+.product-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.product-filter-wrapper {
+  position: relative;
+}
+
+.product-filter-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, white);
+}
+
 
   .filter-title {
     display: none;

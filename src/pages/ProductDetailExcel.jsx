@@ -19,9 +19,7 @@ export default function ProductDetailExcel() {
 
     return (
         <div className="excel-page">
-            <Link to="/products-excel" className="excel-back-link">
-                ← Back to Products (Excel View)
-            </Link>
+           
             <div className="product-header">
                 <h1 className="excel-title">{product.name}</h1>
                 <p className="product-description">{product.description}</p>
@@ -100,6 +98,10 @@ export default function ProductDetailExcel() {
                     </table>
                 </div>
             </div>
+
+             <Link to="/products-excel" className="excel-back-link">
+                ← Back to Products (Excel View)
+            </Link>
         </div>
     );
 }

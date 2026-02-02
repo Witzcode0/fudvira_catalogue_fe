@@ -89,8 +89,8 @@ export default function FeaturedProducts() {
                 />
               </div>
 
-              <div className="product-content-ui">
-                <h3>{product.name}</h3>
+              <div  className="product-content-ui">
+                <h3 >{product.name}</h3>
               </div>
             </Link>
 

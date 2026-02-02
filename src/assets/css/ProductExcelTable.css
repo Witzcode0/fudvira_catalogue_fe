@@ -2,7 +2,6 @@
    PAGE
 ===================================================== */
 .excel-page {
-  padding: 16px;
   background: radial-gradient(
       circle at top,
       #f0fdf4 0%,
@@ -237,9 +236,7 @@
    RESPONSIVE
 ===================================================== */
 @media (max-width: 768px) {
-  .excel-page {
-    padding: 18px;
-  }
+  
 
   .excel-title {
     font-size: 22px;
