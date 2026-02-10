@@ -208,7 +208,7 @@
 
 @media (max-width: 768px) {
   .hero{
-    height: 600px;
+    height: 620px;
   }
   .featured-products-section .product-grid {
     grid-template-columns: 1fr;
