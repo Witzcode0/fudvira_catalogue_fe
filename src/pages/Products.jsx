@@ -4,6 +4,7 @@ import { API_BASE } from "../services/api";
 import { useCategories } from "../store/CategoryContext";
 import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
+/* Normalize paginated API response */
 const normalizeProducts = (data) => {
   if (Array.isArray(data)) return data;
   if (Array.isArray(data?.results)) return data.results;
@@ -16,46 +17,63 @@ export default function Products() {
 
   const activeCategory = searchParams.get("category");
   const searchQuery = searchParams.get("search");
+  const page = Number(searchParams.get("page") || 1);
 
   const [products, setProducts] = useState([]);
+  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const totalPages = Math.ceil(count / 6);
 
   /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
     setLoading(true);
 
-    let url = `${API_BASE}/api/products/`;
+    let url = `${API_BASE}/api/products/?page=${page}`;
 
     if (searchQuery) {
-      url = `${API_BASE}/api/products/search/?q=${searchQuery}`;
+      url = `${API_BASE}/api/products/search/?q=${encodeURIComponent(
+        searchQuery
+      )}&page=${page}`;
     } else if (activeCategory) {
-      url = `${API_BASE}/api/category/${activeCategory}/products/`;
+      url = `${API_BASE}/api/products/?category=${activeCategory}&page=${page}`;
     }
 
     fetch(url)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(normalizeProducts(data));
+        setCount(data.count || 0);
         setLoading(false);
       })
       .catch(() => {
         setProducts([]);
+        setCount(0);
         setLoading(false);
       });
   }, [searchParams.toString()]);
 
-  const categoryName =
-    categories.find(cat => cat.slug === activeCategory)?.name;
+  /* ================= PAGE TITLE ================= */
+  const categoryName = categories.find(
+    (cat) => cat.slug === activeCategory
+  )?.name;
 
   const pageTitle = searchQuery
     ? `Search results for "${searchQuery}"`
     : categoryName || "All Products";
 
+  /* ================= PAGE CHANGE ================= */
+  const changePage = (newPage) => {
+    const params = Object.fromEntries(searchParams.entries());
+    setSearchParams({ ...params, page: newPage });
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="product-list-page">
       <div className="product-list-layout">
 
-        {/* SIDEBAR */}
+        {/* ================= SIDEBAR ================= */}
         <aside className="product-filter">
           <h4 className="filter-title">Categories</h4>
 
@@ -66,10 +84,12 @@ export default function Products() {
             All Products
           </button>
 
-          {categories.map(cat => (
+          {categories.map((cat) => (
             <button
               key={cat.id}
-              className={`filter-pill ${activeCategory === cat.slug ? "active" : ""}`}
+              className={`filter-pill ${
+                activeCategory === cat.slug ? "active" : ""
+              }`}
               onClick={() =>
                 setSearchParams({ category: cat.slug }, { replace: true })
               }
@@ -79,7 +99,7 @@ export default function Products() {
           ))}
         </aside>
 
-        {/* PRODUCT LIST */}
+        {/* ================= PRODUCT LIST ================= */}
         <section className="product-list-content">
           <h1 className="product-list-title">{pageTitle}</h1>
 
@@ -90,27 +110,18 @@ export default function Products() {
               <p className="product-empty-text">
                 No products available at the moment.
               </p>
-
-              <p className="product-empty-subtext">
-                Please try another category or check back later.
-              </p>
             </div>
           )}
 
-
           <div className="product-grid">
-            {products.map(product => (
+            {products.map((product) => (
               <div key={product.id} className="product-card-ui">
-
                 <Link to={`/product/${product.slug}`}>
                   <div className="product-image-ui">
                     <img
-                      src={
-                        product.primary_image
-                          ? `${API_BASE}${product.primary_image}`
-                          : "/placeholder.png"
-                      }
+                      src={product.primary_image || "/placeholder.png"}
                       alt={product.name}
+                      loading="lazy"
                     />
                   </div>
                 </Link>
@@ -126,14 +137,35 @@ export default function Products() {
                       View details →
                     </Link>
 
-                    {/* ✅ THIS HANDLES EVERYTHING */}
                     <WhatsAppEnquiry product={product} />
                   </div>
                 </div>
-
               </div>
             ))}
           </div>
+
+          {/* ================= PAGINATION ================= */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button
+                disabled={page === 1}
+                onClick={() => changePage(page - 1)}
+              >
+                ← Prev
+              </button>
+
+              <span>
+                Page {page} of {totalPages}
+              </span>
+
+              <button
+                disabled={page === totalPages}
+                onClick={() => changePage(page + 1)}
+              >
+                Next →
+              </button>
+            </div>
+          )}
         </section>
       </div>
     </div>

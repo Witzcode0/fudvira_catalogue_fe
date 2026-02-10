@@ -1,107 +1,85 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
 
 const API_BASE = "https://fudviraapi.pythonanywhere.com";
 
 export default function ProductDetailExcel() {
-    const { slug } = useParams();
-    const [product, setProduct] = useState(null);
+  const { slug } = useParams();
+  const [product, setProduct] = useState(null);
 
-    useEffect(() => {
-        fetch(`${API_BASE}/api/products/${slug}/`)
-            .then(res => res.json())
-            .then(data => setProduct(data));
-    }, [slug]);
+  useEffect(() => {
+    fetch(`${API_BASE}/api/products/${slug}/`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
+  }, [slug]);
 
-    if (!product) return <p style={{ padding: 40 }}>Loading product…</p>;
+  if (!product) return <p style={{ padding: 40 }}>Loading product…</p>;
 
-    return (
-        <div className="excel-page">
-           
-            <div className="product-header">
-                <h1 className="excel-title">{product.name}</h1>
-                <p className="product-description">{product.description}</p>
-            </div>
+  return (
+    <div className="excel-page">
 
-            {/* ADDITIONAL DETAILS */}
-            <div className="excel-section">
-                <h3>Additional Details</h3>
 
-                <div className="excel-table-wrapper">
-                    <table className="excel-table">
-                        <thead>
-                            <tr>
-                                <th>Property</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.entries(product.additional_values || {}).map(([key, value]) => (
-                                <tr key={key}>
-                                    <td>{key}</td>
-                                    <td>
-                                        {Array.isArray(value) ? (
-                                            <ul className="excel-ul">
-                                                {value.map((item, index) => (
-                                                    <li key={index}>{item}</li>
-                                                ))}
-                                            </ul>
-                                        ) : (
-                                            value
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
+      {/* PRIMARY IMAGE */}
+      <div className="excel-product-image-wrapper">
+        <img
+          src={product.primary_image || "/placeholder.png"}
+          alt={product.name}
+          className="excel-product-image-large"
+        />
+      </div>
+      
+      {/* HEADER */}
+      <div className="product-header">
+        <h1 className="excel-title">{product.name}</h1>
+      </div>
 
-                    </table>
-                </div>
-            </div>
+      {/* DESCRIPTION */}
+      {product.description && (
+        <p className="product-description">
+          {product.description}
+        </p>
+      )}
 
-            {/* VARIATIONS */}
-            <div className="excel-section">
-                <h3>Price Variations</h3>
+      {/* ADDITIONAL DETAILS */}
+      <div className="excel-section">
+        <h3>Additional Details</h3>
 
-                <div className="excel-table-wrapper">
-                    <table className="excel-table">
-                        <thead>
-                            <tr>
-                                <th>Qty</th>
-                                <th>Quality</th>
-                                <th>Type</th>
-                                <th>Price ₹</th>
-                                <th>Stock Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {product.variations.map(v => (
-                                <tr key={v.id}>
-                                    <td>{Number(v.quantity)} {v.unit}</td>
-                                    <td>{v.quality_type}</td>
-                                    <td>{v.purchase_type}</td>
-                                    <td>{v.price}</td>
-                                    <td>
-                                    <span
-                                        className="price-status-emoji"
-                                        role="img"
-                                        aria-label={v.stock ? "In stock" : "Out of stock"}
-                                        title={v.stock ? "In Stock" : "Out of Stock"}
-                                    >
-                                        &nbsp;  {v.stock ? "✔️" : "❌"}
-                                    </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-             <Link to="/products-excel" className="excel-back-link">
-                ← Back to Products (Excel View)
-            </Link>
+        <div className="excel-table-wrapper">
+          <table className="excel-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(product.additional_values || {}).map(
+                ([key, value]) => (
+                  <tr key={key}>
+                    <td>{key}</td>
+                    <td>
+                      {Array.isArray(value) ? (
+                        <ul className="excel-ul">
+                          {value.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        value
+                      )}
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
         </div>
-    );
+      </div>
+
+      {/* BACK */}
+      <Link to="/products-excel" className="excel-back-link">
+        ← Back to Products (Excel View)
+      </Link>
+    </div>
+  );
 }

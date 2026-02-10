@@ -7,7 +7,7 @@ export default function WhatsAppEnquiry({ product }) {
   const [requirement, setRequirement] = useState("");
   const [quantity, setQuantity] = useState("");
 const sendWhatsApp = () => {
-  const phone = "919876543210"; // Replace with your WhatsApp number
+  const phone = "918980145007"; // Replace with your WhatsApp number
 
   const msg = [
     "Hello Fudvira Team,",

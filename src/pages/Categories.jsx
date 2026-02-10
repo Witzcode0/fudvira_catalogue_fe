@@ -1,10 +1,8 @@
 import { useCategories } from "../store/CategoryContext";
 import { Link } from "react-router-dom";
-import { API_BASE } from "../services/api";
 
 export default function Categories() {
   const { categories, loading } = useCategories();
-  
 
   const limitWords = (text, wordLimit = 10) => {
     if (!text) return "";
@@ -33,22 +31,28 @@ export default function Categories() {
             to={`/products?category=${cat.slug}`}
             className="category-card"
           >
-
+            {/* CATEGORY IMAGE */}
             <div className="category-image-wrapper">
               <img
-                src={`${cat.category_image}`}
+                src={cat.image || "/placeholder.png"}
                 alt={cat.name}
                 className="category-image"
+                loading="lazy"
               />
             </div>
 
+            {/* CATEGORY INFO */}
             <div className="category-info">
               <h3 className="category-name">{cat.name}</h3>
-              <p className="category-desc">
-                {limitWords(cat.description, 10)}
-              </p>
+
+              {cat.description && (
+                <p className="category-desc">
+                  {limitWords(cat.description, 10)}
+                </p>
+              )}
             </div>
 
+            {/* CTA */}
             <div className="category-btn-wrapper">
               <span className="category-btn">
                 Explore
@@ -59,6 +63,5 @@ export default function Categories() {
         ))}
       </div>
     </div>
-
   );
 }

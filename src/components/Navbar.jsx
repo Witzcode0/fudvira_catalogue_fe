@@ -83,26 +83,37 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* SEARCH */}
-          <div className="nav-search">
-            <div className="search-wrapper">
-              <span className="material-icons-round search-icon">search</span>
-              <input
-                type="search"
-                placeholder="Search products..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && searchText.trim()) {
-                    navigate(`/products?search=${encodeURIComponent(searchText.trim())}`);
-                    setSearchText("");
-                    closeAll();
-                  }
-                }}
-              />
+{/* GLOBAL SEARCH */}
+<div className="nav-search">
+  <div className="search-wrapper">
+    <span className="material-icons-round search-icon">
+      search
+    </span>
 
-            </div>
-          </div>
+    <input
+      type="search"
+      placeholder="Search products..."
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          const query = searchText.trim();
+
+          if (!query) return;
+
+          navigate(
+            `/products?search=${encodeURIComponent(query)}`
+          );
+
+          setSearchText("");
+          closeAll();
+        }
+      }}
+    />
+  </div>
+</div>
+
+
 
           {/* RIGHT */}
           <div className="nav-right" onClick={(e) => e.stopPropagation()}>

@@ -182,6 +182,7 @@ a:-webkit-any-link {
   border-radius: 999px;
   border: none;
   background: #25d366;
+  margin-bottom: 16px;
   color: #ffffff;
   font-size: 12px;
   font-weight: 600;

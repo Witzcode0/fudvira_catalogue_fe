@@ -3,6 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
 import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
+/* Normalize list API safely */
+const normalizeProducts = (data) => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.results)) return data.results;
+  return [];
+};
+
 export default function ProductDetail() {
   const { slug } = useParams();
 
@@ -15,28 +22,30 @@ export default function ProductDetail() {
     let isMounted = true;
     setLoading(true);
 
+    /* ================= FETCH PRODUCT ================= */
     fetch(`${API_BASE}/api/products/${slug}/`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (!isMounted) return;
 
         setProduct(data);
-        setActiveImage(
-          data.images?.find(i => i.is_primary)?.image ||
-          data.images?.[0]?.image ||
-          ""
-        );
 
-        return fetch(
-          `${API_BASE}/api/products/?category=${data.category.slug}`
-        )
-          .then(res => res.json())
-          .then(rel => {
+        const primary =
+          data.images?.find((i) => i.is_primary)?.image_url ||
+          data.images?.[0]?.image_url ||
+          "";
+
+        setActiveImage(primary);
+
+        /* ================= FETCH RELATED ================= */
+        return fetch(`${API_BASE}/api/products/`)
+          .then((res) => res.json())
+          .then((rel) => {
             if (!isMounted) return;
 
-            const results = Array.isArray(rel?.results) ? rel.results : [];
-            const filtered = results.filter(
-              p =>
+            const list = normalizeProducts(rel);
+            const filtered = list.filter(
+              (p) =>
                 p.category?.slug === data.category.slug &&
                 p.slug !== data.slug
             );
@@ -59,6 +68,7 @@ export default function ProductDetail() {
     };
   }, [slug]);
 
+  /* ================= STATES ================= */
   if (loading) return <p className="pd-loading">Loading product...</p>;
   if (!product) return <p className="pd-loading">Product not found</p>;
 
@@ -71,17 +81,24 @@ export default function ProductDetail() {
         {/* LEFT IMAGES */}
         <div className="pd-images">
           <div className="pd-main-image">
-            <img src={activeImage} alt={product.name} />
+            <img
+              src={activeImage || "/placeholder.png"}
+              alt={product.name}
+            />
           </div>
 
-          <div className={`pd-thumbnails ${product.images?.length > 5 ? "scroll" : ""}`}>
-            {product.images?.map(img => (
+          <div
+            className={`pd-thumbnails ${
+              product.images?.length > 5 ? "scroll" : ""
+            }`}
+          >
+            {product.images?.map((img) => (
               <img
                 key={img.id}
-                src={img.image}
+                src={img.image_url}
                 alt=""
-                className={activeImage === img.image ? "active" : ""}
-                onClick={() => setActiveImage(img.image)}
+                className={activeImage === img.image_url ? "active" : ""}
+                onClick={() => setActiveImage(img.image_url)}
               />
             ))}
           </div>
@@ -106,44 +123,16 @@ export default function ProductDetail() {
           {/* DESCRIPTION */}
           {product.description && (
             <p className="pd-description">
-              {product.description.split(/\r?\n\r?\n/).map((para, i) => (
-                <span key={i}>
-                  {para}
-                  <br /><br />
-                </span>
-              ))}
-            </p>
-          )}
-
-          {/* VARIATIONS */}
-          {product.variations?.length > 0 && (
-            <div className="pd-variations">
-              <h3>Available Packs</h3>
-
-              <div className="pd-variation-scroll">
-                {product.variations.map(v => (
-                  <div key={v.id} className="pd-variation-card">
-                    <div className="pd-pack-size">
-                      {Number(v.quantity)} {v.unit}
-                    </div>
-
-                    <div className="pd-pack-type">
-                      {v.purchase_type === "retail"
-                        ? "Retail Pack"
-                        : v.purchase_type}
-                    </div>
-
-                    <div className="pd-pack-price">
-                      ₹{v.price}
-                    </div>
-
-                    <div className={`pd-pack-stock ${v.stock ? "in" : "out"}`}>
-                      {v.stock ? "In Stock" : "Out of Stock"}
-                    </div>
-                  </div>
+              {product.description
+                .split(/\r?\n\r?\n/)
+                .map((para, i) => (
+                  <span key={i}>
+                    {para}
+                    <br />
+                    <br />
+                  </span>
                 ))}
-              </div>
-            </div>
+            </p>
           )}
 
           {/* SPECIFICATIONS */}
@@ -154,22 +143,24 @@ export default function ProductDetail() {
               <div className="pd-spec-table-wrapper">
                 <table className="pd-spec-table">
                   <tbody>
-                    {Object.entries(product.additional_values).map(([k, v]) => (
-                      <tr key={k}>
-                        <th>{k}</th>
-                        <td>
-                          {Array.isArray(v) ? (
-                            <ul className="pd-list">
-                              {v.map((item, i) => (
-                                <li key={i}>{item}</li>
-                              ))}
-                            </ul>
-                          ) : (
-                            v
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                    {Object.entries(product.additional_values).map(
+                      ([k, v]) => (
+                        <tr key={k}>
+                          <th>{k}</th>
+                          <td>
+                            {Array.isArray(v) ? (
+                              <ul className="pd-list">
+                                {v.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              v
+                            )}
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -189,12 +180,15 @@ export default function ProductDetail() {
 
         {relatedProducts.length > 0 ? (
           <div className="pd-related-grid">
-            {relatedProducts.map(p => (
+            {relatedProducts.map((p) => (
               <div key={p.id} className="product-card-ui">
-                <Link to={`/product/${p.slug}`} onClick={() => window.scrollTo(0, 0)}>
+                <Link
+                  to={`/product/${p.slug}`}
+                  onClick={() => window.scrollTo(0, 0)}
+                >
                   <div className="product-image-ui">
                     <img
-                      src={`${API_BASE}${p.primary_image}`}
+                      src={p.primary_image || "/placeholder.png"}
                       alt={p.name}
                     />
                   </div>
@@ -226,7 +220,6 @@ export default function ProductDetail() {
             </span>
           </div>
         )}
-
       </div>
     </div>
   );

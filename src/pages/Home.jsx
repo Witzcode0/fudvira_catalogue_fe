@@ -120,7 +120,7 @@ export default function HeroSection() {
 
 
       {/* PRICE LIST SECTION */}
-      <section className="home-price">
+      {/* <section className="home-price">
         <div className="home-price-container">
           <div className="home-price-content">
             <h2>Product Price List</h2>
@@ -134,7 +134,7 @@ export default function HeroSection() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ================= WHY FUDVIRA ================= */}
 

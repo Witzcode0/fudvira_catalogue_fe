@@ -86,7 +86,7 @@ export default function Footer() {
           {/* MARKETPLACES */}
           <div className="footer-col">
             <h4>Available On</h4>
-            <ul class="external-links">
+            <ul className="external-links">
               <li>
                 <a href="https://www.indiamart.com/bharatoxen-surat/" target="_blank" rel="noopener noreferrer">
                   IndiaMART

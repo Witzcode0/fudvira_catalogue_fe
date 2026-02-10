@@ -16,10 +16,10 @@ export default function FeaturedProducts() {
 
   useEffect(() => {
     fetch(`${API_BASE}/api/products/featured/`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const list = normalizeProducts(data);
-        setProducts(list.slice(0, 8)); // latest 8 featured
+        setProducts(list.slice(0, 8)); // show latest 8 featured
         setLoading(false);
       })
       .catch(() => {
@@ -38,7 +38,7 @@ export default function FeaturedProducts() {
     );
   }
 
-  /* ================= EMPTY STATE (IMPORTANT FIX) ================= */
+  /* ================= EMPTY STATE ================= */
   if (products.length === 0) {
     return (
       <section className="featured-products-section">
@@ -67,12 +67,11 @@ export default function FeaturedProducts() {
         </Link>
       </div>
 
-
       <div className="product-grid">
-        {products.map(product => (
+        {products.map((product) => (
           <div key={product.id} className="product-card-ui">
 
-            {/* CLICKABLE AREA */}
+            {/* PRODUCT CLICK AREA */}
             <Link
               to={`/product/${product.slug}`}
               className="product-link-area"
@@ -80,21 +79,18 @@ export default function FeaturedProducts() {
             >
               <div className="product-image-ui">
                 <img
-                  src={
-                    product.primary_image
-                      ? `${API_BASE}${product.primary_image}`
-                      : "/placeholder.png"
-                  }
+                  src={product.primary_image || "/placeholder.png"}
                   alt={product.name}
+                  loading="lazy"
                 />
               </div>
 
-              <div  className="product-content-ui">
-                <h3 >{product.name}</h3>
+              <div className="product-content-ui">
+                <h3>{product.name}</h3>
               </div>
             </Link>
 
-            {/* ACTIONS (OUTSIDE LINK ✅) */}
+            {/* ACTIONS */}
             <div className="product-card-actions">
               <Link
                 to={`/product/${product.slug}`}
@@ -110,7 +106,6 @@ export default function FeaturedProducts() {
           </div>
         ))}
       </div>
-
     </section>
   );
 }

@@ -405,3 +405,93 @@ CENTERING UTILITIES
 .policy-section ul {
   padding-left: 18px;
 }
+
+/* -------------------------------------
+   PAGINATION
+-------------------------------------- */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+
+  margin-top: var(--space-7);
+  padding: var(--space-4);
+
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* PAGE INFO TEXT */
+.pagination span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+
+  padding: 0 var(--space-3);
+  white-space: nowrap;
+}
+
+/* PAGINATION BUTTONS */
+.pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+  border-radius: 40px;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    #17c117
+  );
+  color: var(--white);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 6px 18px rgba(10, 173, 10, 0.35);
+}
+
+/* HOVER */
+.pagination button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(10, 173, 10, 0.45);
+}
+
+/* ACTIVE */
+.pagination button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(10, 173, 10, 0.35);
+}
+
+/* DISABLED */
+.pagination button:disabled {
+  background: var(--bg-light);
+  color: var(--text-light);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* -------------------------------------
+   MOBILE RESPONSIVE
+-------------------------------------- */
+
+@media (max-width: 768px) {
+  .pagination {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .pagination button {
+    width: 100%;
+    padding: 14px 20px;
+  }
+}

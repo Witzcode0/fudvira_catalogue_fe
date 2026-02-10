@@ -232,6 +232,21 @@
   text-decoration: underline;
 }
 
+.excel-product-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.excel-product-image-large {
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  background: #fff;
+}
+
+
 /* =====================================================
    RESPONSIVE
 ===================================================== */
