@@ -289,6 +289,125 @@
   color: #6b7280;
 }
 
+/* ================= PRICE SECTION ================= */
+
+.pd-price-wrapper {
+  margin: 20px 0 30px;
+}
+
+.pd-price-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.pd-final-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+}
+
+.pd-mrp {
+  text-decoration: line-through;
+  color: #777;
+  font-size: 15px;
+}
+
+.pd-off {
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ================= SIZE SECTION ================= */
+
+.pd-size-section {
+  margin-bottom: 20px;
+}
+
+.pd-size-label {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.pd-size-options {
+  display: flex;
+  gap: 12px;
+}
+
+.pd-size-btn {
+  padding: 8px 18px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.pd-size-btn:hover {
+  border-color: #111;
+}
+
+.pd-size-btn.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.pd-size-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ================= QUANTITY + CART ================= */
+
+.pd-cart-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.pd-qty-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #111;
+  padding: 8px 14px;
+  gap: 20px;
+  min-width: 140px;
+  justify-content: space-between;
+}
+
+.pd-qty-box button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.pd-view-cart-btn {
+  flex: 1;
+  background: #000;
+  color: #fff;
+  padding: 14px 20px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.pd-view-cart-btn:hover {
+  background: #333;
+}
+
+.pd-error-message {
+  margin-top: 12px;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */

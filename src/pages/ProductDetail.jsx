@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
 import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
 
-/* Normalize list API safely */
+const MAX_LIMIT_PER_PRODUCT = 5;
+
 const normalizeProducts = (data) => {
   if (Array.isArray(data)) return data;
   if (Array.isArray(data?.results)) return data.results;
@@ -16,28 +17,30 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [activeImage, setActiveImage] = useState("");
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [selectedVariation, setSelectedVariation] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
 
-    /* ================= FETCH PRODUCT ================= */
     fetch(`${API_BASE}/api/products/${slug}/`)
       .then((res) => res.json())
       .then((data) => {
         if (!isMounted) return;
 
+        if (data.variations) {
+          data.variations.sort(
+            (a, b) => parseFloat(a.quantity) - parseFloat(b.quantity)
+          );
+        }
+
         setProduct(data);
+        setActiveImage(data.primary_image || "");
+        setSelectedVariation(data.variations?.[0] || null);
 
-        const primary =
-          data.images?.find((i) => i.is_primary)?.image_url ||
-          data.images?.[0]?.image_url ||
-          "";
-
-        setActiveImage(primary);
-
-        /* ================= FETCH RELATED ================= */
         return fetch(`${API_BASE}/api/products/`)
           .then((res) => res.json())
           .then((rel) => {
@@ -68,17 +71,42 @@ export default function ProductDetail() {
     };
   }, [slug]);
 
-  /* ================= STATES ================= */
+  /* ================= QUANTITY HANDLERS ================= */
+
+  const handleIncrease = () => {
+    if (!selectedVariation) return;
+
+    if (quantity >= selectedVariation.stock) {
+      setErrorMessage(
+        `Only ${selectedVariation.stock} items available in stock.`
+      );
+      return;
+    }
+
+    if (quantity >= MAX_LIMIT_PER_PRODUCT) {
+      setErrorMessage(
+        `Maximum ${MAX_LIMIT_PER_PRODUCT} items allowed for this product.`
+      );
+      return;
+    }
+
+    setErrorMessage("");
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    setErrorMessage("");
+    setQuantity((prev) => Math.max(prev - 1, 1));
+  };
+
   if (loading) return <p className="pd-loading">Loading product...</p>;
   if (!product) return <p className="pd-loading">Product not found</p>;
 
   return (
     <div className="pd-page">
-
-      {/* ================= MAIN ================= */}
       <div className="pd-wrapper">
 
-        {/* LEFT IMAGES */}
+        {/* ================= IMAGES ================= */}
         <div className="pd-images">
           <div className="pd-main-image">
             <img
@@ -87,11 +115,7 @@ export default function ProductDetail() {
             />
           </div>
 
-          <div
-            className={`pd-thumbnails ${
-              product.images?.length > 5 ? "scroll" : ""
-            }`}
-          >
+          <div className="pd-thumbnails">
             {product.images?.map((img) => (
               <img
                 key={img.id}
@@ -104,8 +128,9 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* RIGHT DETAILS */}
+        {/* ================= INFO ================= */}
         <div className="pd-info">
+
           <h1>{product.name}</h1>
 
           <Link
@@ -115,111 +140,145 @@ export default function ProductDetail() {
             {product.category.name}
           </Link>
 
-          {/* WhatsApp CTA */}
+          {/* ================= PRICE SECTION ================= */}
+          {selectedVariation && (
+            <div className="pd-price-wrapper">
+
+              <div className="pd-price-row">
+                <span className="pd-final-price">
+                  ₹{selectedVariation.final_price}
+                </span>
+
+                {selectedVariation.discount_type !== "none" && (
+                  <>
+                    <span className="pd-mrp">
+                      M.R.P.: ₹{selectedVariation.price}
+                    </span>
+
+                    <span className="pd-off">
+                      {selectedVariation.discount_type === "percent"
+                        ? `${selectedVariation.discount_value}% Off`
+                        : `₹${selectedVariation.discount_value} Off`}
+                    </span>
+                  </>
+                )}
+              </div>
+
+              {/* ================= SIZE SELECTOR ================= */}
+              <div className="pd-size-section">
+                <p className="pd-size-label">
+                  Size:{" "}
+                  <strong>
+                    {Number(selectedVariation.quantity)}
+                    {selectedVariation.unit_symbol}
+                  </strong>
+                </p>
+
+                <div className="pd-size-options">
+                  {product.variations.map((variation) => (
+                    <button
+                      key={variation.id}
+                      className={`pd-size-btn ${
+                        selectedVariation?.id === variation.id
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setSelectedVariation(variation);
+                        setQuantity(1);
+                        setErrorMessage("");
+                      }}
+                      disabled={variation.stock === 0}
+                    >
+                      {Number(variation.quantity)}
+                      {variation.unit_symbol}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ================= QUANTITY + CART ================= */}
+              <div className="pd-cart-row">
+
+                <div className="pd-qty-box">
+                  <button onClick={handleDecrease}>−</button>
+                  <span>{quantity}</span>
+                  <button onClick={handleIncrease}>+</button>
+                </div>
+
+                <button className="pd-view-cart-btn">
+                  View Cart
+                </button>
+
+              </div>
+
+              {/* ================= ERROR MESSAGE ================= */}
+              {errorMessage && (
+                <div className="pd-error-message">
+                  {errorMessage}
+                </div>
+              )}
+
+            </div>
+          )}
+
+          {/* WhatsApp */}
           <div className="pd-actions">
-            <WhatsAppEnquiry product={product} />
+            <WhatsAppEnquiry
+              product={product}
+              variation={selectedVariation}
+              quantity={quantity}
+            />
           </div>
 
           {/* DESCRIPTION */}
-          {product.description && (
-            <p className="pd-description">
-              {product.description
-                .split(/\r?\n\r?\n/)
-                .map((para, i) => (
-                  <span key={i}>
-                    {para}
-                    <br />
-                    <br />
-                  </span>
-                ))}
-            </p>
-          )}
+          <p className="pd-description">
+            {product.description}
+          </p>
 
           {/* SPECIFICATIONS */}
-          {product.additional_values && (
-            <div className="pd-specs">
-              <h3>Product Information</h3>
-
-              <div className="pd-spec-table-wrapper">
+          {product.additional_values &&
+            Object.keys(product.additional_values).length > 0 && (
+              <div className="pd-specs">
+                <h3>Product Information</h3>
                 <table className="pd-spec-table">
                   <tbody>
                     {Object.entries(product.additional_values).map(
                       ([k, v]) => (
                         <tr key={k}>
                           <th>{k}</th>
-                          <td>
-                            {Array.isArray(v) ? (
-                              <ul className="pd-list">
-                                {v.map((item, i) => (
-                                  <li key={i}>{item}</li>
-                                ))}
-                              </ul>
-                            ) : (
-                              v
-                            )}
-                          </td>
+                          <td>{v}</td>
                         </tr>
                       )
                     )}
                   </tbody>
                 </table>
               </div>
-            </div>
-          )}
+            )}
+
         </div>
       </div>
 
-      {/* BACK */}
-      <Link to="/products" className="pd-back">
-        ← Back to Products
-      </Link>
-
-      {/* ================= RELATED PRODUCTS ================= */}
+      {/* ================= RELATED ================= */}
       <div className="pd-related">
         <h2>Related Products</h2>
 
-        {relatedProducts.length > 0 ? (
-          <div className="pd-related-grid">
-            {relatedProducts.map((p) => (
-              <div key={p.id} className="product-card-ui">
-                <Link
-                  to={`/product/${p.slug}`}
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <div className="product-image-ui">
-                    <img
-                      src={p.primary_image || "/placeholder.png"}
-                      alt={p.name}
-                    />
-                  </div>
-                </Link>
-
-                <div className="product-content-ui">
-                  <h3>{p.name}</h3>
-
-                  <div className="product-card-actions">
-                    <Link
-                      to={`/product/${p.slug}`}
-                      className="view-product-link"
-                    >
-                      View details →
-                    </Link>
-
-                    <WhatsAppEnquiry product={p} />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="pd-related-empty">
-            <span className="material-icons-round">inventory_2</span>
-            <p>No related products available right now.</p>
-            <span className="pd-related-subtext">
-              Please check back later or explore other products.
-            </span>
-          </div>
-        )}
+        <div className="pd-related-grid">
+          {relatedProducts.map((p) => (
+            <div key={p.id} className="product-card-ui">
+              <Link to={`/product/${p.slug}`}>
+                <img
+                  src={p.primary_image || "/placeholder.png"}
+                  alt={p.name}
+                />
+              </Link>
+              <h3>{p.name}</h3>
+              <Link to={`/product/${p.slug}`}>
+                View details →
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
