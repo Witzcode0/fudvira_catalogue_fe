@@ -15,7 +15,8 @@ import "./assets/css/notfound.css";
 import "./assets/css/maintenance.css";
 import "./assets/css/certificates.css";
 import "./assets/css/product-price-list.css";
-import "./assets/css/ProductExcelTable.css";
+import "./assets/css/product-excel-table.css";
+import "./assets/css/terms-conditions.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CategoryProvider>
