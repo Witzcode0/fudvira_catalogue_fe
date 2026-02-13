@@ -128,7 +128,7 @@ export default function Products() {
                 <div className="product-content-ui">
                   <h3>{product.name}</h3>
 
-                  <div className="product-card-actions">
+                  <div className="product-card-actions" style={{padding:"0px"}}>
                     <Link
                       to={`/product/${product.slug}`}
                       className="view-product-link"
