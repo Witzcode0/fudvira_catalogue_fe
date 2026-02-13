@@ -144,7 +144,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px 16px;
 }
 
 .view-product-link {
@@ -160,20 +159,32 @@
 
 /* WhatsApp */
 .whatsapp-enquiry-btn {
+  display: inline-flex;           /* important */
+  align-items: center;            /* vertical center */
+  justify-content: center;        /* horizontal center */
+  gap: 8px;                       /* space between icon & text */
+
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: none;
   background: #25d366;
   color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 12px;
+
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(37,211,102,0.35);
+
+  transition: all 0.25s ease;
 }
 
 .whatsapp-enquiry-btn:hover {
   background: #1ebe5d;
   transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-enquiry-btn svg {
+  display: block;   /* prevents icon alignment issue */
 }
 
 .featured-empty {

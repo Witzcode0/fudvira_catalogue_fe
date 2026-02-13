@@ -87,9 +87,8 @@ export default function Products() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              className={`filter-pill ${
-                activeCategory === cat.slug ? "active" : ""
-              }`}
+              className={`filter-pill ${activeCategory === cat.slug ? "active" : ""
+                }`}
               onClick={() =>
                 setSearchParams({ category: cat.slug }, { replace: true })
               }
@@ -148,17 +147,19 @@ export default function Products() {
           {totalPages > 1 && (
             <div className="pagination">
               <button
+                className="page-btn"
                 disabled={page === 1}
                 onClick={() => changePage(page - 1)}
               >
                 ← Prev
               </button>
 
-              <span>
+              <span className="page-info">
                 Page {page} of {totalPages}
               </span>
 
               <button
+                className="page-btn"
                 disabled={page === totalPages}
                 onClick={() => changePage(page + 1)}
               >
@@ -166,6 +167,7 @@ export default function Products() {
               </button>
             </div>
           )}
+
         </section>
       </div>
     </div>

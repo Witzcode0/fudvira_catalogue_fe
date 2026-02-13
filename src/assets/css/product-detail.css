@@ -103,6 +103,7 @@
    DESCRIPTION
 ========================================================= */
 .pd-description {
+  margin-top: 16px;
   font-size: 16px;
   line-height: 1.8;
   color: #374151;
@@ -184,6 +185,7 @@
   border-collapse: collapse;
   background: #f9fafb;
   border-radius: 14px;
+  margin-top: 16px;
   overflow: hidden;
 }
 

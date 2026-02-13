@@ -179,8 +179,8 @@ export default function ProductDetail() {
                     <button
                       key={variation.id}
                       className={`pd-size-btn ${selectedVariation?.id === variation.id
-                          ? "active"
-                          : ""
+                        ? "active"
+                        : ""
                         }`}
                       onClick={() => {
                         setSelectedVariation(variation);
@@ -260,40 +260,68 @@ export default function ProductDetail() {
 
       {/* ================= RELATED ================= */}
       <div className="pd-related">
-        <h2>Related Products</h2>
+  <h2>Related Products</h2>
 
-        <div className="pd-related-grid">
-          {relatedProducts.map((product) => (
-            <div key={product.id} className="product-card-ui">
-              <Link to={`/product/${product.slug}`}>
-                <div className="product-image-ui">
-                  <img
-                    src={product.primary_image || "/placeholder.png"}
-                    alt={product.name}
-                    loading="lazy"
-                  />
-                </div>
+  {relatedProducts && relatedProducts.length > 0 ? (
+    <div className="pd-related-grid">
+      {relatedProducts.map((product) => (
+        <div key={product.id} className="product-card-ui">
+          <Link to={`/product/${product.slug}`}>
+            <div className="product-image-ui">
+              <img
+                src={product.primary_image || "/placeholder.png"}
+                alt={product.name}
+                loading="lazy"
+              />
+            </div>
+          </Link>
+
+          <div className="product-content-ui">
+            <h3>{product.name}</h3>
+
+            <div className="product-card-actions">
+              <Link
+                to={`/product/${product.slug}`}
+                className="view-product-link"
+              >
+                View details →
               </Link>
 
-              <div className="product-content-ui">
-                <h3>{product.name}</h3>
-
-                <div className="product-card-actions">
-                  <Link
-                    to={`/product/${product.slug}`}
-                    className="view-product-link"
-                  >
-                    View details →
-                  </Link>
-
-                  <WhatsAppEnquiry product={product} />
-                </div>
-              </div>
+              <WhatsAppEnquiry product={product} />
             </div>
-          ))}
-
+          </div>
         </div>
+      ))}
+    </div>
+  ) : (
+    <div className="pd-related-empty">
+      <span className="material-icons-round">
+        inventory_2
+      </span>
+
+      <p>No related products found</p>
+
+      <div className="pd-related-subtext">
+        Explore more products from our collection.
       </div>
+
+      <Link
+        to="/products"
+        style={{
+          display: "inline-block",
+          marginTop: "18px",
+          fontWeight: "600",
+          color: "#2e7d32",
+          textDecoration: "none"
+        }}
+      >
+        Browse All Products →
+      </Link>
+    </div>
+  )}
+</div>
+
+
     </div>
   );
 }

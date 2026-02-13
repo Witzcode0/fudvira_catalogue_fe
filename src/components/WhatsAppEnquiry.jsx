@@ -6,37 +6,37 @@ export default function WhatsAppEnquiry({ product }) {
   const [open, setOpen] = useState(false);
   const [requirement, setRequirement] = useState("");
   const [quantity, setQuantity] = useState("");
-const sendWhatsApp = () => {
-  const phone = "918980145007"; // Replace with your WhatsApp number
+  const sendWhatsApp = () => {
+    const phone = "918980145007"; // Replace with your WhatsApp number
 
-  const msg = [
-    "Hello Fudvira Team,",
-    "",
-    "I am interested in the following product:",
-    "",
-    `Product Name: ${product.name}`,
-    "",
-    "Requirement:",
-    requirement || "Please share more details about this product.",
-    "",
-    "Quantity Required:",
-    quantity || "Not specified",
-    "",
-    "Product Link:",
-    `${window.location.origin}/product/${product.slug}`,
-    "",
-    "Thank you."
-  ].join("\n");
+    const msg = [
+      "Hello Fudvira Team,",
+      "",
+      "I am interested in the following product:",
+      "",
+      `Product Name: ${product.name}`,
+      "",
+      "Requirement:",
+      requirement || "Please share more details about this product.",
+      "",
+      "Quantity Required:",
+      quantity || "Not specified",
+      "",
+      "Product Link:",
+      `${window.location.origin}/product/${product.slug}`,
+      "",
+      "Thank you."
+    ].join("\n");
 
-  window.open(
-    `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
-    "_blank"
-  );
+    window.open(
+      `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
+      "_blank"
+    );
 
-  setOpen(false);
-  setRequirement("");
-  setQuantity("");
-};
+    setOpen(false);
+    setRequirement("");
+    setQuantity("");
+  };
 
 
 
@@ -51,7 +51,7 @@ const sendWhatsApp = () => {
         }}
       >
         <FaWhatsapp size={16} />
-        Enquiry
+        <span>Enquiry</span>
       </button>
 
       {/* 🔥 MODAL RENDERED AT BODY LEVEL */}
