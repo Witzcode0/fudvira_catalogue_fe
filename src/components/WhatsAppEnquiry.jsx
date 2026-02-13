@@ -2,31 +2,30 @@ import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { createPortal } from "react-dom";
 
-export default function WhatsAppEnquiry({ product }) {
+export default function WhatsAppEnquiry({ product, variation, quantity }) {
   const [open, setOpen] = useState(false);
   const [requirement, setRequirement] = useState("");
-  const [quantity, setQuantity] = useState("");
+
   const sendWhatsApp = () => {
-    const phone = "918980145007"; // Replace with your WhatsApp number
+    if (!product) return;
+
+    const phone = "918980145007";
 
     const msg = [
       "Hello Fudvira Team,",
       "",
-      "I am interested in the following product:",
-      "",
       `Product Name: ${product.name}`,
+      variation
+        ? `Size: ${variation.quantity}${variation.unit_symbol}`
+        : "",
+      quantity ? `Quantity: ${quantity}` : "",
       "",
-      "Requirement:",
-      requirement || "Please share more details about this product.",
+      requirement || "Please share more details.",
       "",
-      "Quantity Required:",
-      quantity || "Not specified",
-      "",
-      "Product Link:",
-      `${window.location.origin}/product/${product.slug}`,
-      "",
-      "Thank you."
-    ].join("\n");
+      `${window.location.origin}/product/${product.slug}`
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     window.open(
       `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
@@ -34,65 +33,119 @@ export default function WhatsAppEnquiry({ product }) {
     );
 
     setOpen(false);
-    setRequirement("");
-    setQuantity("");
   };
-
-
 
   return (
     <>
-      {/* BUTTON */}
+      {/* WhatsApp Button */}
       <button
-        className="whatsapp-enquiry-btn"
         onClick={(e) => {
           e.stopPropagation();
+          console.log("Button clicked");
           setOpen(true);
+        }}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "10px 16px",
+          borderRadius: "30px",
+          border: "none",
+          background: "#25D366",
+          color: "#fff",
+          fontWeight: "600",
+          cursor: "pointer"
         }}
       >
         <FaWhatsapp size={16} />
-        <span>Enquiry</span>
+        Enquiry
       </button>
 
-      {/* 🔥 MODAL RENDERED AT BODY LEVEL */}
+      {/* Modal */}
       {open &&
         createPortal(
           <div
-            className="enquiry-modal-overlay"
             onClick={() => setOpen(false)}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0,0,0,0.6)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 999999
+            }}
           >
             <div
-              className="enquiry-modal"
               onClick={(e) => e.stopPropagation()}
+              style={{
+                background: "#fff",
+                padding: "25px",
+                borderRadius: "12px",
+                width: "90%",
+                maxWidth: "420px",
+                boxShadow: "0 20px 50px rgba(0,0,0,0.3)"
+              }}
             >
-              <h3>Quick WhatsApp Enquiry</h3>
+              <h3 style={{ marginBottom: "10px" }}>
+                Quick WhatsApp Enquiry
+              </h3>
 
-              <p>📦 {product.name}</p>
+              <p style={{ marginBottom: "15px", fontWeight: "600" }}>
+                {product?.name}
+              </p>
 
               <textarea
                 placeholder="Your requirement"
                 value={requirement}
                 onChange={(e) => setRequirement(e.target.value)}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "12px",
+                  borderRadius: "8px",
+                  border: "1px solid #ddd",
+                  resize: "none",
+                  minHeight: "80px"
+                }}
               />
 
-              <input
-                type="number"
-                placeholder="Quantity"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-              />
-
-              <div className="enquiry-actions">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "10px"
+                }}
+              >
                 <button
-                  className="btn-cancel"
                   onClick={() => setOpen(false)}
+                  style={{
+                    padding: "8px 14px",
+                    borderRadius: "6px",
+                    border: "none",
+                    background: "#eee",
+                    cursor: "pointer"
+                  }}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="btn-whatsapp"
                   onClick={sendWhatsApp}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "8px 16px",
+                    borderRadius: "6px",
+                    border: "none",
+                    background: "#25D366",
+                    color: "#fff",
+                    cursor: "pointer"
+                  }}
                 >
                   <FaWhatsapp size={16} /> Send
                 </button>

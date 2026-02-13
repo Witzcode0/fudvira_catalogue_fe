@@ -24,54 +24,61 @@ export default function ProductDetail() {
 
   useEffect(() => {
     let isMounted = true;
-    setLoading(true);
 
-    fetch(`${API_BASE}/api/products/${slug}/`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // 1️⃣ Fetch single product
+        const productRes = await fetch(`${API_BASE}/api/products/${slug}/`);
+        const productData = await productRes.json();
+
         if (!isMounted) return;
 
-        if (data.variations) {
-          data.variations.sort(
+        if (productData?.variations) {
+          productData.variations.sort(
             (a, b) => parseFloat(a.quantity) - parseFloat(b.quantity)
           );
         }
 
-        setProduct(data);
-        setActiveImage(data.primary_image || "");
-        setSelectedVariation(data.variations?.[0] || null);
+        setProduct(productData);
+        setActiveImage(productData?.primary_image || "");
+        setSelectedVariation(productData?.variations?.[0] || null);
 
-        return fetch(`${API_BASE}/api/products/`)
-          .then((res) => res.json())
-          .then((rel) => {
-            if (!isMounted) return;
+        // 2️⃣ Fetch all products for related
+        const allRes = await fetch(`${API_BASE}/api/products/`);
+        const allData = await allRes.json();
 
-            const list = normalizeProducts(rel);
-            const filtered = list.filter(
-              (p) =>
-                p.category?.slug === data.category.slug &&
-                p.slug !== data.slug
-            );
+        if (!isMounted) return;
 
-            setRelatedProducts(filtered.slice(0, 8));
-          });
-      })
-      .catch(() => {
+        const list = normalizeProducts(allData);
+
+        const filtered = list.filter(
+          (p) =>
+            p.category?.slug === productData.category?.slug &&
+            p.slug !== productData.slug
+        );
+
+        setRelatedProducts(filtered.slice(0, 8));
+      } catch (error) {
+        console.error("Error loading product:", error);
         if (isMounted) {
           setProduct(null);
           setRelatedProducts([]);
         }
-      })
-      .finally(() => {
+      } finally {
         if (isMounted) setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
 
     return () => {
       isMounted = false;
     };
   }, [slug]);
 
-  /* ================= QUANTITY HANDLERS ================= */
+  /* ================= QUANTITY ================= */
 
   const handleIncrease = () => {
     if (!selectedVariation) return;
@@ -104,9 +111,13 @@ export default function ProductDetail() {
 
   return (
     <div className="pd-page">
+
+      
+
+      {/* ================= MAIN SECTION ================= */}
       <div className="pd-wrapper">
 
-        {/* ================= IMAGES ================= */}
+        {/* ===== LEFT IMAGES ===== */}
         <div className="pd-images">
           <div className="pd-main-image">
             <img
@@ -128,198 +139,160 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* ================= INFO ================= */}
+        {/* ===== RIGHT INFO ===== */}
         <div className="pd-info">
 
           <h1>{product.name}</h1>
 
-          <Link
-            to={`/products?category=${product.category.slug}`}
-            className="pd-category"
-          >
-            {product.category.name}
-          </Link>
-
-          {/* ================= PRICE SECTION ================= */}
-          {selectedVariation && (
-            <div className="pd-price-wrapper">
-
-              <div className="pd-price-row">
-                <span className="pd-final-price">
-                  ₹{selectedVariation.final_price}
-                </span>
-
-                {selectedVariation.discount_type !== "none" && (
-                  <>
-                    <span className="pd-mrp">
-                      M.R.P.: ₹{selectedVariation.price}
-                    </span>
-
-                    <span className="pd-off">
-                      {selectedVariation.discount_type === "percent"
-                        ? `${selectedVariation.discount_value}% Off`
-                        : `₹${selectedVariation.discount_value} Off`}
-                    </span>
-                  </>
-                )}
-              </div>
-
-              {/* ================= SIZE SELECTOR ================= */}
-              <div className="pd-size-section">
-                <p className="pd-size-label">
-                  Size:{" "}
-                  <strong>
-                    {Number(selectedVariation.quantity)}
-                    {selectedVariation.unit_symbol}
-                  </strong>
-                </p>
-
-                <div className="pd-size-options">
-                  {product.variations.map((variation) => (
-                    <button
-                      key={variation.id}
-                      className={`pd-size-btn ${selectedVariation?.id === variation.id
-                        ? "active"
-                        : ""
-                        }`}
-                      onClick={() => {
-                        setSelectedVariation(variation);
-                        setQuantity(1);
-                        setErrorMessage("");
-                      }}
-                      disabled={variation.stock === 0}
-                    >
-                      {Number(variation.quantity)}
-                      {variation.unit_symbol}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* ================= QUANTITY + CART ================= */}
-              <div className="pd-cart-row">
-
-                <div className="pd-qty-box">
-                  <button onClick={handleDecrease}>−</button>
-                  <span>{quantity}</span>
-                  <button onClick={handleIncrease}>+</button>
-                </div>
-
-                <button className="pd-view-cart-btn">
-                  View Cart
-                </button>
-
-              </div>
-
-              {/* ================= ERROR MESSAGE ================= */}
-              {errorMessage && (
-                <div className="pd-error-message">
-                  {errorMessage}
-                </div>
-              )}
-
-            </div>
+          {product.category && (
+            <Link
+              to={`/products?category=${product.category.slug}`}
+              className="pd-category"
+            >
+              {product.category.name}
+            </Link>
           )}
 
-          {/* WhatsApp */}
-          <div className="pd-actions">
-            <WhatsAppEnquiry
-              product={product}
-              variation={selectedVariation}
-              quantity={quantity}
-            />
-          </div>
+          {/* PRICE */}
+          {/* {selectedVariation && (
+            <>
+              <div className="pd-price-wrapper">
 
-          {/* DESCRIPTION */}
+                <div className="pd-price-row">
+                  <span className="pd-final-price">
+                    ₹{selectedVariation.final_price}
+                  </span>
+
+                  {selectedVariation.discount_type !== "none" && (
+                    <>
+                      <span className="pd-mrp">
+                        M.R.P.: ₹{selectedVariation.price}
+                      </span>
+
+                      <span className="pd-off">
+                        {selectedVariation.discount_type === "percent"
+                          ? `${selectedVariation.discount_value}% Off`
+                          : `₹${selectedVariation.discount_value} Off`}
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                <div className="pd-size-section">
+                  <p className="pd-size-label">
+                    Size:{" "}
+                    <strong>
+                      {Number(selectedVariation.quantity)}
+                      {selectedVariation.unit_symbol}
+                    </strong>
+                  </p>
+
+                  <div className="pd-size-options">
+                    {product.variations?.map((variation) => (
+                      <button
+                        key={variation.id}
+                        className={`pd-size-btn ${
+                          selectedVariation?.id === variation.id ? "active" : ""
+                        }`}
+                        onClick={() => {
+                          setSelectedVariation(variation);
+                          setQuantity(1);
+                          setErrorMessage("");
+                        }}
+                        disabled={variation.stock === 0}
+                      >
+                        {Number(variation.quantity)}
+                        {variation.unit_symbol}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pd-cart-row">
+                  <div className="pd-qty-box">
+                    <button onClick={handleDecrease}>−</button>
+                    <span>{quantity}</span>
+                    <button onClick={handleIncrease}>+</button>
+                  </div>
+
+                  <button className="pd-view-cart-btn">
+                    View Cart
+                  </button>
+                </div>
+
+                {errorMessage && (
+                  <div className="pd-error-message">
+                    {errorMessage}
+                  </div>
+                )}
+
+              </div>
+            </>
+          )} */}
+
+          {/* WhatsApp */}
+          <WhatsAppEnquiry
+            product={product}
+            variation={selectedVariation}
+            quantity={quantity}
+          />
+
+          {/* Description */}
           <p className="pd-description">
             {product.description}
           </p>
 
-          {/* SPECIFICATIONS */}
-          {product.additional_values &&
-            Object.keys(product.additional_values).length > 0 && (
-              <div className="pd-specs">
-                <h3>Product Information</h3>
-                <table className="pd-spec-table">
-                  <tbody>
-                    {Object.entries(product.additional_values).map(
-                      ([k, v]) => (
-                        <tr key={k}>
-                          <th>{k}</th>
-                          <td>{v}</td>
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
         </div>
       </div>
 
-      {/* ================= RELATED ================= */}
+      {/* ================= RELATED PRODUCTS ================= */}
       <div className="pd-related">
-  <h2>Related Products</h2>
+        <h2>Related Products</h2>
 
-  {relatedProducts && relatedProducts.length > 0 ? (
-    <div className="pd-related-grid">
-      {relatedProducts.map((product) => (
-        <div key={product.id} className="product-card-ui">
-          <Link to={`/product/${product.slug}`}>
-            <div className="product-image-ui">
-              <img
-                src={product.primary_image || "/placeholder.png"}
-                alt={product.name}
-                loading="lazy"
-              />
-            </div>
-          </Link>
+        {relatedProducts.length > 0 ? (
+          <div className="pd-related-grid">
+            {relatedProducts.map((item) => (
+              <div key={item.id} className="product-card-ui">
+                <Link to={`/product/${item.slug}`}>
+                  <div className="product-image-ui">
+                    <img
+                      src={item.primary_image || "/placeholder.png"}
+                      alt={item.name}
+                    />
+                  </div>
+                </Link>
 
-          <div className="product-content-ui">
-            <h3>{product.name}</h3>
+                <div className="product-content-ui" >
+                  <h3>{item.name}</h3>
 
-            <div className="product-card-actions">
-              <Link
-                to={`/product/${product.slug}`}
-                className="view-product-link"
-              >
-                View details →
-              </Link>
+                  <div className="product-card-actions" style={{padding:"0px"}}>
+                    <Link
+                      to={`/product/${item.slug}`}
+                      className="view-product-link"
+                    >
+                      View details →
+                    </Link>
 
-              <WhatsAppEnquiry product={product} />
-            </div>
+                    <WhatsAppEnquiry product={item} />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
-  ) : (
-    <div className="pd-related-empty">
-      <span className="material-icons-round">
-        inventory_2
-      </span>
-
-      <p>No related products found</p>
-
-      <div className="pd-related-subtext">
-        Explore more products from our collection.
+        ) : (
+          <div className="pd-related-empty">
+            <p>No related products found</p>
+            <Link to="/products">Browse All Products →</Link>
+          </div>
+        )}
+      </div>
+      {/* ================= BACK BUTTON ================= */}
+      <div className="pd-back-wrapper">
+        <Link to="/products" className="pd-back">
+          ← Back to Products
+        </Link>
       </div>
 
-      <Link
-        to="/products"
-        style={{
-          display: "inline-block",
-          marginTop: "18px",
-          fontWeight: "600",
-          color: "#2e7d32",
-          textDecoration: "none"
-        }}
-      >
-        Browse All Products →
-      </Link>
-    </div>
-  )}
-</div>
 
 
     </div>
