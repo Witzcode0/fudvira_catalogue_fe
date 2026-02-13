@@ -53,7 +53,7 @@ export default function ProductDetail() {
                 p.slug !== data.slug
             );
 
-            setRelatedProducts(filtered.slice(0, 4));
+            setRelatedProducts(filtered.slice(0, 8));
           });
       })
       .catch(() => {
@@ -178,11 +178,10 @@ export default function ProductDetail() {
                   {product.variations.map((variation) => (
                     <button
                       key={variation.id}
-                      className={`pd-size-btn ${
-                        selectedVariation?.id === variation.id
+                      className={`pd-size-btn ${selectedVariation?.id === variation.id
                           ? "active"
                           : ""
-                      }`}
+                        }`}
                       onClick={() => {
                         setSelectedVariation(variation);
                         setQuantity(1);
@@ -264,20 +263,35 @@ export default function ProductDetail() {
         <h2>Related Products</h2>
 
         <div className="pd-related-grid">
-          {relatedProducts.map((p) => (
-            <div key={p.id} className="product-card-ui">
-              <Link to={`/product/${p.slug}`}>
-                <img
-                  src={p.primary_image || "/placeholder.png"}
-                  alt={p.name}
-                />
+          {relatedProducts.map((product) => (
+            <div key={product.id} className="product-card-ui">
+              <Link to={`/product/${product.slug}`}>
+                <div className="product-image-ui">
+                  <img
+                    src={product.primary_image || "/placeholder.png"}
+                    alt={product.name}
+                    loading="lazy"
+                  />
+                </div>
               </Link>
-              <h3>{p.name}</h3>
-              <Link to={`/product/${p.slug}`}>
-                View details →
-              </Link>
+
+              <div className="product-content-ui">
+                <h3>{product.name}</h3>
+
+                <div className="product-card-actions">
+                  <Link
+                    to={`/product/${product.slug}`}
+                    className="view-product-link"
+                  >
+                    View details →
+                  </Link>
+
+                  <WhatsAppEnquiry product={product} />
+                </div>
+              </div>
             </div>
           ))}
+
         </div>
       </div>
     </div>
