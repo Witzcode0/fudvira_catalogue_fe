@@ -23,7 +23,8 @@ export default function Products() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const totalPages = Math.ceil(count / 6);
+  const ITEMS_PER_PAGE = 9; // MUST match backend page_size
+  const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
   /* ================= FETCH PRODUCTS ================= */
   useEffect(() => {
@@ -42,7 +43,15 @@ export default function Products() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(normalizeProducts(data));
+        const results = normalizeProducts(data);
+
+        // Prevent invalid empty page
+        if (page > 1 && results.length === 0 && data.count > 0) {
+          changePage(page - 1);
+          return;
+        }
+
+        setProducts(results);
         setCount(data.count || 0);
         setLoading(false);
       })
@@ -66,7 +75,7 @@ export default function Products() {
   const changePage = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());
     setSearchParams({ ...params, page: newPage });
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -87,8 +96,9 @@ export default function Products() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              className={`filter-pill ${activeCategory === cat.slug ? "active" : ""
-                }`}
+              className={`filter-pill ${
+                activeCategory === cat.slug ? "active" : ""
+              }`}
               onClick={() =>
                 setSearchParams({ category: cat.slug }, { replace: true })
               }
@@ -106,9 +116,7 @@ export default function Products() {
 
           {!loading && products.length === 0 && (
             <div className="product-empty-state">
-              <p className="product-empty-text">
-                No products available at the moment.
-              </p>
+              <p>No products available at the moment.</p>
             </div>
           )}
 
@@ -128,7 +136,7 @@ export default function Products() {
                 <div className="product-content-ui">
                   <h3>{product.name}</h3>
 
-                  <div className="product-card-actions" style={{padding:"0px"}}>
+                  <div className="product-card-actions">
                     <Link
                       to={`/product/${product.slug}`}
                       className="view-product-link"
@@ -167,7 +175,6 @@ export default function Products() {
               </button>
             </div>
           )}
-
         </section>
       </div>
     </div>
