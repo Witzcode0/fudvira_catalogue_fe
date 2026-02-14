@@ -170,6 +170,11 @@ export default function Navbar() {
                         Certificates
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink to="/contact" onClick={closeAll} className="account-link">
+                        Contact
+                      </NavLink>
+                    </li>
 
                   </ul>
 

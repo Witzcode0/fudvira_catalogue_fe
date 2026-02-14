@@ -1,0 +1,168 @@
+/* =====================================
+   CONTACT SECTION
+===================================== */
+
+.contact-section {
+  background: var(--white);
+  padding-bottom: var(--space-9);
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.contact-header {
+  padding: var(--space-9) 0 var(--space-7);
+  max-width: 720px;
+  margin: auto;
+}
+
+.contact-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: var(--space-3);
+}
+
+.contact-header p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+/* =====================================
+   FULL WIDTH MAP
+===================================== */
+
+.map-full-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.map-full-wrapper iframe {
+  width: 100%;
+  height: 550px;
+  display: block;
+  border: none;
+  filter: grayscale(1) contrast(1.05);
+}
+
+/* =====================================
+   OVERLAY CARD
+===================================== */
+
+.contact-overlay-card {
+  position: absolute;
+  bottom: 50px;
+  left: 8%;
+  max-width: 520px;
+  width: 100%;
+
+  background: var(--white);
+  padding: var(--space-7);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover subtle lift */
+.contact-overlay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* =====================================
+   2 COLUMN INFO GRID
+===================================== */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+}
+
+.info-item p {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.gst-highlight {
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+/* Laptop */
+@media (max-width: 1200px) {
+  .contact-overlay-card {
+    left: 6%;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .map-full-wrapper iframe {
+    height: 450px;
+  }
+
+   .contact-overlay-card {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: -60px auto 0;
+    width: 92%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .map-full-wrapper iframe {
+    height: 350px;
+  }
+
+  .contact-overlay-card {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: -60px auto 0;
+    width: 92%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .contact-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .map-full-wrapper iframe {
+    height: 280px;
+  }
+
+  .contact-overlay-card {
+    padding: var(--space-6);
+  }
+  
+}

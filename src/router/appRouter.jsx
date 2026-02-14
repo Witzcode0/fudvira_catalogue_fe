@@ -12,6 +12,7 @@ import Certificates from "../pages/Certificates";
 import ProductPriceList from "../pages/ProductPriceList";
 import ProductExcelTable from "../pages/ProductExcelTable";
 import ProductDetailExcel from "../pages/ProductDetailExcel";
+import Contact from "../pages/Contact";
 
 
 const appRouter = createBrowserRouter([
@@ -42,6 +43,7 @@ const appRouter = createBrowserRouter([
       { path: "terms-and-conditions", element: <TermsConditions /> },
       { path: "certificates", element: <Certificates /> },
       { path: "price-list", element: <ProductPriceList /> },
+      { path: "contact", element: <Contact /> },
       { path: "*", element: <NotFound /> },
     ],
   },
