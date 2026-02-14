@@ -4,64 +4,49 @@ import { Link } from "react-router-dom";
 export default function Categories() {
   const { categories, loading } = useCategories();
 
-  const limitWords = (text, wordLimit = 10) => {
-    if (!text) return "";
-    const words = text.split(" ");
-    return words.length > wordLimit
-      ? words.slice(0, wordLimit).join(" ") + "..."
-      : text;
-  };
-
   if (loading) {
-    return <p className="text-center">Loading categories...</p>;
+    return (
+      <section className="cat-section">
+        <p className="cat-loading">Loading categories...</p>
+      </section>
+    );
   }
 
   return (
-    <div className="category-page">
-      <h1 className="category-title">Shop by Category</h1>
-      <p className="category-subtitle">
-        Explore our range of natural food products, carefully crafted for
-        purity, nutrition, and everyday wellness.
-      </p>
+    <section className="cat-section">
+      <div className="cat-container">
 
-      <div className="category-grid">
-        {categories.map((cat) => (
-          <Link
-            key={cat.id}
-            to={`/products?category=${cat.slug}`}
-            className="category-card"
-          >
-            {/* CATEGORY IMAGE */}
-            <div className="category-image-wrapper">
-              <img
-                src={cat.image || "/placeholder.png"}
-                alt={cat.name}
-                className="category-image"
-                loading="lazy"
-              />
-            </div>
+        <h2 className="cat-title">Shop by Category</h2>
+        <p className="cat-subtitle">
+          Explore our natural food collections crafted for purity,
+          nutrition and everyday wellness.
+        </p>
 
-            {/* CATEGORY INFO */}
-            <div className="category-info">
-              <h3 className="category-name">{cat.name}</h3>
+        <div className="cat-grid">
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/products?category=${cat.slug}`}
+              className="cat-card"
+            >
+              <div className="cat-image">
+                <img
+                  src={cat.image || "/placeholder.png"}
+                  alt={cat.name}
+                  loading="lazy"
+                />
+              </div>
 
-              {cat.description && (
-                <p className="category-desc">
-                  {limitWords(cat.description, 10)}
-                </p>
-              )}
-            </div>
+              <h3 className="cat-name">{cat.name}</h3>
 
-            {/* CTA */}
-            <div className="category-btn-wrapper">
-              <span className="category-btn">
+              <span className="cat-link">
                 Explore
-                <span className="material-icons-round">chevron_right</span>
               </span>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 }
