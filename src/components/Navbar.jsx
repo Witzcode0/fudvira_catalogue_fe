@@ -83,35 +83,35 @@ export default function Navbar() {
             </div>
           </div>
 
-{/* GLOBAL SEARCH */}
-<div className="nav-search">
-  <div className="search-wrapper">
-    <span className="material-icons-round search-icon">
-      search
-    </span>
+          {/* GLOBAL SEARCH */}
+          <div className="nav-search">
+            <div className="search-wrapper">
+              <span className="material-icons-round search-icon">
+                search
+              </span>
 
-    <input
-      type="search"
-      placeholder="Search products..."
-      value={searchText}
-      onChange={(e) => setSearchText(e.target.value)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          const query = searchText.trim();
+              <input
+                type="search"
+                placeholder="Search products..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    const query = searchText.trim();
 
-          if (!query) return;
+                    if (!query) return;
 
-          navigate(
-            `/products?search=${encodeURIComponent(query)}`
-          );
+                    navigate(
+                      `/products?search=${encodeURIComponent(query)}`
+                    );
 
-          setSearchText("");
-          closeAll();
-        }
-      }}
-    />
-  </div>
-</div>
+                    setSearchText("");
+                    closeAll();
+                  }
+                }}
+              />
+            </div>
+          </div>
 
 
 
@@ -156,15 +156,15 @@ export default function Navbar() {
 
 
                     </li>
-                    <li>
-                      <NavLink to="/products-excel" className="account-link"  onClick={() => {
-                          closeAll();
-                          window.scrollTo(0, 0);
-                        }}>
+                    {/* <li>
+                      <NavLink to="/products-excel" className="account-link" onClick={() => {
+                        closeAll();
+                        window.scrollTo(0, 0);
+                      }}>
                         Products (Excel View)
                       </NavLink>
-                    </li>
-                    
+                    </li> */}
+
                     <li>
                       <NavLink to="/certificates" onClick={closeAll} className="account-link">
                         Certificates
