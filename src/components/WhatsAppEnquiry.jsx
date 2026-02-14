@@ -48,7 +48,7 @@ export default function WhatsAppEnquiry({ product, variation, quantity }) {
           display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          padding: "10px 16px",
+          padding: "6px 12px",
           borderRadius: "30px",
           border: "none",
           background: "#25D366",
