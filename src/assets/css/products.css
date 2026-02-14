@@ -17,7 +17,7 @@
 .product-list-page {
   max-width: 1320px;
   margin: 0 auto;
-  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px);
+  /* padding: clamp(24px, 4vw, 48px) clamp(0px, 4vw, 32px); */
 }
 
 /* =========================================================
