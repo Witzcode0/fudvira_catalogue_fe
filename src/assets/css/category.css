@@ -26,8 +26,11 @@
 
 /* ================= GRID ================= */
 .cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 220px);
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, 220px); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
   justify-content: center;
 }

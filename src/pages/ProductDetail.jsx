@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
 import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
+import { textConverter } from "../utils/textConverter";
+
 
 /* Normalize API */
 const normalizeProducts = (data) => {
@@ -130,7 +132,7 @@ export default function ProductDetail() {
               to={`/products?category=${product.category.slug}`}
               className="pd-category"
             >
-              {product.category.name}
+              {textConverter(product.category.name,"title")}
             </Link>
           )}
 
@@ -138,7 +140,7 @@ export default function ProductDetail() {
 
           {product.description && (
             <p className="pd-description">
-              {product.description}
+              {textConverter(product.description,"title")}
             </p>
           )}
 
@@ -164,10 +166,10 @@ export default function ProductDetail() {
                           Object.entries(value).map(([subKey, subVal]) => (
                             <div key={subKey} className="pd-sub-row">
                               <span className="pd-sub-key">
-                                {subKey.replace(/_/g, " ")}:
+                                {textConverter(subKey.replace(/_/g, " "), "title")}:
                               </span>
                               <span className="pd-sub-value">
-                                {String(subVal)}
+                                {textConverter(String(subVal), "title")}
                               </span>
                             </div>
                           ))}
@@ -193,50 +195,50 @@ export default function ProductDetail() {
                   )
                 )}
               </div>
-          )}
+            )}
 
         </div>
       </div>
 
       {/* ================= RELATED PRODUCTS ================= */}
-{relatedProducts.length > 0 && (
-  <div className="pd-related">
-    <h2 className="pd-related-title">Related Products</h2>
+      {relatedProducts.length > 0 && (
+        <div className="pd-related">
+          <h2 className="pd-related-title">Related Products</h2>
 
-    <div className="product-grid">
-      {relatedProducts.map((product) => (
-        <div key={product.id} className="product-card-ui">
+          <div className="product-grid">
+            {relatedProducts.map((product) => (
+              <div key={product.id} className="product-card-ui">
 
-          <Link to={`/product/${product.slug}`}>
-            <div className="product-image-ui">
-              <img
-                src={product.primary_image || "/placeholder.png"}
-                alt={product.name}
-                loading="lazy"
-              />
-            </div>
-          </Link>
+                <Link to={`/product/${product.slug}`}>
+                  <div className="product-image-ui">
+                    <img
+                      src={product.primary_image || "/placeholder.png"}
+                      alt={product.name}
+                      loading="lazy"
+                    />
+                  </div>
+                </Link>
 
-          <div className="product-content-ui">
-            <h3>{product.name}</h3>
+                <div className="product-content-ui">
+                  <h3>{product.name}</h3>
 
-            <div className="product-card-actions" style={{ padding: "0px" }}>
-              <Link
-                to={`/product/${product.slug}`}
-                className="view-product-link"
-              >
-                View details →
-              </Link>
+                  <div className="product-card-actions" style={{ padding: "0px" }}>
+                    <Link
+                      to={`/product/${product.slug}`}
+                      className="view-product-link"
+                    >
+                      View details →
+                    </Link>
 
-              <WhatsAppEnquiry product={product} />
-            </div>
+                    <WhatsAppEnquiry product={product} />
+                  </div>
+                </div>
+
+              </div>
+            ))}
           </div>
-
         </div>
-      ))}
-    </div>
-  </div>
-)}
+      )}
 
 
       {/* ================= BACK BUTTON ================= */}
