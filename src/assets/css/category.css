@@ -30,6 +30,7 @@
   grid-template-columns: repeat(auto-fit, 220px); */
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
   gap: 30px;
   justify-content: center;
