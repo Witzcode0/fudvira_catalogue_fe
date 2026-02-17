@@ -31,11 +31,13 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.instagram.com/fudvira_"
+                href="https://www.instagram.com/fudvira_/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="fab fa-instagram"></i>
               </a>
+
 
               <a
                 href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20👋%0AI%20visited%20your%20catalogue%20and%20would%20like%20to%20know%20more%20about%20your%20products."
