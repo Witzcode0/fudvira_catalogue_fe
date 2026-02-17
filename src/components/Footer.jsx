@@ -33,7 +33,6 @@ export default function Footer() {
               <a
                 href="https://www.instagram.com/fudvira_"
                 target="_blank"
-                rel="noopener noreferrer"
               >
                 <i className="fab fa-instagram"></i>
               </a>
