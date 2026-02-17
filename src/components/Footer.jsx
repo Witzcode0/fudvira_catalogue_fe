@@ -31,7 +31,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.instagram.com/fudvira"
+                href="https://www.instagram.com/fudvira_"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -45,6 +45,15 @@ export default function Footer() {
               >
                 <i className="fab fa-whatsapp"></i>
               </a>
+
+              <a
+                href="https://www.linkedin.com/company/110510031/admin/dashboard/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fab fa-linkedin"></i>
+              </a>
+
             </div>
           </div>
 
