@@ -67,45 +67,28 @@ export default function FeaturedProducts() {
         </Link>
       </div>
 
-      <div className="product-grid">
-        {products.map((product) => (
-          <div key={product.id} className="product-card-ui">
-
-            {/* PRODUCT CLICK AREA */}
-            <Link
-              to={`/product/${product.slug}`}
-              className="product-link-area"
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              <div className="product-image-ui">
-                <img
-                  src={product.primary_image || "/placeholder.png"}
-                  alt={product.name}
-                  loading="lazy"
-                />
+      <div className="green-grid">
+                {products.map((product) => (
+                  <div key={product.id} className="green-card">
+                    <Link to={`/product/${product.slug}`}>
+                      <div className="green-image">
+                        <img
+                          src={product.primary_image || "/placeholder.png"}
+                          alt={product.name}
+                        />
+                      </div>
+                   
+      
+                    <div className="green-info">
+                      <h4 style={{textDecoration:"none"}}>{product.name}</h4>
+                      <div className="green-actions">
+                        <WhatsAppEnquiry product={product} />
+                      </div>
+                    </div>
+                     </Link>
+                  </div>
+                ))}
               </div>
-
-              <div className="product-content-ui">
-                <h3>{product.name}</h3>
-              </div>
-            </Link>
-
-            {/* ACTIONS */}
-            <div className="product-card-actions">
-              <Link
-                to={`/product/${product.slug}`}
-                className="view-product-link"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                View details →
-              </Link>
-
-              <WhatsAppEnquiry product={product} />
-            </div>
-
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
