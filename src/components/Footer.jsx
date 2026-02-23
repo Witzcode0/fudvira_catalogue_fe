@@ -31,7 +31,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.instagram.com/fudvira_/"
+                href="https://www.instagram.com/thefudvira/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
