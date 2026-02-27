@@ -118,15 +118,18 @@ export default function Products() {
                     alt={product.name}
                   />
                 </div>
+              </Link>
              
 
               <div className="green-info">
+                <Link to={`/product/${product.slug}`}>
                 <h4 style={{textDecoration:"none"}}>{product.name}</h4>
+                </Link>
                 <div className="green-actions">
                   <WhatsAppEnquiry product={product} />
                 </div>
               </div>
-               </Link>
+               
             </div>
           ))}
         </div>
