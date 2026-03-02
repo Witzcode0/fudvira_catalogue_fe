@@ -3,8 +3,38 @@ import heroDesktop from "../assets/images/hero-desktop.jpg";
 import heroTablet from "../assets/images/hero-tablet.jpg";
 import heroMobile from "../assets/images/hero-mobile.jpg";
 import FeaturedProducts from "./FeaturedProducts";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
+
+  const [totalVisitors, setTotalVisitors] = useState(null);
+  const [uniqueVisitors, setUniqueVisitors] = useState(null);
+
+  useEffect(() => {
+
+    const API_BASE = "https://fudviraapi.pythonanywhere.com";
+
+    const loadData = async () => {
+      try {
+        // Track visit
+        await fetch(`${API_BASE}/api/track-visit/`);
+
+        // Get both stats
+        const response = await fetch(`${API_BASE}/api/visitor-stats/`);
+        const data = await response.json();
+
+        setTotalVisitors(data.total_visits);
+        setUniqueVisitors(data.unique_visitors);
+
+      } catch (error) {
+        console.log("API Error:", error);
+      }
+    };
+
+    loadData();
+
+  }, []);
+
   return (
     <>
 
@@ -30,7 +60,6 @@ export default function HeroSection() {
           <p className="hero-subtitle">
             Premium herbal blends, spices, vegetable powders, fruit powders, and natural honey <br /> —
             crafted with care for everyday health and wellness.
-
           </p>
 
           <div className="hero-actions">
@@ -45,7 +74,80 @@ export default function HeroSection() {
 
         </div>
       </section>
+{/* ================= BRAND IMPACT SECTION ================= */}
+<section className="brand-impact">
+  <div className="container brand-impact-wrapper">
 
+    {/* LEFT SIDE - IMPACT DATA */}
+    <div className="impact-left">
+
+      <h2 className="impact-title">
+        Trusted by a Growing Community
+      </h2>
+
+      <p className="impact-description">
+        Fudvira continues to expand its presence across India,
+        serving customers, retailers, and business partners with
+        certified and quality-controlled natural products.
+      </p>
+
+      <div className="impact-stats">
+
+        <div className="impact-stat">
+          <h3>{uniqueVisitors !== null ? uniqueVisitors.toLocaleString() : "—"}</h3>
+          <span>Unique Visitors</span>
+          <p>Individuals who have explored our catalogue</p>
+        </div>
+
+        <div className="impact-stat">
+          <h3>{totalVisitors !== null ? totalVisitors.toLocaleString() : "—"}</h3>
+          <span>Total Visits</span>
+          <p>Total interactions across our digital platform</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* RIGHT SIDE - COMPLIANCE */}
+    <div className="impact-right">
+
+      <h3 className="compliance-title">
+        Registered & Compliant Business
+      </h3>
+
+      <div className="compliance-card">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/002/142/139/non_2x/line-icon-for-gst-vector.jpg"
+          alt="GST Logo"
+        />
+        <div>
+          <h4>GST Registered Entity</h4>
+          <p>24ABFFB2905F1ZY</p>
+        </div>
+      </div>
+
+      <div className="compliance-card">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/020/336/361/non_2x/fssai-logo-fssai-icon-free-free-vector.jpg"
+          alt="FSSAI Logo"
+        />
+        <div>
+          <h4>FSSAI Certified Food Business</h4>
+          <p>10726997000109</p>
+        </div>
+      </div>
+
+      <p className="compliance-info">
+        We strictly follow Indian food safety regulations,
+        maintain hygienic processing standards, and ensure full
+        transparency in taxation and operations.
+      </p>
+
+    </div>
+
+  </div>
+</section>
       <section className="home-section">
         <h2 className="center">Who We Serve</h2>
         <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>
@@ -83,40 +185,40 @@ export default function HeroSection() {
       </section>
 
       <section className="why-fudvira-section">
-  <h2 className="why-fudvira-title">Why Choose Fudvira?</h2>
+        <h2 className="why-fudvira-title">Why Choose Fudvira?</h2>
 
-  <p className="why-fudvira-subtitle">
-    Naturally sourced, carefully processed, and crafted for everyday wellness
-  </p>
+        <p className="why-fudvira-subtitle">
+          Naturally sourced, carefully processed, and crafted for everyday wellness
+        </p>
 
-  <div className="why-fudvira-grid">
+        <div className="why-fudvira-grid">
 
-    <div className="why-fudvira-card">
-      <span className="material-icons-round">verified</span>
-      <h4>100% Pure</h4>
-      <p>No chemicals, no additives, only natural goodness.</p>
-    </div>
+          <div className="why-fudvira-card">
+            <span className="material-icons-round">verified</span>
+            <h4>100% Pure</h4>
+            <p>No chemicals, no additives, only natural goodness.</p>
+          </div>
 
-    <div className="why-fudvira-card">
-      <span className="material-icons-round">fact_check</span>
-      <h4>Quality Checked</h4>
-      <p>Each batch undergoes strict quality and hygiene checks.</p>
-    </div>
+          <div className="why-fudvira-card">
+            <span className="material-icons-round">fact_check</span>
+            <h4>Quality Checked</h4>
+            <p>Each batch undergoes strict quality and hygiene checks.</p>
+          </div>
 
-    <div className="why-fudvira-card">
-      <span className="material-icons-round">local_shipping</span>
-      <h4>Pan India Delivery</h4>
-      <p>Fast and reliable delivery across India.</p>
-    </div>
+          <div className="why-fudvira-card">
+            <span className="material-icons-round">local_shipping</span>
+            <h4>Pan India Delivery</h4>
+            <p>Fast and reliable delivery across India.</p>
+          </div>
 
-    <div className="why-fudvira-card">
-      <span className="material-icons-round">handshake</span>
-      <h4>Trusted by Businesses</h4>
-      <p>Preferred by retailers, wholesalers, and health brands.</p>
-    </div>
+          <div className="why-fudvira-card">
+            <span className="material-icons-round">handshake</span>
+            <h4>Trusted by Businesses</h4>
+            <p>Preferred by retailers, wholesalers, and health brands.</p>
+          </div>
 
-  </div>
-</section>
+        </div>
+      </section>
 
 
       {/* PRICE LIST SECTION */}
@@ -145,7 +247,8 @@ export default function HeroSection() {
         <p className="section-subtitle">
           From sourcing to delivery, we follow a simple and transparent process
           to ensure quality at every step.
-        </p> <div className="steps-grid">
+        </p> 
+        <div className="steps-grid">
           <div className="step-card">
             <span>01</span>
             <h4>Choose Products</h4>
@@ -155,7 +258,8 @@ export default function HeroSection() {
             <span>02</span>
             <h4>Place Order</h4>
             <p>Order online or contact us for bulk requirements.</p>
-          </div> <div className="step-card">
+          </div> 
+          <div className="step-card">
             <span>03</span>
             <h4>We Deliver</h4>
             <p>Safe, hygienic, and timely delivery across India.</p>
@@ -164,6 +268,5 @@ export default function HeroSection() {
       </section> */}
 
     </>
-
   );
 }

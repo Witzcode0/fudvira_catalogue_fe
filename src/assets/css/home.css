@@ -55,6 +55,134 @@
   color: #f1f1f1;
 }
 
+
+/* ================= BRAND IMPACT SECTION ================= */
+
+.brand-impact {
+  padding: 120px 0px;
+  /* background: #f8fafc; */
+}
+
+.brand-impact-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* LEFT SIDE */
+
+.impact-left {
+  flex: 1;
+  min-width: 320px;
+}
+
+.impact-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 18px;
+}
+
+.impact-description {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 50px;
+  line-height: 1.7;
+}
+
+.impact-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.impact-stat h3 {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.impact-stat span {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #374151;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.impact-stat p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* RIGHT SIDE */
+
+.impact-right {
+  flex: 1;
+  min-width: 320px;
+}
+
+.compliance-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #111827;
+}
+
+.compliance-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #ffffff;
+  padding: 22px 28px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 25px;
+  transition: 0.3s ease;
+}
+
+.compliance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.compliance-card img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  padding: 8px;
+  background:transparent;
+  border-radius: 8px;
+}
+
+.compliance-card h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.compliance-card p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.compliance-info {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+
+/* RESPONSIVE */
+
+
+
 .featured-products-section {
   margin-top: 90px;
   padding: 0 8px;
@@ -596,6 +724,23 @@
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
+
+  .compliance-title {
+    font-size: 34px;
+  }
+
+  .brand-impact-wrapper {
+    flex-direction: column-reverse;
+    gap: 60px;
+  }
+
+  .impact-stats {
+    flex-direction: column;
+  }
+
+  .impact-stat h3 {
+    font-size: 38px;
+  }
 }
 
 /* Mobile */
@@ -608,4 +753,22 @@
     font-size: 0.9rem;
     padding: var(--space-4);
   }
+
+  .compliance-title {
+    font-size: 34px;
+  }
+
+  .brand-impact-wrapper {
+    flex-direction: column-reverse;
+    gap: 60px;
+  }
+
+  .impact-stats {
+    flex-direction: column;
+  }
+
+  .impact-stat h3 {
+    font-size: 38px;
+  }
 }
+
