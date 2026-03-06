@@ -29,7 +29,7 @@ export default function HeroSection() {
   };
 
   const [totalVisitors, setTotalVisitors] = useState(null);
-  const [uniqueVisitors, setUniqueVisitors] = useState(null);
+  const [uniqueVisitors, setUniqueVisitors] = useState(50000);
 
   useEffect(() => {
 
