@@ -7,6 +7,27 @@ import { useEffect, useState } from "react";
 
 export default function HeroSection() {
 
+  const formatNumber = (num) => {
+    if (num === null || num === undefined) return "—";
+
+    const units = [
+      { value: 1e13, symbol: "Kharab" },
+      { value: 1e11, symbol: "Arab" },
+      { value: 1e9, symbol: "B" },
+      { value: 1e7, symbol: "Cr" },
+      { value: 1e5, symbol: "L" },
+      { value: 1e3, symbol: "K" },
+    ];
+
+    for (let i = 0; i < units.length; i++) {
+      if (num >= units[i].value) {
+        return (num / units[i].value).toFixed(1) + units[i].symbol;
+      }
+    }
+
+    return num.toString();
+  };
+
   const [totalVisitors, setTotalVisitors] = useState(null);
   const [uniqueVisitors, setUniqueVisitors] = useState(null);
 
@@ -74,80 +95,82 @@ export default function HeroSection() {
 
         </div>
       </section>
-{/* ================= BRAND IMPACT SECTION ================= */}
-<section className="brand-impact">
-  <div className="container brand-impact-wrapper">
+      {/* ================= BRAND IMPACT SECTION ================= */}
+      <section className="brand-impact">
+        <div className="container brand-impact-wrapper">
 
-    {/* LEFT SIDE - IMPACT DATA */}
-    <div className="impact-left">
+          {/* LEFT SIDE - IMPACT DATA */}
+          <div className="impact-left">
 
-      <h2 className="impact-title">
-        Trusted by a Growing Community
-      </h2>
+            <h2 className="impact-title">
+              Trusted by a Growing Community
+            </h2>
 
-      <p className="impact-description">
-        Fudvira continues to expand its presence across India,
-        serving customers, retailers, and business partners with
-        certified and quality-controlled natural products.
-      </p>
+            <p className="impact-description">
+              Fudvira continues to expand its presence across India,
+              serving customers, retailers, and business partners with
+              certified and quality-controlled natural products.
+            </p>
 
-      <div className="impact-stats">
+            <div className="impact-stats">
 
-        <div className="impact-stat">
-          <h3>{uniqueVisitors !== null ? uniqueVisitors.toLocaleString() : "—"}</h3>
-          <span>Unique Visitors</span>
-          <p>Individuals who have explored our catalogue</p>
+              <div className="impact-stat">
+                <h3>{formatNumber(uniqueVisitors)}</h3>
+                <span>Unique Visitors</span>
+                <p>Individuals who have explored our catalogue</p>
+              </div>
+
+              <div className="impact-stat">
+                <h3>{formatNumber(totalVisitors)}</h3>
+                <span>Total Visits</span>
+                <p>Total interactions across our digital platform</p>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          {/* RIGHT SIDE - COMPLIANCE */}
+          <div className="impact-right">
+
+            <h3 className="compliance-title">
+              Registered & Compliant Business
+            </h3>
+
+            <div className="compliance-card">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/002/142/139/non_2x/line-icon-for-gst-vector.jpg"
+                alt="GST Logo"
+              />
+              <div>
+                <h4>GST Registered Entity</h4>
+                <p>24ABFFB2905F1ZY</p>
+              </div>
+            </div>
+
+            <div className="compliance-card">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/020/336/361/non_2x/fssai-logo-fssai-icon-free-free-vector.jpg"
+                alt="FSSAI Logo"
+              />
+              <div>
+                <h4>FSSAI Certified Food Business</h4>
+                <p>10726997000109</p>
+              </div>
+            </div>
+
+            <p className="compliance-info">
+              We strictly follow Indian food safety regulations,
+              maintain hygienic processing standards, and ensure full
+              transparency in taxation and operations.
+            </p>
+
+          </div>
+
         </div>
-
-        <div className="impact-stat">
-          <h3>{totalVisitors !== null ? totalVisitors.toLocaleString() : "—"}</h3>
-          <span>Total Visits</span>
-          <p>Total interactions across our digital platform</p>
-        </div>
-
-      </div>
-
-    </div>
-
-    {/* RIGHT SIDE - COMPLIANCE */}
-    <div className="impact-right">
-
-      <h3 className="compliance-title">
-        Registered & Compliant Business
-      </h3>
-
-      <div className="compliance-card">
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/002/142/139/non_2x/line-icon-for-gst-vector.jpg"
-          alt="GST Logo"
-        />
-        <div>
-          <h4>GST Registered Entity</h4>
-          <p>24ABFFB2905F1ZY</p>
-        </div>
-      </div>
-
-      <div className="compliance-card">
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/020/336/361/non_2x/fssai-logo-fssai-icon-free-free-vector.jpg"
-          alt="FSSAI Logo"
-        />
-        <div>
-          <h4>FSSAI Certified Food Business</h4>
-          <p>10726997000109</p>
-        </div>
-      </div>
-
-      <p className="compliance-info">
-        We strictly follow Indian food safety regulations,
-        maintain hygienic processing standards, and ensure full
-        transparency in taxation and operations.
-      </p>
-
-    </div>
-
-  </div>
-</section>
+      </section>
       <section className="home-section">
         <h2 className="center">Who We Serve</h2>
         <p className="section-subtitle"> Fudvira proudly serves individuals and businesses across India. </p>
