@@ -6,12 +6,16 @@ import fudvira_qr from "../assets/images/fudvira-qr.png";
 import { useCategories } from "../store/CategoryContext";
 
 export default function Navbar() {
+
   const location = useLocation();
   const navigate = useNavigate();
   const { categories, loading } = useCategories();
+
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+
+  const cartCount = 10; // static for now
 
   const closeAll = () => {
     setCategoryOpen(false);
@@ -29,15 +33,19 @@ export default function Navbar() {
 
   return (
     <>
+
       {(categoryOpen || accountOpen) && (
         <div className="backdrop-blur show" onClick={closeAll}></div>
       )}
 
       <nav className="nav">
+
         <div className="container nav-container">
 
           {/* LEFT */}
+
           <div className="nav-left">
+
             <Link to="/" className="nav-logo">
               <img src={logo} alt="Fudvira Logo" />
             </Link>
@@ -45,6 +53,7 @@ export default function Navbar() {
             <div className="nav-divider"></div>
 
             <div className="nav-title" onClick={(e) => e.stopPropagation()}>
+
               <div
                 className="dropdown"
                 onClick={() => {
@@ -52,6 +61,7 @@ export default function Navbar() {
                   setAccountOpen(false);
                 }}
               >
+
                 <span className="title-main">
                   Pure & Premium Powders Delivered Fast
                 </span>
@@ -64,11 +74,16 @@ export default function Navbar() {
                 </span>
 
                 {categoryOpen && (
+
                   <div className="dropdown-menu open">
+
                     {loading && <p>Loading...</p>}
+
                     {!loading &&
                       categories.map((cat) => (
+
                         <Link
+                          key={cat.id}
                           to={`/products?category=${cat.slug}`}
                           className="dropdown-item"
                           onClick={closeAll}
@@ -77,15 +92,24 @@ export default function Navbar() {
                         </Link>
 
                       ))}
+
                   </div>
+
                 )}
+
               </div>
+
             </div>
+
           </div>
 
-          {/* GLOBAL SEARCH */}
+
+          {/* SEARCH */}
+
           <div className="nav-search">
+
             <div className="search-wrapper">
+
               <span className="material-icons-round search-icon">
                 search
               </span>
@@ -96,28 +120,55 @@ export default function Navbar() {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    const query = searchText.trim();
 
+                  if (e.key === "Enter") {
+
+                    const query = searchText.trim();
                     if (!query) return;
 
-                    navigate(
-                      `/products?search=${encodeURIComponent(query)}`
-                    );
+                    navigate(`/products?search=${encodeURIComponent(query)}`);
 
                     setSearchText("");
                     closeAll();
                   }
+
                 }}
               />
+
             </div>
+
           </div>
 
 
-
           {/* RIGHT */}
+
           <div className="nav-right" onClick={(e) => e.stopPropagation()}>
+
+            {/* CART ICON */}
+
+            <div className="nav-cart">
+
+              <Link to="/cart" className="cart-icon">
+
+                <span className="material-icons-round">
+                  shopping_cart
+                </span>
+
+                {cartCount > 0 && (
+                  <span className="cart-count">
+                    {cartCount}
+                  </span>
+                )}
+
+              </Link>
+
+            </div>
+
+
+            {/* ACCOUNT MENU */}
+
             <div className="account-wrapper">
+
               <button
                 className="login-btn"
                 onClick={() => {
@@ -125,17 +176,23 @@ export default function Navbar() {
                   setCategoryOpen(false);
                 }}
               >
-                <span className="material-icons-round">menu</span>
+                <span className="material-icons-round">
+                  menu
+                </span>
               </button>
 
               {accountOpen && (
+
                 <div className="account-dropdown open">
+
                   <ul className="account-list">
+
                     <li>
                       <NavLink to="/" onClick={closeAll} className="account-link">
                         Home
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink to="/categories" onClick={closeAll} className="account-link">
                         Categories
@@ -153,23 +210,14 @@ export default function Navbar() {
                       >
                         Products
                       </NavLink>
-
-
                     </li>
-                    {/* <li>
-                      <NavLink to="/products-excel" className="account-link" onClick={() => {
-                        closeAll();
-                        window.scrollTo(0, 0);
-                      }}>
-                        Products (Excel View)
-                      </NavLink>
-                    </li> */}
 
                     <li>
                       <NavLink to="/certificates" onClick={closeAll} className="account-link">
                         Certificates
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink to="/contact" onClick={closeAll} className="account-link">
                         Contact
@@ -178,40 +226,59 @@ export default function Navbar() {
 
                   </ul>
 
-                  {/* QR */}
+
+                  {/* QR SECTION */}
+
                   <div className="account-dropdown__qrcode">
+
                     <a
                       href="https://www.fudvira.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="account-dropdown__qrcode-box"
                     >
+
                       <img
                         src={fudvira_qr}
                         alt="Fudvira Web Store QR"
                         className="account-dropdown__qrcode-img"
                       />
+
                     </a>
 
                     <div>
+
                       <div className="account-dropdown__qrcode-heading">
                         Explore premium products <br />
-                        <a href="https://www.fudvira.com" target="_blank" rel="noopener noreferrer">
+                        <a
+                          href="https://www.fudvira.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           at fudvira.com
                         </a>
                       </div>
+
                       <div className="account-dropdown__qrcode-sub">
                         Scan QR to visit our official store
                       </div>
+
                     </div>
+
                   </div>
+
                 </div>
+
               )}
+
             </div>
+
           </div>
 
         </div>
+
       </nav>
+
     </>
   );
 }

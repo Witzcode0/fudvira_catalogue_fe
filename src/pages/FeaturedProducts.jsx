@@ -68,26 +68,43 @@ export default function FeaturedProducts() {
       </div>
 
       <div className="green-grid">
-                {products.map((product) => (
-                  <div key={product.id} className="green-card">
-                    <Link to={`/product/${product.slug}`}>
-                      <div className="green-image">
-                        <img
-                          src={product.primary_image || "/placeholder.png"}
-                          alt={product.name}
-                        />
-                      </div>
-                   
-      
-                    <div className="green-info">
-                      <h4 style={{textDecoration:"none"}}>{product.name}</h4>
-                      <div className="green-actions">
-                        <WhatsAppEnquiry product={product} />
-                      </div>
+                {/* ================= RELATED PRODUCTS ================= */}
+                {products.length > 0 && (
+                  <div className="related-products">
+                
+                    <div className="related-grid">
+                
+                      {products.map((product) => (
+                
+                        <div key={product.id} className="related-card">
+                
+                          <Link to={`/product/${product.slug}`} style={{textDecoration:"none"}}>
+                
+                            <div className="related-image">
+                              <img
+                                src={product.primary_image || "/placeholder.png"}
+                                alt={product.name}
+                              />
+                            </div>
+                
+                            <div className="related-info">
+                              <h4>{product.name}</h4>
+                
+                              <div className="related-actions">
+                                <WhatsAppEnquiry product={product} />
+                              </div>
+                            </div>
+                
+                          </Link>
+                
+                        </div>
+                
+                      ))}
+                
                     </div>
-                     </Link>
+                
                   </div>
-                ))}
+                )}
               </div>
     </section>
   );

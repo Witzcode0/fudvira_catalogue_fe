@@ -13,6 +13,9 @@ import ProductPriceList from "../pages/ProductPriceList";
 import ProductExcelTable from "../pages/ProductExcelTable";
 import ProductDetailExcel from "../pages/ProductDetailExcel";
 import Contact from "../pages/Contact";
+import ShoppingCart from "../pages/ShoppingCart";
+import CheckoutPage from "../pages/CheckoutPage";
+import PaymentPage from "../pages/PaymentPage";
 
 
 const appRouter = createBrowserRouter([
@@ -36,6 +39,10 @@ const appRouter = createBrowserRouter([
         element: <ProductDetailExcel /> 
       },
       { path: "product/:slug", element: <ProductDetail /> },
+      { path: "/cart", element: <ShoppingCart /> },
+      { path: "/checkout", element: <CheckoutPage /> },
+      { path: "/payment", element: <PaymentPage /> },
+      
       {
         path: "/coming-soon",
         element: <UnderMaintenance />,

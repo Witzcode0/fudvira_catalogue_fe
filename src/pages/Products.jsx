@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { API_BASE } from "../services/api";
 import { useCategories } from "../store/CategoryContext";
 import WhatsAppEnquiry from "../components/WhatsAppEnquiry";
+import { truncateText } from "../utils/textUtils";
 
 const normalizeProducts = (data) => {
   if (Array.isArray(data)) return data;
@@ -11,6 +12,7 @@ const normalizeProducts = (data) => {
 };
 
 export default function Products() {
+
   const [searchParams, setSearchParams] = useSearchParams();
   const { categories } = useCategories();
 
@@ -22,24 +24,39 @@ export default function Products() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const [view, setView] = useState("list");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
   const ITEMS_PER_PAGE = 9;
   const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
   useEffect(() => {
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+
+  }, []);
+
+  useEffect(() => {
+
     setLoading(true);
+
     let url = `${API_BASE}/api/products/?page=${page}`;
 
     if (searchQuery) {
-      url = `${API_BASE}/api/products/search/?q=${encodeURIComponent(
-        searchQuery
-      )}&page=${page}`;
-    } else if (activeCategory) {
+      url = `${API_BASE}/api/products/search/?q=${encodeURIComponent(searchQuery)}&page=${page}`;
+    }
+    else if (activeCategory) {
       url = `${API_BASE}/api/products/?category=${activeCategory}&page=${page}`;
     }
 
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setProducts(normalizeProducts(data));
         setCount(data.count || 0);
         setLoading(false);
@@ -49,11 +66,13 @@ export default function Products() {
         setCount(0);
         setLoading(false);
       });
+
   }, [searchParams.toString()]);
 
   const changePage = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());
     setSearchParams({ ...params, page: newPage });
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -65,39 +84,94 @@ export default function Products() {
     ? `Search results for "${searchQuery}"`
     : categoryName || "All Products";
 
+  const currentView = isMobile ? "grid" : view;
+
   return (
-    <div className="green-shop">
-      {/* Sidebar */}
-      <aside className="green-sidebar">
-        <h3>Categories</h3>
 
-        <button
-          className={`green-category ${!activeCategory ? "active" : ""}`}
-          onClick={() => setSearchParams({}, { replace: true })}
-        >
-          All Products
-        </button>
+    <div className="shop-container">
 
-        {categories.map((cat) => (
+      {/* SIDEBAR */}
+
+      <aside className="shop-sidebar">
+
+        {/* <div className="filter-box">
+          <h3>FILTER</h3>
+
+          <div className="filter-section">
+            <h4>Filter by Price</h4>
+
+            <input type="range" min="10" max="1000"/>
+
+            <div className="price-row">
+              <span>$10 - $1000</span>
+              <button className="filter-btn">Filter</button>
+            </div>
+
+          </div>
+        </div> */}
+
+        <div className="category-box">
+
+          <h3>CATEGORIES</h3>
+
           <button
-            key={cat.id}
-            className={`green-category ${
-              activeCategory === cat.slug ? "active" : ""
-            }`}
-            onClick={() =>
-              setSearchParams({ category: cat.slug }, { replace: true })
-            }
+            className={`category-item ${!activeCategory ? "active" : ""}`}
+            onClick={() => setSearchParams({}, { replace: true })}
           >
-            {cat.name}
+            All Products
           </button>
-        ))}
+
+          {categories.map(cat => (
+
+            <button
+              key={cat.id}
+              className={`category-item ${activeCategory === cat.slug ? "active" : ""
+                }`}
+              onClick={() =>
+                setSearchParams({ category: cat.slug }, { replace: true })
+              }
+            >
+              {cat.name}
+            </button>
+
+          ))}
+
+        </div>
+
       </aside>
 
-      {/* Main Content */}
-      <main className="green-content">
-        <div className="green-header">
-          <h1>{pageTitle}</h1>
-          <span>{count} Products</span>
+
+      {/* PRODUCTS */}
+
+      <main className="shop-products">
+
+        <div className="product-header">
+
+          <div className="main-product-title">
+            <h2>{pageTitle}</h2>
+            <span>( {count} ) Products</span>
+          </div>
+
+          {!isMobile && (
+            <div className="view-toggle">
+
+              <button
+                className={view === "grid" ? "active" : ""}
+                onClick={() => setView("grid")}
+              >
+                <span className="material-icons-round">grid_view</span>
+              </button>
+
+              <button
+                className={view === "list" ? "active" : ""}
+                onClick={() => setView("list")}
+              >
+                <span className="material-icons-round">view_list</span>
+              </button>
+
+            </div>
+          )}
+
         </div>
 
         {loading && <p className="loading-text">Loading products...</p>}
@@ -108,34 +182,74 @@ export default function Products() {
           </div>
         )}
 
-        <div className="green-grid">
-          {products.map((product) => (
-            <div key={product.id} className="green-card">
-              <Link to={`/product/${product.slug}`}>
-                <div className="green-image">
+        <div className={currentView === "grid" ? "product-grid" : "product-list"}>
+
+          {products.map(product => (
+
+            <div key={product.id} className="product-row">
+
+              <div className="product-img">
+                <Link to={`/product/${product.slug}`}>
                   <img
                     src={product.primary_image || "/placeholder.png"}
                     alt={product.name}
                   />
-                </div>
-              </Link>
-             
-
-              <div className="green-info">
-                <Link to={`/product/${product.slug}`}>
-                <h4 style={{textDecoration:"none"}}>{product.name}</h4>
                 </Link>
-                <div className="green-actions">
-                  <WhatsAppEnquiry product={product} />
-                </div>
               </div>
-               
+
+              <div className="product-details">
+
+                <Link to={`/product/${product.slug}`} style={{ textDecoration: "none" }}>
+                  <h3>{product.name}</h3>
+                </Link>
+
+                {product.price && (
+                  <div className="product-price">
+                    ₹ {product.price}
+                  </div>
+                )}
+
+                <p className="product-desc" style={{margin:"16px 0"}}>
+                  {truncateText(product.description, 100) ||
+                    "Premium quality product made with natural ingredients."}
+                </p>
+
+                {/* <WhatsAppEnquiry product={product} /> */}
+
+              </div>
+
+              <div className="product-actions">
+
+                <button
+                  className="cart-btn"
+                  onClick={() => addToCart(product)}
+                >
+                  <span className="material-icons-round">shopping_cart</span>
+                  Add to Cart
+                </button>
+
+                <button
+                  className="buy-btn"
+                  onClick={() => navigate(`/product/${product.slug}`)}
+                >
+                  Buy Now
+                </button>
+
+                
+
+              </div>
+
+
             </div>
+
           ))}
+
         </div>
 
         {totalPages > 1 && (
+
           <div className="green-pagination">
+
             <button
               disabled={page === 1}
               onClick={() => changePage(page - 1)}
@@ -143,9 +257,7 @@ export default function Products() {
               Prev
             </button>
 
-            <span>
-              {page} / {totalPages}
-            </span>
+            <span>{page} / {totalPages}</span>
 
             <button
               disabled={page === totalPages}
@@ -153,9 +265,14 @@ export default function Products() {
             >
               Next
             </button>
+
           </div>
+
         )}
+
       </main>
+
     </div>
+
   );
 }
