@@ -263,7 +263,7 @@ export default function HeroSection() {
 
       {/* ================= WHY FUDVIRA ================= */}
 
-      <FeaturedProducts />
+      {/* <FeaturedProducts /> */}
 
       {/* <section className="home-section light">
         <h2 className="center">How Fudvira Works</h2>

@@ -58,7 +58,7 @@ export default function WhatsAppEnquiry({ product, variation, quantity }) {
         }}
       >
         <FaWhatsapp size={16} />
-        Enquiry
+        Bulk Order Enquiry
       </button>
 
       {/* Modal */}

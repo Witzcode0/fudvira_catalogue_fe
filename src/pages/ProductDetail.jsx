@@ -367,9 +367,9 @@ export default function ProductDetail() {
 
                     <h4>{product.name}</h4>
 
-                    <div className="related-actions">
+                    {/* <div className="related-actions">
                       <WhatsAppEnquiry product={product} />
-                    </div>
+                    </div> */}
 
                   </div>
 
