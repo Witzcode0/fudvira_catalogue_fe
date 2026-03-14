@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
+
+
 import logo from "../assets/images/logo.png";
 import fudvira_qr from "../assets/images/fudvira-qr.png";
 import { useCategories } from "../store/CategoryContext";
+import LoginModal from "./LoginModal";
 
 export default function Navbar() {
 
@@ -14,6 +17,8 @@ export default function Navbar() {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+
+  const [showLogin, setShowLogin] = useState(false);
 
   const cartCount = 10; // static for now
 
@@ -164,6 +169,22 @@ export default function Navbar() {
 
             </div>
 
+            <div className="nav-user">
+
+              <button
+                className="user-icon"
+                onClick={() => setShowLogin(true)}
+              >
+                <span className="material-icons-round">
+                  account_circle
+                </span>
+              </button>
+
+            </div>
+
+            {showLogin && (
+              <LoginModal closeModal={() => setShowLogin(false)} />
+            )}
 
             {/* ACCOUNT MENU */}
 
