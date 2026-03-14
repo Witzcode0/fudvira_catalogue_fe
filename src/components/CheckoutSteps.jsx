@@ -13,14 +13,14 @@ export default function CheckoutSteps({ step }) {
 
       <div className={`step ${step >= 2 ? "active" : ""}`}>
         <span>02</span>
-        <p>Order Summary</p>
+        <p>Delivery Address & Order Summary</p>
       </div>
 
       <div className="line"></div>
 
       <div className={`step ${step >= 3 ? "active" : ""}`}>
         <span>03</span>
-        <p>Payment</p>
+        <p>Payment Method</p>
       </div>
 
     </div>
