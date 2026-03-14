@@ -151,7 +151,7 @@ export default function Navbar() {
 
             {/* CART ICON */}
 
-            <div className="nav-cart">
+            {/* <div className="nav-cart">
 
               <Link to="/cart" className="cart-icon">
 
@@ -167,7 +167,7 @@ export default function Navbar() {
 
               </Link>
 
-            </div>
+            </div> */}
 
             <div className="nav-user">
 
@@ -207,6 +207,16 @@ export default function Navbar() {
                 <div className="account-dropdown open">
 
                   <ul className="account-list">
+                    <div className="account-section">
+
+                      <div className="account-info">
+                        <span className="account-title">My Account</span>
+                        <span className="account-mobile">8980145007</span>
+                      </div>
+
+                      <hr className="account-divider" />
+
+                    </div>
 
                     <li>
                       <NavLink to="/" onClick={closeAll} className="account-link">
@@ -242,6 +252,11 @@ export default function Navbar() {
                     <li>
                       <NavLink to="/contact" onClick={closeAll} className="account-link">
                         Contact
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/contact" onClick={closeAll} className="account-link">
+                        Logout
                       </NavLink>
                     </li>
 

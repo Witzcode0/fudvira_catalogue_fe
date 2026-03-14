@@ -184,7 +184,7 @@ export default function ProductDetail() {
 
           {/* ================= VARIATIONS ================= */}
 
-          {product.variations?.length > 0 && (
+          {/* {product.variations?.length > 0 && (
 
             <div className="pd-variations">
 
@@ -216,21 +216,21 @@ export default function ProductDetail() {
 
             </div>
 
-          )}
+          )} */}
 
           {/* PRICE */}
 
-          {selectedVariation && (
+          {/* {selectedVariation && (
 
             <div className="pd-price">
               ₹{selectedVariation.final_price}
             </div>
 
-          )}
+          )} */}
 
           {/* QUANTITY */}
 
-          <div className="pd-qty">
+          {/* <div className="pd-qty">
 
             <button onClick={decreaseQty}>−</button>
 
@@ -238,11 +238,11 @@ export default function ProductDetail() {
 
             <button onClick={increaseQty}>+</button>
 
-          </div>
+          </div> */}
 
           {/* CART BUTTONS */}
 
-          <div className="pd-cart-actions">
+          {/* <div className="pd-cart-actions">
 
             <button className="pd-add-cart">
               Add to Cart
@@ -252,7 +252,7 @@ export default function ProductDetail() {
               Buy Now
             </button>
 
-          </div>
+          </div> */}
 
           {/* DESCRIPTION */}
 
