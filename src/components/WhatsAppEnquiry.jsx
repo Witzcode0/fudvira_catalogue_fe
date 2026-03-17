@@ -12,33 +12,42 @@ export default function WhatsAppEnquiry({ product, variation, quantity }) {
     const phone = "919408501190";
 
     const msg = [
-      "Hello Fudvira Team,",
-      "",
-      "Product Inquiry Details:",
-      "",
-      `Product Name: ${product?.name}`,
-      variation ? `Size: ${variation.quantity}${variation.unit_symbol}` : null,
-      quantity ? `Quantity: ${quantity}` : null,
-      `Requirement: ${requirement || "Please share more details."}`,
-      "",
-      `Product Link: ${window.location.origin}/product/${product?.slug}`,
-      "",
-      "--------------------------------",
-      "Fudvira Contact Details",
-      "",
-      "Mobile: +91 9408501190",
-      "Email: info@fudvira.com",
-      "Website: https://www.fudvira.com/",
-      "Catalogue: https://catalogue.fudvira.com/",
-      "",
-      "Follow Us:",
-      "Facebook: https://www.facebook.com/profile.php?id=61588065655380",
-      "Instagram: https://www.instagram.com/thefudviraofficial/",
-      "WhatsApp: https://wa.me/919408501190",
-      "LinkedIn: https://www.linkedin.com/company/110510031/"
-    ]
-      .filter(Boolean)
-      .join("\n")
+  "👋 Hello Fudvira Team,",
+  "",
+  "🛒 *Product Inquiry Details*",
+  "",
+  `📦 *Product Name:* ${product?.name}`,
+  variation ? `📏 *Size:* ${variation.quantity}${variation.unit_symbol}` : null,
+  quantity ? `🔢 *Quantity:* ${quantity}` : null,
+  `📝 *Requirement:* ${requirement || "Please share more details."}`,
+  "",
+  `🔗 *Product Link:* ${window.location.origin}/product/${product?.slug}`,
+  "",
+  "━━━━━━━━━━━━━━━━━━━━",
+  "",
+  "📞 *Fudvira Contact Details*",
+  "",
+  "📱 *Mobile:* +91 9408501190",
+  "📧 *Email:* info@fudvira.com",
+  "🌐 *Website:* https://www.fudvira.com/",
+  "📚 *Catalogue:* https://catalogue.fudvira.com/",
+  "",
+  "🌍 *Follow Us*",
+  "",
+  "📘 Facebook:",
+  "https://www.facebook.com/profile.php?id=61588065655380",
+  "",
+  "📸 Instagram:",
+  "https://www.instagram.com/thefudviraofficial/",
+  "",
+  "💬 WhatsApp:",
+  "https://wa.me/919408501190",
+  "",
+  "💼 LinkedIn:",
+  "https://www.linkedin.com/company/110510031/"
+]
+  .filter(Boolean)
+  .join("\n");
     window.open(
       `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
       "_blank"
