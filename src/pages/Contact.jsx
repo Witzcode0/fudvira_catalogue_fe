@@ -43,7 +43,7 @@ export default function Contact() {
 
     <div className="info-item">
       <h4>Phone</h4>
-      <p>+91 89801 45007</p>
+      <p>+91 940-8501-190</p>
     </div>
 
     <div className="info-item">

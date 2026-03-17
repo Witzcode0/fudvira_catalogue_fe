@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
-
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
 export default function Footer() {
   return (
     <footer className="footer">
@@ -58,6 +59,36 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Pages */}
+          <div className="footer-col">
+            <h4>Pages</h4>
+            <ul>
+              <li>
+                <Link to="/" onClick={() => {
+                  closeAll();
+                  window.scrollTo(0, 0);
+                }}>
+                  Home
+                </Link>
+
+              </li>
+              <li>
+                <Link to="/categories">
+                  Categories
+                </Link>
+              </li>
+              <li>
+                <Link to="/products">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
           {/* POLICIES */}
           <div className="footer-col">
             <h4>Legal & Policies</h4>
@@ -75,20 +106,6 @@ export default function Footer() {
                 <Link to="/certificates">
                   Certificates
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* CONTACT */}
-          <div className="footer-col">
-            <h4>Contact</h4>
-            <ul>
-              <li>+91 89801 45007</li>
-              <li>+91 84908 46001</li>
-              <li>
-                <a href="mailto:info@fudvira.com">
-                  info@fudvira.com
-                </a>
               </li>
             </ul>
           </div>
@@ -120,6 +137,35 @@ export default function Footer() {
             </ul>
 
           </div>
+
+          {/* CONTACT */}
+         {/* CONTACT */}
+<div className="footer-col">
+  <h4>Contact</h4>
+
+  <ul>
+
+    <li>
+      <i className="fa-solid fa-phone footer-icon"></i>
+      +91 940-8501-190
+    </li>
+
+    <li>
+      <i className="fa-solid fa-envelope footer-icon"></i>
+      <a href="mailto:info@fudvira.com">
+        info@fudvira.com
+      </a>
+    </li>
+
+    <li>
+      <i className="fa-solid fa-location-dot footer-icon"></i>
+      Shayona Plaza, 306, Vesu Canal Rd, nr. BRTS, Punagam,
+      Yoginagar Society, Surat, Gujarat 395010
+    </li>
+
+  </ul>
+</div>
+
 
         </div>
 
