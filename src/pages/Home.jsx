@@ -195,7 +195,7 @@ export default function HeroSection() {
           </p>
 
           <a
-            href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
+            href="https://wa.me/919408501190?text=Hello%20Fudvira%20Team%20%0AI%20am%20interested%20in%20bulk%20or%20business%20orders.%20Please%20share%20pricing,%20MOQ,%20and%20product%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
