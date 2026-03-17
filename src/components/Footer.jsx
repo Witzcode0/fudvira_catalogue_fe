@@ -24,7 +24,7 @@ export default function Footer() {
 
             <div className="footer-social">
               <a
-                href="https://www.facebook.com/profile.php?id=61584767964819"
+                href="https://www.facebook.com/profile.php?id=61588065655380"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -138,7 +138,6 @@ export default function Footer() {
 
           </div>
 
-          {/* CONTACT */}
          {/* CONTACT */}
 <div className="footer-col">
   <h4>Contact</h4>
