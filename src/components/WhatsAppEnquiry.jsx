@@ -14,19 +14,17 @@ export default function WhatsAppEnquiry({ product, variation, quantity }) {
     const msg = [
       "Hello Fudvira Team,",
       "",
-      `Product Name: ${product.name}`,
-      variation
-        ? `Size: ${variation.quantity}${variation.unit_symbol}`
-        : "",
-      quantity ? `Quantity: ${quantity}` : "",
+      "Product Inquiry Details:",
       "",
-      requirement || "Please share more details.",
+      `Product Name: ${product?.name}`,
+      variation ? `Size: ${variation.quantity}${variation.unit_symbol}` : null,
+      quantity ? `Quantity: ${quantity}` : null,
+      `Requirement: ${requirement || "Please share more details."}`,
       "",
-      `${window.location.origin}/product/${product.slug}`
+      `Product Link: ${window.location.origin}/product/${product?.slug}`
     ]
       .filter(Boolean)
       .join("\n");
-
     window.open(
       `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
       "_blank"
