@@ -583,25 +583,35 @@ margin-bottom: 16px;
 height:50px;
 object-fit: contain;
 }
-
 /* ==============================
 TITLE
 ============================== */
 
-.login-content h2{
-font-size: 24px;
-font-weight: 700;
-margin-bottom: 6px;
-color: #111;
+.login-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+  font-family: 'Inter', sans-serif;
 }
 
-.login-subtitle{
-font-size: 14px;
-color: #6b7280;
-margin-bottom: 26px;
-line-height: 1.4;
+.login-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 14px;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
 }
 
+/* IMPORTANT FIX */
+.ls-title {
+  display: block; /* ✅ fix spacing issue */
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 18px;
+  font-family: 'Inter', sans-serif;
+}
 /* ==============================
 MOBILE INPUT
 ============================== */
@@ -863,3 +873,33 @@ font-size: 16px;
 }
 
 }
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.otp-inputs input {
+  width: 45px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.otp-inputs input:focus {
+  border-color: #0c831f; /* blinkit green */
+  box-shadow: 0 0 0 2px rgba(12, 131, 31, 0.2);
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+

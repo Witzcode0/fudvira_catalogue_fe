@@ -1,84 +1,158 @@
 import { useState } from "react";
 import logo from "../assets/images/logo.png";
+import { sendOTP } from "../services/authApi";
 import OTPModal from "./OTPModal";
-
+import { Link } from "react-router-dom";
 function LoginModal({ closeModal }) {
 
-const [mobile, setMobile] = useState("");
-const [showOTP, setShowOTP] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
 
-const handleChange = (e) => {
-  const value = e.target.value.replace(/\D/g, "");
-  if (value.length <= 10) setMobile(value);
-};
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-const isValid = mobile.length === 10;
+  /* ======================
+     MOBILE INPUT
+  ====================== */
 
-return (
+  const handleChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    if (value.length <= 10) setMobile(value);
+  };
 
-<>
-<div className="login-overlay">
+  const isValid = mobile.length === 10;
 
-<div className="login-modal">
+  /* ======================
+     SEND OTP API
+  ====================== */
 
-<div className="login-header">
-<span
-className="material-icons-round back-icon"
-onClick={closeModal}
->
-arrow_back
-</span>
-</div>
+  const handleSendOTP = async () => {
 
-<div className="login-content">
+    if (!isValid) return;
 
-<div className="login-logo">
-<img src={logo} alt="Fudvira Logo" />
-</div>
+    setLoading(true);
+    setError("");
 
-<h2>Welcome to Fudvira</h2>
+    try {
+      const res = await sendOTP(mobile);
 
-<p className="login-subtitle">
-Fresh groceries & essentials delivered fast
-</p>
+      if (res.status) {
+        setShowOTP(true);
+      } else {
+        setError(res.message || "Failed to send OTP");
+      }
 
-<div className="mobile-input">
+    } catch (err) {
+      setError("Something went wrong");
+    }
 
-<span className="country-code">+91</span>
+    setLoading(false);
+  };
 
-<input
-type="tel"
-placeholder="Enter mobile number"
-value={mobile}
-onChange={handleChange}
-/>
+  return (
 
-</div>
+    <>
+      <div className="login-overlay">
 
-<button
-className={`auht-btn ${isValid ? "active" : ""}`}
-disabled={!isValid}
-onClick={() => setShowOTP(true)}
->
-Continue
-</button>
+        <div className="login-modal">
 
-<p className="terms"> By continuing you agree to our <span> Terms of Service</span> & <span> Privacy Policy</span> </p>
+          {/* HEADER */}
+          <div className="login-header">
+            <span
+              className="material-icons-round back-icon"
+              onClick={closeModal}
+            >
+              arrow_back
+            </span>
+          </div>
 
-</div>
+          {/* CONTENT */}
+          <div className="login-content">
 
-</div>
+            <div className="login-logo">
+              <img src={logo} alt="Fudvira Logo" />
+            </div>
 
-</div>
+            <h2>Welcome to Fudvira</h2>
 
-{showOTP && (
-<OTPModal mobile={mobile} closeOTP={()=>setShowOTP(false)} />
-)}
+            <p className="login-subtitle">
+              Fresh groceries & essentials delivered fast
 
-</>
+            </p>
+            <span className="ls-title">Log in or Sign up</span>
 
-);
+            {/* MOBILE INPUT */}
+            <div className="mobile-input">
 
+              <span className="country-code">+91</span>
+
+              <input
+                type="tel"
+                placeholder="Enter mobile number"
+                value={mobile}
+                onChange={handleChange}
+              />
+
+            </div>
+
+            {/* ERROR */}
+            {error && <p className="error-text">{error}</p>}
+
+            {/* BUTTON */}
+            <button
+              className={`auht-btn ${isValid ? "active" : ""}`}
+              disabled={!isValid || loading}
+              onClick={handleSendOTP}
+            >
+              {loading ? "Sending..." : "Continue"}
+            </button>
+
+            <p className="terms">
+              By continuing you agree to our{" "}
+
+            
+
+              <Link
+                to="/terms-and-conditions"
+                onClick={() => {
+                  closeAll?.();
+                  window.scrollTo(0, 0);
+                }}
+                className="terms-link"
+              >
+                Terms of Service
+              </Link>
+
+              {" "} & {" "}
+
+              <Link
+                to="/privacy-policy"
+                onClick={() => {
+                  closeAll?.();
+                  window.scrollTo(0, 0);
+                }}
+                className="terms-link"
+              >
+                Privacy Policy
+              </Link>
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* OTP MODAL */}
+      {showOTP && (
+        <OTPModal
+          mobile={mobile}
+          closeOTP={() => setShowOTP(false)}
+        />
+      )}
+    </>
+
+  );
 }
 
 export default LoginModal;

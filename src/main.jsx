@@ -17,6 +17,7 @@ import "./assets/css/certificates.css";
 import "./assets/css/product-price-list.css";
 import "./assets/css/product-excel-table.css";
 import "./assets/css/terms-conditions.css";
+import "./assets/css/privacy-policy.css";
 import "./assets/css/contact.css";
 import "./assets/css/shopping-cart.css";
 import "./assets/css/checkout-page.css";

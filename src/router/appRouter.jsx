@@ -16,6 +16,7 @@ import Contact from "../pages/Contact";
 import ShoppingCart from "../pages/ShoppingCart";
 import CheckoutPage from "../pages/CheckoutPage";
 import PaymentPage from "../pages/PaymentPage";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
 
 
 const appRouter = createBrowserRouter([
@@ -31,23 +32,27 @@ const appRouter = createBrowserRouter([
         key: "products"
       },
       {
-        path:"/products-excel",
+        path: "/products-excel",
         element: <ProductExcelTable />
       },
       {
-        path:"/products-excel/:slug",
-        element: <ProductDetailExcel /> 
+        path: "/products-excel/:slug",
+        element: <ProductDetailExcel />
       },
       { path: "product/:slug", element: <ProductDetail /> },
       { path: "/cart", element: <ShoppingCart /> },
       { path: "/checkout", element: <CheckoutPage /> },
       { path: "/payment", element: <PaymentPage /> },
-      
+
       {
         path: "/coming-soon",
         element: <UnderMaintenance />,
       },
       { path: "terms-and-conditions", element: <TermsConditions /> },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />
+      },
       { path: "certificates", element: <Certificates /> },
       { path: "price-list", element: <ProductPriceList /> },
       { path: "contact", element: <Contact /> },

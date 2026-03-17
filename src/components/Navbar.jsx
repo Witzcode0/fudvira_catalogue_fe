@@ -20,6 +20,8 @@ export default function Navbar() {
 
   const [showLogin, setShowLogin] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
   const cartCount = 10; // static for now
 
   const closeAll = () => {
@@ -169,20 +171,20 @@ export default function Navbar() {
 
             </div> */}
 
-            <div className="nav-user">
+            {!user && (
+              <div className="nav-user">
 
-              <button
-                className="user-icon"
-                onClick={() => setShowLogin(true)}
-              >
-                <span className="material-icons-round">
-                  account_circle
-                </span>
-              </button>
+                <button
+                  className="user-icon"
+                  onClick={() => setShowLogin(true)}
+                >
+                  Login
+                </button>
 
-            </div>
+              </div>
+            )}
 
-            {showLogin && (
+            {showLogin && !user && (
               <LoginModal closeModal={() => setShowLogin(false)} />
             )}
 
@@ -211,7 +213,9 @@ export default function Navbar() {
 
                       <div className="account-info">
                         <span className="account-title">My Account</span>
-                        <span className="account-mobile">8980145007</span>
+                        <span className="account-mobile">
+                          {user?.mobile || "Guest"}
+                        </span>
                       </div>
 
                       <hr className="account-divider" />
@@ -254,11 +258,26 @@ export default function Navbar() {
                         Contact
                       </NavLink>
                     </li>
-                    <li>
-                      <NavLink to="/contact" onClick={closeAll} className="account-link">
-                        Logout
-                      </NavLink>
-                    </li>
+                    {user ? (
+                      <li>
+                        <span
+                          className="account-link"
+                          style={{
+                            color: "#e53935",
+                            fontWeight: "500",
+                            cursor: "pointer"
+                          }}
+                          onMouseEnter={(e) => (e.target.style.color = "#c62828")}
+                          onMouseLeave={(e) => (e.target.style.color = "#e53935")}
+                          onClick={() => {
+                            localStorage.clear();
+                            window.location.reload();
+                          }}
+                        >
+                          Logout
+                        </span>
+                      </li>
+                    ) : ("")}
 
                   </ul>
 
