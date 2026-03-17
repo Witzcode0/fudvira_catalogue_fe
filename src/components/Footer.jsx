@@ -32,7 +32,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.instagram.com/thefudvira/"
+                href="https://www.instagram.com/thefudviraofficial/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -41,7 +41,7 @@ export default function Footer() {
 
 
               <a
-                href="https://wa.me/918980145007?text=Hello%20Fudvira%20Team%20👋%0AI%20visited%20your%20catalogue%20and%20would%20like%20to%20know%20more%20about%20your%20products."
+                href="https://wa.me/919408501190?text=Hello%20Fudvira%20Team%20👋%0AI%20visited%20your%20catalogue%20and%20would%20like%20to%20know%20more%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
               >

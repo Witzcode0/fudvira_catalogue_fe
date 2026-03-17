@@ -9,7 +9,7 @@ export default function WhatsAppEnquiry({ product, variation, quantity }) {
   const sendWhatsApp = () => {
     if (!product) return;
 
-    const phone = "918980145007";
+    const phone = "919408501190";
 
     const msg = [
       "Hello Fudvira Team,",
